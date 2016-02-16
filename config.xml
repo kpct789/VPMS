@@ -1,8 +1,8 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.project3.containersearch" version="1.0.5">
-  <name>My Cam</name>
-  <description>Sample Camera</description>
-  <author href="http://raghavau.blogspot.com" email="raghava.u@gmail.com">IT Professional</author>
-  <content src="Camera.html"/>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.project3.containersearch" version="1.0.1">
+  <name>VPMS</name>
+  <description>Online Visitor Pass</description>
+  <author href="http://www.krishnapatnamport.com" email="raghava.u@gmail.com">Krishnapatnam Port Company LTD.</author>
+  <content src="VisitorRequest.html"/>
   <preference name="permissions" value="none"/>
   <preference name="orientation" value="default"/>
   <preference name="target-device" value="universal"/>
