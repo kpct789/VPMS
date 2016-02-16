@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=true, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+        <title>Visit Request</title>
+        <script type="text/ecmascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/ecmascript" src="js/jquery.min.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
+        <style type="text/css">
+            ::-webkit-scrollbar-track
+            {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                border-radius: 10px;
+                background-color: #F5F5F5;
+            }
+            ::-webkit-scrollbar
+            {
+                height: 7px;
+                width: 7px;
+                background-color: #F5F5F5;
+            }
+            ::-webkit-scrollbar-thumb
+            {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+                background-color: #555;
+            }
+            .divWaiting
+            {
+                position: absolute;
+                background-color: white;
+                z-index: 10000;
+                filter: alpha(opacity=80);
+                overflow: hidden;
+                text-align: center;
+                top: 0;
+                left: 0;
+                margin: auto;
+                height: 100%;
+                width: 100%;
+                /*padding-top: 30%;*/
+                display: flex;
+            }
+
+            #imgloading
+            {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="divloading" class="divWaiting" style="display: none">
+            <span id="imgloading">
+                <img src="img/loading.gif" alt="Loading"><br>
+                <label class="text text-success">Report is Loading</label>
+            </span>
+        </div>
+        <div class="container">
+            <div id="login-overlay" class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel">Visit Request</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-10">
+                                <div class="well" style="padding: 15px">
+                                    <form id="form1">
+                                        <div class="form-group">
+                                            <label for="txtEmail" class="control-label">Email<span class="text-danger"> *</span></label>
+                                            <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter your email" placeholder="example@gmail.com"><br />
+                                            <button type="button" class="btn btn-primary btn-block" id="btnOTP">Get OTP</button>
+                                        </div>
+                                        <div id="divvalidate" class="form-group">
+                                            <label for="txtOTP" class="control-label">Verify OTP</label>
+                                            <input type="text" class="form-control" id="txtOTP" name="txtOTP" value="" required title="Verify OTP"><br />
+                                            <button type="button" class="btn btn-success btn-block" id="btnValidate">Validate</button>
+                                        </div>                                        
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var clntHeight = parseFloat(document.documentElement.clientHeight) - 140;
+            var apiURL = 'http://localhost/vpmsapi/api/VisitorRequest';
+            
+            function ValidateEmail(sEmail){
+                var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+                if (filter.test(sEmail))
+                    return true;
+                else
+                    return false;
+            }
+            
+            $(document).ready(function () {
+                $("#divvalidate").hide();
+                $("#btnOTP").click(function (){
+                    var sEmail = $("#txtEmail").val();
+                    if ($.trim(sEmail).length == 0) {
+                        alert('Please enter valid email address');
+                        $("#txtEmail").focus();
+                        e.preventDefault();
+                    }
+                    else if (!ValidateEmail(sEmail)){
+                        alert('Please enter valid email address');
+                        e.preventDefault();
+                    }
+                    else {
+                        $("#divloading").attr('display', 'block');
+                        var Adddata = {};
+                        Adddata.Email = $("#txtEmail").val();
+                        $.ajax({
+                            url: apiURL + '/AddRequest',
+                            type: 'POST',
+                            data: Adddata,
+                            dataType: 'json',
+                            success: function (data) {
+                                $("#txtEmail").attr('disabled', 'disabled');
+                                $("#btnOTP").hide();
+                                $("#divvalidate").show();
+                            },
+                            statusCode: {
+                                404: function () {
+                                    alert('Failed');
+                                    $("#divloading").attr('display', 'none');
+                                }
+                            }
+                        });
+                    }
+                });
+                
+                $("#btnValidate").click(function (){
+                    $("#divloading").attr('display', 'block');
+                    var Validatedata = {};
+                    Validatedata.Email = $("#txtEmail").val();
+                    Validatedata.OTP = $("#txtOTP").val();
+                    $.ajax({
+                        url: apiURL + '/ValidateOTP',
+                        type: 'POST',
+                        data: Validatedata,
+                        dataType: 'json',
+                        success: function (data) {
+                            window.location.href = 'VisitorInfo.html?mail=' + ($("#txtEmail").val());
+                        },
+                        statusCode: {
+                            404: function () {
+                                alert('Failed');
+                                $("#divloading").attr('display', 'none');
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

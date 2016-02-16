@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=true, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+        <title>Visit Details</title>
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <!--<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>-->
+        <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
+        <style type="text/css">
+            ::-webkit-scrollbar-track
+            {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                border-radius: 10px;
+                background-color: #F5F5F5;
+            }
+            ::-webkit-scrollbar
+            {
+                height: 7px;
+                width: 7px;
+                background-color: #F5F5F5;
+            }
+            ::-webkit-scrollbar-thumb
+            {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+                background-color: #555;
+            }
+            .input-group-btn select
+            {
+                border-color: #ccc;
+                margin-top: 0px;
+                margin-bottom: 0px;
+                padding-top: 7px;
+                padding-bottom: 7px;
+            }
+            .ui-datepicker{
+                font-size: 12px;
+            }
+            .ui-widget-content .ui-icon {
+                background-image: url("img/ui-icons_222222_256x240.png");
+            }
+            .ui-widget-header .ui-icon {
+                background-image: url("img/ui-icons_222222_256x240.png");
+            }
+            /*.ui-state-default .ui-icon {
+                background-image: url("img/ui-icons_888888_256x240.png");
+            }
+            .ui-state-hover .ui-icon,
+            .ui-state-focus .ui-icon {
+                background-image: url("img/ui-icons_454545_256x240.png");
+            }
+            .ui-state-active .ui-icon {
+                background-image: url("img/ui-icons_454545_256x240.png");
+            }
+            .ui-state-highlight .ui-icon {
+                background-image: url("img/ui-icons_2e83ff_256x240.png");
+            }
+            .ui-state-error .ui-icon,
+            .ui-state-error-text .ui-icon {
+                background-image: url("img/ui-icons_cd0a0a_256x240.png");
+            }*/
+            .divWaiting
+            {
+                position: absolute;
+                background-color: white;
+                z-index: 10000;
+                filter: alpha(opacity=80);
+                overflow: hidden;
+                text-align: center;
+                top: 0;
+                left: 0;
+                margin: auto;
+                height: 100%;
+                width: 100%;
+                /*padding-top: 30%;*/
+                display: flex;
+            }
+            #imgloading
+            {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="divloading" class="divWaiting" style="display: none">
+            <span id="imgloading">
+                <img src="img/loading.gif" alt="Loading"><br>
+                <label class="text text-success">Report is Loading</label>
+            </span>
+        </div>
+        <div class="container">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel">Visit Details</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-10">
+                                <div class="well" style="padding: 15px">
+                                    <form id="form1">
+                                        <div class="form-group">
+                                            <label for="txtCompany" class="control-label">Company<span class="text-danger"> *</span></label>
+                                            <input type="text" class="form-control text-capitalize" id="txtCompany" name="txtCompany" value="" required title="Please enter Company"><br />
+                                            <label for="txtDate" class="control-label">Visit Date<span class="text-danger"> *</span></label>
+                                            <input type="text" class="form-control" id="txtDate" name="txtDate" value="" required title="Please enter Visit Date"><br />
+                                            <label for="selDept" class="control-label">Department<span class="text-danger"> *</span></label>
+                                            <select id="selDept" class="form-control">
+                                                <option value="0" selected>Select</option>
+                                                <option value="1">IT</option>
+                                                <option value="2">Accounts</option>
+                                            </select><br />
+                                            <label for="txtPersons" class="control-label">No.Of Persons<span class="text-danger"> *</span></label>
+                                            <input type="text" class="form-control" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" maxlength="3"><br />
+                                            <label for="txtPurpose" class="control-label">Visit Purpose<span class="text-danger"> *</span></label>
+                                            <textarea class="form-control text-capitalize" id="txtPurpose" name="txtPurpose" title="Please Enter the Visit Purpose" required rows="5"></textarea><br />
+                                            <label for="selVehType" class="control-label">Vehicle Type</label>
+                                            <select id="selVehType" class="form-control">
+                                                <option value="0" selected>Select</option>
+                                                <option value="CAR">CAR</option>
+                                                <option value="SUV">SUV</option>
+                                                <option value="VAN">VAN</option>
+                                                <option value="BIKE">BIKE</option>
+                                            </select><br />
+                                            <label for="txtVehNumber" class="control-label">Vehicle Number</label>
+                                            <input type="text" class="form-control text-uppercase" id="txtVehNumber" name="txtVehNumber" value="" required title="Please enter Vehicle Number"><br />
+                                            <label for="drivetype" class="control-label">Self Driving</label>&nbsp;
+                                            <div class="radio-inline">
+                                              <label><input type="radio" name="drivetype" value="N" checked>No</label>
+                                            </div>
+                                            <div class="radio-inline">
+                                              <label><input type="radio" name="drivetype" value="Y">Yes</label>
+                                            </div><br />
+                                            <button type="button" class="btn btn-success btn-block" id="btnSubmit">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        var apiURL = 'http://localhost/vpmsapi/api/VisitDetails';
+        var qsParm = new Array();
+        var Email = null;
+        function qs() {
+            var query = window.location.search.substring(1);
+            var parms = query.split('&');
+            for (var i=0; i < parms.length; i++) {
+                var pos = parms[i].indexOf('=');
+                if (pos > 0) {
+                    var key = parms[i].substring(0, pos);
+                    var val = parms[i].substring(pos + 1);
+                    qsParm[key] = val;
+                }
+            }
+            Email = qsParm["mail"];
+        }
+        function ValidateEmail(sEmail){
+            var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            if (filter.test(sEmail))
+                return true;
+            else
+                return false;
+        }
+        $(document).ready(function () {
+            qs();
+            $("#txtDate").keypress(function () {
+                return false;
+            });
+            
+            $("#txtPersons").keydown(function (objEvt) {
+                var charCode = (objEvt.which) ? objEvt.which : event.keyCode
+                //alert(parseInt(charCode));
+                // Num 0-96 to 9-105 and 0-48 to 9-57
+                // Tab 9, BackSpace 8, Delete 46, Space 32
+                // Arrows keys 37 to 40
+                if ((parseInt(charCode) >= 96 && parseInt(charCode) <= 105) || (parseInt(charCode) >= 48 && parseInt(charCode) <= 57))
+                    return true;
+                else if (parseInt(charCode) == 9 || parseInt(charCode) == 8 || parseInt(charCode) == 46)
+                    return true;
+                else if (parseInt(charCode) >= 37 && parseInt(charCode) <= 40)
+                    return true;
+                else
+                    return false;
+            });
+
+            $("#txtDate").datepicker({
+                numberOfMonths: 2,
+                minDate: 1, maxDate: "+1M +10D"
+            });
+
+            $("#btnSubmit").click(function () {
+                $("#divloading").attr('display', 'block');
+                var _dept = $("#selDept option:selected").text();
+                var _vehType = $("#selVehType option:selected").text();
+                var _drivetype = $("input[name='drivetype']:checked").val();
+                var Adddata = {};
+                Adddata.Company = $("#txtCompany").val();
+                Adddata.VisitDate = $("#txtDate").val();
+                Adddata.Department = _dept;
+                Adddata.NoofPersons = $("#txtPersons").val();
+                Adddata.VisitPurpose = $("#txtPurpose").val();
+                Adddata.VehicleNumber = $("#txtVehNumber").val();
+                Adddata.VehicleType = _vehType;
+                Adddata.SelfDriving = _drivetype;
+                $.ajax({
+                    url: apiURL,
+                    type: 'POST',
+                    data: Adddata,
+                    dataType: 'json',
+                    success: function (data) {
+                        window.location.href = 'RequestEnd.html?mail='+Email;
+                    },
+                    statusCode: {
+                        404: function () {
+                            alert('Failed');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</html>
