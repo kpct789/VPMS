@@ -75,7 +75,7 @@
                 text-align: center;
                 top: 0;
                 left: 0;
-                margin: auto;
+                margin: 0;
                 height: 100%;
                 width: 100%;
                 /*padding-top: 30%;*/
@@ -134,7 +134,7 @@
                                                 <option value="BIKE">BIKE</option>
                                             </select><br />
                                             <label for="txtVehNumber" class="control-label">Vehicle Number</label>
-                                            <input type="text" class="form-control text-uppercase" id="txtVehNumber" name="txtVehNumber" value="" required title="Please enter Vehicle Number"><br />
+                                            <input type="text" class="form-control text-uppercase" id="txtVehNumber" name="txtVehNumber" value="" disabled required title="Please enter Vehicle Number"><br />
                                             <label for="drivetype" class="control-label">Self Driving</label>&nbsp;
                                             <div class="radio-inline">
                                               <label><input type="radio" name="drivetype" value="N" checked>No</label>
@@ -158,6 +158,7 @@
         var apiURL = 'http://localhost/vpmsapi/api/VisitDetails';
         var qsParm = new Array();
         var Email = null;
+        var _vehType = null;
         function qs() {
             var query = window.location.search.substring(1);
             var parms = query.split('&');
@@ -184,6 +185,21 @@
                 return false;
             });
             
+            $("#selVehType").change(function(){
+                var str = "";
+                $("#selVehType option:selected").each(function() {
+                    str += $(this).text().trim();
+                });
+                if(str == "Select"){
+                    _vehType = "";
+                    $("#txtVehNumber").attr('disabled', 'disabled');
+                }
+                else{
+                    _vehType = $("#selVehType option:selected").text()
+                    $("#txtVehNumber").attr('disabled', false);
+                }
+            });
+            
             $("#txtPersons").keydown(function (objEvt) {
                 var charCode = (objEvt.which) ? objEvt.which : event.keyCode
                 //alert(parseInt(charCode));
@@ -206,9 +222,8 @@
             });
 
             $("#btnSubmit").click(function () {
-                $("#divloading").attr('display', 'block');
+                $("#divloading").show();
                 var _dept = $("#selDept option:selected").text();
-                var _vehType = $("#selVehType option:selected").text();
                 var _drivetype = $("input[name='drivetype']:checked").val();
                 var Adddata = {};
                 Adddata.Company = $("#txtCompany").val();
@@ -219,6 +234,7 @@
                 Adddata.VehicleNumber = $("#txtVehNumber").val();
                 Adddata.VehicleType = _vehType;
                 Adddata.SelfDriving = _drivetype;
+                Adddata.Email = Email;
                 $.ajax({
                     url: apiURL,
                     type: 'POST',
@@ -230,6 +246,7 @@
                     statusCode: {
                         404: function () {
                             alert('Failed');
+                            $("#divloading").hide();
                         }
                     }
                 });

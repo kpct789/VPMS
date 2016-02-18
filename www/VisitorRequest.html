@@ -78,7 +78,7 @@
                                         <div class="form-group">
                                             <label for="txtEmail" class="control-label">Email<span class="text-danger"> *</span></label>
                                             <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter your email" placeholder="example@gmail.com"><br />
-                                            <input type="submit" class="btn btn-primary btn-block" id="btnOTP" value="Get OTP">
+                                            <button type="button" class="btn btn-primary btn-block" id="btnOTP">Get OTP</button>
                                         </div>
                                         <div id="divvalidate" class="form-group">
                                             <label for="txtOTP" class="control-label">Verify OTP</label>
@@ -105,22 +105,23 @@
                 else
                     return false;
             }
-            
+
             $(document).ready(function () {
+                $("#divloading").hide();
                 $("#divvalidate").hide();
-                $("#btnOTP").click(function (){
+                $("#btnOTP").click(function () {
                     var sEmail = $("#txtEmail").val();
                     if ($.trim(sEmail).length == 0) {
                         alert('Please enter valid email address');
                         $("#txtEmail").focus();
                         e.preventDefault();
                     }
-                    else if (!ValidateEmail(sEmail)){
+                    else if (!ValidateEmail(sEmail)) {
                         alert('Please enter valid email address');
                         e.preventDefault();
                     }
                     else {
-                        $("#divloading").attr('display', 'block');
+                        $("#divloading").show();
                         var Adddata = {};
                         Adddata.Email = $("#txtEmail").val();
                         $.ajax({
@@ -132,19 +133,20 @@
                                 $("#txtEmail").attr('disabled', 'disabled');
                                 $("#btnOTP").hide();
                                 $("#divvalidate").show();
+                                $("#divloading").hide();
                             },
                             statusCode: {
                                 404: function () {
                                     alert('Failed');
-                                    $("#divloading").attr('display', 'none');
+                                    $("#divloading").hide();
                                 }
                             }
                         });
                     }
                 });
-                
-                $("#btnValidate").click(function (){
-                    $("#divloading").attr('display', 'block');
+
+                $("#btnValidate").click(function () {
+                    $("#divloading").show();
                     var Validatedata = {};
                     Validatedata.Email = $("#txtEmail").val();
                     Validatedata.OTP = $("#txtOTP").val();
@@ -159,7 +161,7 @@
                         statusCode: {
                             404: function () {
                                 alert('Failed');
-                                $("#divloading").attr('display', 'none');
+                                $("#divloading").hide();
                             }
                         }
                     });

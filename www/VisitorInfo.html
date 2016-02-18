@@ -91,10 +91,10 @@
                                             <input type="text" class="form-control text-capitalize" id="txtLstName" name="txtLstName" value="" required title="Please enter Last Name"><br />
                                             <label for="selGender" class="control-label">Gender<span class="text-danger"> *</span></label>&nbsp;
                                             <div class="radio-inline">
-                                              <label><input type="radio" name="gender" value="Male">Male</label>
+                                              <label><input type="radio" name="gender" value="Male" checked>Male</label>
                                             </div>
                                             <div class="radio-inline">
-                                              <label><input type="radio" name="gender" value="Male">Female</label>
+                                              <label><input type="radio" name="gender" value="Female">Female</label>
                                             </div><br />
                                             <label for="selIdProof" class="control-label">ID Proof<span class="text-danger"> *</span></label>
                                             <select id="selIdProof" class="form-control">
@@ -114,7 +114,7 @@
                                             <br />
                                             <label for="txtEmail" class="control-label">Email<span class="text-danger"> *</span></label>
                                             <input type="text" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter Email"><br />
-                                            <button type="button" class="btn btn-success btn-block" id="btnSubmit"><h4>Next</h4></button>
+                                            <button type="button" class="btn btn-success btn-block" id="btnSubmit">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -150,6 +150,60 @@
                 return true;
             else
                 return false;
+        }
+        
+        function formValidations()
+        {
+            var _idprooftype = $("#selIdProof option:selected").val();
+            if($("#txtFrstName").val() == "")
+            {
+                alert('Enter First Name');
+                $("#txtFrstName").focus();
+                return false;
+            }
+            else if($("#txtLstName").val() == "")
+            {
+                alert('Enter Last Name');
+                $("#txtLstName").focus();
+                return false;
+            }
+            else if(_idprooftype=="0")
+            {
+                alert('Select ID Proof Type');
+                $("#selIdProof").focus();
+                return false;
+            }
+            else if(parseInt(_idprooftype)>0)
+            {
+                if($("#txtIdNo").val() == "")
+                {
+                    alert('Enter ID Proof No');
+                    $("#txtIdNo").focus();
+                    return false;
+                }                
+            }
+            if($("#txtMobile").val() == "")
+            {
+                alert('Enter Mobile No');
+                $("#txtMobile").focus();
+                return false;
+            }
+            else if($("#txtMobile").val() != "")
+            {
+                if(parseInt($("#txtMobile").val().length) < 10)
+                {
+                    alert('Invalid Mobile No');
+                    $("#txtMobile").focus();
+                    return false;
+                }
+            }
+            if($("#txtEmail").val() == "")
+            {
+                alert('Enter Email');
+                $("#txtEmail").focus();
+                return false;
+            }
+            return true;
         }
         
         $(document).ready(function(){
@@ -258,7 +312,10 @@
                         
             $("#btnSubmit").click(function(){
                 var sEmail = $("#txtEmail").val();
-                if ($.trim(sEmail).length == 0) {
+                if(!formValidations()){
+                    
+                }
+                else if ($.trim(sEmail).length == 0) {
                     alert('Please enter valid email address');
                     $("#txtEmail").focus();
                     e.preventDefault();
@@ -268,7 +325,7 @@
                     e.preventDefault();
                 }
                 else {
-                    $("#divloading").attr('display', 'block');
+                    $("#divloading").show();
                     var _gender = $("input[name='gender']:checked").val();
                     var _idprooftype = $("#selIdProof option:selected").val();
                     var _countrycode = $("#selCountryCode option:selected").val();
@@ -287,12 +344,12 @@
                         data: Adddata,
                         dataType: 'json',
                         success: function (data) {
-                            window.location.href = 'VisitDetails.html?mail=' + ($("#txtEmail").val());
+                            window.location.href = 'VisitDetails.html?mail=' + $("#txtEmail").val();
                         },
                         statusCode: {
                             404: function () {
                                 alert('Failed');
-                                $("#divloading").attr('display', 'none');
+                                $("#divloading").hide();
                             }
                         }
                     });
