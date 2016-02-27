@@ -89,6 +89,13 @@
                 margin-right: -50%;
                 transform: translate(-50%, -50%);
             }
+            #container{
+                top: 50%;
+                left: 50%;
+                position: fixed;
+                margin-right: -50%;
+                transform: translate(-50%, -50%);
+            }
         </style>
     </head>
     <body>
@@ -98,7 +105,7 @@
                 <label class="text text-success">Report is Loading</label>
             </span>
         </div>
-        <div class="container">
+        <div id="container" class="container">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -155,7 +162,7 @@
         </div>
     </body>
     <script type="text/javascript">
-        var apiURL = 'http://localhost/vpmsapi/api/VisitDetails';
+        var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitDetails';
         var qsParm = new Array();
         var Email = null;
         var _vehType = null;
