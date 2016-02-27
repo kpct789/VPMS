@@ -100,7 +100,7 @@
                 options.mimeType="image/jpeg";
                 options.chunkedMode = false;
                 
-                document.getElementById('camera_status').innerHTML = options.fileKey + "/" + options.fileName + "/" + options.mimeType + "/" + options.chunkedMode;
+                document.getElementById('camera_status').innerHTML = options.fileKey + "-" + options.fileName + "-" + options.mimeType + "-" + options.chunkedMode;
                 
                 var ft = new FileTransfer();
                 ft.upload(imageURI, server, function(r) {
