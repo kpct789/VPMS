@@ -32,9 +32,9 @@
                     
                 <!-- Actions -->
                 <div>
-                    <input type="button" class="btn btn-info btn-block btn-md" onclick="takePicture();" value="Take Picture" /><br/>
-                    <input type="button" class="btn btn-info btn-block btn-md" onclick="selectPicture();" value="Select Picture from Library" /><br/>
-                    <input type="button" class="btn btn-info btn-block btn-md" onclick="uploadPicture();" value="Upload Picture" />
+                    <input type="button" id="btnCapture" class="btn btn-info btn-block btn-md" onclick="takePicture();" value="Take Picture" /><br/>
+                    <input type="button" id="btnSelect" class="btn btn-info btn-block btn-md" onclick="selectPicture();" value="Select Picture from Library" /><br/>
+                    <input type="button" id="btnUpload" class="btn btn-info btn-block btn-md" onclick="uploadPicture();" value="Upload Picture" />
                 </div>
                 <br/>
             </div>
@@ -91,8 +91,10 @@
                 document.getElementById('camera_status').innerHTML = "Take picture or select picture from library first.";
                 return;
             }
-            
-            var server = 'http://61.0.225.169:81/VPMS/wwww/upload.php';
+            $("#btnCapture").css('disable', 'disabled');
+            $("#btnSelect").css('disable', 'disabled');
+            $("#btnUpload").css('disable', 'disabled');
+            var server = 'http://61.0.225.169:81/ContainerSearch/upload.php';
             if (server) {
                 var options = new FileUploadOptions();
                 options.fileKey="file";
