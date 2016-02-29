@@ -94,7 +94,8 @@
             $("#btnCapture").css('disable', 'disabled');
             $("#btnSelect").css('disable', 'disabled');
             $("#btnUpload").css('disable', 'disabled');
-            var server = 'http://61.0.225.169:81/ContainerSearch/upload.php';
+            //var server = 'http://61.0.225.169:81/ContainerSearch/upload.php';
+            var server = 'http://61.0.225.169/VPMSAPI/api/FileUpload/UploadFile';
             if (server) {
                 var options = new FileUploadOptions();
                 options.fileKey="file";
