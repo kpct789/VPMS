@@ -91,9 +91,9 @@
                 document.getElementById('camera_status').innerHTML = "Take picture or select picture from library first.";
                 return;
             }
-            $("#btnCapture").css('disable', 'disabled');
-            $("#btnSelect").css('disable', 'disabled');
-            $("#btnUpload").css('disable', 'disabled');
+            $("#btnCapture").css('class', 'disabled');
+            $("#btnSelect").css('class', 'disabled');
+            $("#btnUpload").css('class', 'disabled');
             //var server = 'http://61.0.225.169:81/ContainerSearch/upload.php';
             var server = 'http://61.0.225.169/VPMSAPI/api/FileUpload/UploadFile';
             if (server) {
@@ -112,7 +112,7 @@
                 var ft = new FileTransfer();
                 ft.upload(imageURI, encodeURI(server), function(r) {
                     alert("Success");
-                    document.getElementById('camera_status').innerHTML = "Upload successful: " + r.bytesSent + " bytes uploaded.";
+                    document.getElementById('camera_status').innerHTML = "Upload successful: " + (parseFloat(parseFloat(r.bytesSent)/1024)/1024) + " MB uploaded.";
                 }, function(error) {
                     alert("Filed");
                     document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
