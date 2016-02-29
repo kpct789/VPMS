@@ -91,7 +91,7 @@
                 return;
             }
             
-            server = 'http://61.0.225.169/VPMSAPI/api/FileUpload/UploadFile';
+            var server = 'http://61.0.225.169/VPMSAPI/api/FileUpload/UploadFile';
             if (server) {
                 var options = new FileUploadOptions();
                 options.fileKey="file";
@@ -104,33 +104,13 @@
                 
                 var ft = new FileTransfer();
                 alert("ft");
-                ft.upload(imageURI, server, function(r) {
+                ft.upload(imageURI, 'http://61.0.225.169/VPMSAPI/api/FileUpload/UploadFile', function(r) {
                     document.getElementById('camera_status').innerHTML = "Upload successful: " + r.bytesSent + " bytes uploaded.";
                 }, function(error) {
                     document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
                 }, options);
                 
             }
-        }
-
-        function viewUploadedPictures() {
-            server = document.getElementById('serverUrl').value;
-            if (server) {
-                var xmlhttp = new XMLHttpRequest();
-
-                xmlhttp.onreadystatechange=function(){
-                    if(xmlhttp.readyState === 4){
-                        if (xmlhttp.status === 200) {
-                            document.getElementById('server_images').innerHTML = xmlhttp.responseText;
-                        }
-                        else {
-                            document.getElementById('server_images').innerHTML = "Error retrieving pictures from server.";
-                        }
-                    }
-                };
-                xmlhttp.open("GET", server , true);
-                xmlhttp.send();       	
-            }	
         }
         
         function init() {
