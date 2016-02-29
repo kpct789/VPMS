@@ -100,6 +100,9 @@
                 //options.fileName=imageURI;
                 options.mimeType="image/jpeg";
                 options.chunkedMode = false;
+                options.headers = {
+                    Connection: "close"
+                }
                 
                 document.getElementById('camera_status').innerHTML = options.fileName;
                 
