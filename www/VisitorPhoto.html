@@ -95,18 +95,18 @@
             if (server) {
                 var options = new FileUploadOptions();
                 options.fileKey="file";
-                //options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
-                options.fileName=imageURI;
+                options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+                //options.fileName=imageURI;
                 options.mimeType="image/jpeg";
                 options.chunkedMode = false;
                 
-                document.getElementById('camera_status').innerHTML = options.fileKey + "-" + options.fileName + "-" + options.mimeType + "-" + options.chunkedMode;
+                document.getElementById('camera_status').innerHTML = options.fileName;
                 
                 var ft = new FileTransfer();
                 ft.upload(imageURI, server, function(r) {
-                    document.getElementById('camera_status').innerHTML = "Upload successful: "+r.bytesSent+" bytes uploaded.";            	
+                    document.getElementById('camera_status').innerHTML = "Upload successful: " + r.bytesSent + " bytes uploaded.";
                 }, function(error) {
-                    document.getElementById('camera_status').innerHTML = "Upload failed: Code = "+error.code;            	
+                    document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
                 }, options);
                 
             }
