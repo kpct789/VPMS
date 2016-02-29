@@ -104,14 +104,13 @@
                 document.getElementById('camera_status').innerHTML = options.fileName;
                 
                 var ft = new FileTransfer();
-                ft.upload(imageURI, 'http://61.0.225.169/VPMSAPI/api/FileUpload/UploadFile', function(r) {
+                ft.upload(imageURI, server, function(r) {
                     alert("Success");
                     document.getElementById('camera_status').innerHTML = "Upload successful: " + r.bytesSent + " bytes uploaded.";
                 }, function(error) {
                     alert("Filed");
                     document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
                 }, options);
-                
             }
         }
         
