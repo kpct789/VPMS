@@ -19,6 +19,9 @@
   <preference name="android-minSdkVersion" value="14"/>
   <preference name="android-installLocation" value="auto"/>
   <preference name="EnableViewportScale" value="true" />
+  <preference name="SplashScreen" value="screen" />
+  <preference name="SplashScreenDelay" value="2000" />
+  <preference name="AutoHideSplashScreen" value="true" />
   <gap:plugin name="org.apache.cordova.battery-status"/>
   <gap:plugin name="org.apache.cordova.camera"/>
   <gap:plugin name="org.apache.cordova.device-orientation"/>
