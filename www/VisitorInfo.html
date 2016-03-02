@@ -136,7 +136,11 @@
         var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitorDetails';
         var IdProofTypeapiURL = 'http://61.0.225.169/vpmsapi/api/IdProofType';
         var qsParm = new Array();
-        
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            document.addEventListener("backbutton", function (e) {
+                e.preventDefault();
+            }, false );
         $(document).ready(function () {
             qs();
             if ($("#txtEmail").val() != "")
