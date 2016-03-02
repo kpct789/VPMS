@@ -89,13 +89,6 @@
                 margin-right: -50%;
                 transform: translate(-50%, -50%);
             }
-            #container{
-                top: 50%;
-                left: 50%;
-                position: fixed;
-                margin-right: -50%;
-                transform: translate(-50%, -50%);
-            }
         </style>
     </head>
     <body>
@@ -113,25 +106,25 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-lg-1"></div>
-                            <div class="col-lg-10">
-                                <div class="well" style="padding: 15px">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <!--<div class="well" style="padding: 15px">-->
                                     <form id="form1">
                                         <div class="form-group">
                                             <label for="txtCompany" class="control-label">Company<span class="text-danger"> *</span></label>
-                                            <input type="text" class="form-control text-capitalize" id="txtCompany" name="txtCompany" value="" required title="Please enter Company"><br />
+                                            <input type="text" class="form-control text-capitalize" id="txtCompany" name="txtCompany" value="" required title="Please enter Company">
                                             <label for="txtDate" class="control-label">Visit Date<span class="text-danger"> *</span></label>
-                                            <input type="text" class="form-control" id="txtDate" name="txtDate" value="" required title="Please enter Visit Date"><br />
+                                            <input type="text" class="form-control" id="txtDate" name="txtDate" value="" required title="Please enter Visit Date">
                                             <label for="selDept" class="control-label">Department<span class="text-danger"> *</span></label>
                                             <select id="selDept" class="form-control">
                                                 <option value="0" selected>Select</option>
                                                 <option value="1">IT</option>
                                                 <option value="2">Accounts</option>
-                                            </select><br />
+                                            </select>
                                             <label for="txtPersons" class="control-label">No.Of Persons<span class="text-danger"> *</span></label>
-                                            <input type="text" class="form-control" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" maxlength="3"><br />
+                                            <input type="text" class="form-control" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" maxlength="3">
                                             <label for="txtPurpose" class="control-label">Visit Purpose<span class="text-danger"> *</span></label>
-                                            <textarea class="form-control text-capitalize" id="txtPurpose" name="txtPurpose" title="Please Enter the Visit Purpose" required rows="5"></textarea><br />
+                                            <textarea class="form-control text-capitalize" id="txtPurpose" name="txtPurpose" title="Please Enter the Visit Purpose" required rows="3"></textarea>
                                             <label for="selVehType" class="control-label">Vehicle Type</label>
                                             <select id="selVehType" class="form-control">
                                                 <option value="0" selected>Select</option>
@@ -139,9 +132,9 @@
                                                 <option value="SUV">SUV</option>
                                                 <option value="VAN">VAN</option>
                                                 <option value="BIKE">BIKE</option>
-                                            </select><br />
+                                            </select>
                                             <label for="txtVehNumber" class="control-label">Vehicle Number</label>
-                                            <input type="text" class="form-control text-uppercase" id="txtVehNumber" name="txtVehNumber" value="" disabled required title="Please enter Vehicle Number"><br />
+                                            <input type="text" class="form-control text-uppercase" id="txtVehNumber" name="txtVehNumber" value="" disabled required title="Please enter Vehicle Number">
                                             <label for="drivetype" class="control-label">Self Driving</label>&nbsp;
                                             <div class="radio-inline">
                                               <label><input type="radio" name="drivetype" value="N" checked>No</label>
@@ -152,9 +145,9 @@
                                             <button type="button" class="btn btn-success btn-block" id="btnSubmit">Submit</button>
                                         </div>
                                     </form>
-                                </div>
+                                <!--</div>-->
                             </div>
-                            <div class="col-lg-1"></div>
+                            <div class="col-md-1"></div>
                         </div>
                     </div>
                 </div>
