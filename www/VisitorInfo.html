@@ -137,11 +137,7 @@
         var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitorDetails';
         var IdProofTypeapiURL = 'http://61.0.225.169/vpmsapi/api/IdProofType';
         var qsParm = new Array();
-        document.addEventListener("deviceready", onDeviceReady, false);
-        function onDeviceReady() {
-            document.addEventListener("backbutton", function (e) {
-                e.preventDefault();
-            }, false );
+        
         $(document).ready(function () {
             qs();
             if ($("#txtEmail").val() != "")
@@ -153,15 +149,15 @@
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
                 url: IdProofTypeapiURL,
-                data: "",
+                data: "{}",
                 dataType: "json",
-                success: function (Result) {
-                    $.each(Result, function (key, value) {
+                success: function (result) {
+                    $.each(result, function (key, value) {
                         $("#selIdProof").append($("<option></option>").val(value.Id).html(value.Name));
                     });
                 },
-                error: function (Result) {
-                    alert("Error");
+                error: function (result) {
+                    alert("IdProofType => " + result.message);
                 }
             });
 
