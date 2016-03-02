@@ -129,6 +129,7 @@
         </div>
     </div>
 </body>
+    <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="js/additional-methods.min.js"></script>
@@ -152,7 +153,7 @@
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
                 url: IdProofTypeapiURL,
-                data: "{}",
+                data: "",
                 dataType: "json",
                 success: function (Result) {
                     $.each(Result, function (key, value) {
