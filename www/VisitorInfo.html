@@ -127,15 +127,16 @@
                 </div>
             </div>
         </div>
+        <table id="tbPerson"></table>
     </div>
 </body>
-    <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="js/additional-methods.min.js"></script>
     <script type="text/javascript">
         var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitorDetails';
-        var IdProofTypeapiURL = 'http://61.0.225.169/vpmsapi/api/IdProofType';
+        var IdProofTypeapiURL = 'http://61.0.225.169/VPMSAPI/api/IdProofType';//61.0.225.169
+        var SampleApi = 'http://61.0.225.169/SampleWebApi/api/Values';
         var qsParm = new Array();
         
         $(document).ready(function () {
@@ -144,12 +145,13 @@
                 $("#txtEmail").attr('disabled', 'disabled');
             else
                 $("#txtEmail").attr('disabled', false);
-
+            
             $.ajax({
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
                 url: IdProofTypeapiURL,
                 dataType: "json",
+                crossDomain: true,
                 success: function (result) {
                     $.each(result, function (key, value) {
                         $("#selIdProof").append($("<option></option>").val(value.Id).html(value.Name));
@@ -159,7 +161,7 @@
                     alert("IdProofType => " + result.message);
                 }
             });
-
+            
             $("#selIdProof").change(function () {
                 var str = "";
                 $("#selIdProof option:selected").each(function () {
@@ -176,7 +178,7 @@
                     $("#txtIdNo").attr('placeholder', 'Enter ' + str + ' No');
                 }
             });
-
+            /*
             $("#txtMobile").keydown(function (objEvt) {
                 var charCode = (objEvt.which) ? objEvt.which : event.keyCode
                 //alert(charCode);
@@ -240,7 +242,7 @@
                 else
                     return false;
             });
-
+            */
             $("#btnSubmit").click(function () {
                 var sEmail = $("#txtEmail").val();
                 if (!formValidations()) {
@@ -302,7 +304,7 @@
             $("#txtEmail").val(qsParm["mail"]);
         }
 
-        function ValidateEmail(sEmail){
+        function ValidateEmail(sEmail) {
             var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
             if (filter.test(sEmail))
                 return true;
@@ -310,8 +312,7 @@
                 return false;
         }
 
-        function formValidations()
-        {
+        function formValidations() {
             var _idprooftype = $("#selIdProof option:selected").val();
             if($("#txtFrstName").val() == "")
             {

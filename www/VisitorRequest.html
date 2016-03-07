@@ -59,7 +59,7 @@
     <body>
         <div id="divloading" class="divWaiting" style="display: none">
             <span id="imgloading">
-                <img src="img/loading.gif" alt="Loading"><br>
+                <img src="img/loading.gif" alt="Loading" width="150" height="120"><br>
                 <label class="text text-success">Loading Please Wait.</label>
             </span>
         </div>
@@ -79,7 +79,7 @@
                                             <label for="txtEmail" class="control-label">Email<span class="text-danger"> *</span></label>
                                             <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter your email" placeholder="example@gmail.com"><br />
                                             <button type="button" class="btn btn-primary btn-block" id="btnOTP">Send Verification Code</button><br>
-                                            <a href="#" class="text text-primary" id="lnkValidate"><small>Already having Verification Code.</small></a>
+                                            <!--<a href="#" class="text text-primary" id="lnkValidate"><small>Already having Verification Code.</small></a>-->
                                         </div>
                                         <div id="divvalidate" class="form-group">
                                             <label for="txtOTP" class="control-label">Verify OTP</label>
@@ -111,6 +111,7 @@
                 $("#divloading").hide();
                 $("#divvalidate").hide();
                 //Send Verification Code
+                
                 $("#btnOTP").click(function () {
                     var sEmail = $("#txtEmail").val();
                     if ($.trim(sEmail).length == 0) {
@@ -132,6 +133,7 @@
                             data: Adddata,
                             dataType: 'json',
                             success: function (data) {
+                                debugger;
                                 $("#txtEmail").attr('disabled', 'disabled');
                                 $("#btnOTP").hide();
                                 $("#divvalidate").show();
@@ -146,9 +148,9 @@
                         });
                     }
                 });
-                
+
                 //Already having Verification Code
-                $("#lnkValidate").click(function(){
+                $("#lnkValidate").click(function () {
                     var sEmail = $("#txtEmail").val();
                     if ($.trim(sEmail).length == 0) {
                         alert('Please enter valid email address');
@@ -163,7 +165,7 @@
                         $("#divvalidate").show();
                     }
                 });
-                
+
                 //Verify Email
                 $("#btnValidate").click(function () {
                     $("#divloading").show();
