@@ -85,13 +85,13 @@
                                     <form id="form1">
                                         <div class="form-group">
                                             <label for="txtEmail" class="control-label">Email<span class="text-danger"> *</span></label>
-                                            <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter your email" placeholder="example@gmail.com"><br />
+                                            <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter your email" placeholder="example@mail.com"><br />
                                             <button type="button" class="btn btn-primary btn-block" id="btnOTP">Send Verification Code</button><br>
                                             <!--<a href="#" class="text text-primary" id="lnkValidate"><small>Already having Verification Code.</small></a>-->
                                         </div>
                                         <div id="divvalidate" class="form-group">
                                             <label for="txtOTP" class="control-label">Verify OTP</label>
-                                            <input type="number" class="form-control" id="txtOTP" name="txtOTP" maxlength="6" value="" required title="Verify OTP" pattern="[0-9]"><br />
+                                            <input type="number" class="form-control" id="txtOTP" name="txtOTP" maxlength="6" value="" required title="Verify OTP"><br />
                                             <button type="button" class="btn btn-success btn-block" id="btnValidate">Verify Email</button>
                                         </div>                                        
                                     </form>
@@ -215,7 +215,7 @@
                         var Validatedata = {};
                         Validatedata.Email = $("#txtEmail").val();
                         Validatedata.OTP = $("#txtOTP").val();
-                       Validatedata.RequestId =  $("#hidRequestId").val();
+                        Validatedata.RequestId =  $("#hidRequestId").val();
                         $.ajax({
                             url: apiURL + '/ValidateOTP',
                             type: 'POST',

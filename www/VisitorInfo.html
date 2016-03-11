@@ -114,15 +114,15 @@
                                     <label for="txtMobile" class="control-label">Mobile No<span class="text-danger"> *</span></label>
                                     <div class="input-group">
                                         <span class="input-group-btn">
-                                                    <select id="selCountryCode" class="btn">
-                                                        <option>+91</option>
-                                                    </select>
-                                                </span>
-                                        <input type="text" class="form-control" id="txtMobile" name="txtMobile" value="" required title="Please enter Mobile No"
+                                            <select id="selCountryCode" class="btn">
+                                                <option>+91</option>
+                                            </select>
+                                        </span>
+                                        <input type="number" class="form-control" id="txtMobile" name="txtMobile" value="" required title="Please enter Mobile No"
                                         maxlength="10">
                                     </div>
                                     <label for="txtEmail" class="control-label">Email<span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter Email">
+                                    <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter Email">
                                     <br>
                                     <button type="button" class="btn btn-success btn-block" id="btnSubmit">Submit</button>
                                 </div>
@@ -202,6 +202,17 @@
                     $("#txtIdNo").attr('placeholder', 'Enter ' + str + ' No');
                 }
             });
+            $('#txtFrstName').keypress(function (e) {
+                var regex = new RegExp("^[a-zA-Z0-9]+$");
+                var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+                if (regex.test(str)) {
+                    return true;
+                }
+
+                e.preventDefault();
+                return false;
+            });
+            
             /*
             $("#txtMobile").keydown(function (objEvt) {
                 var charCode = (objEvt.which) ? objEvt.which : event.keyCode
