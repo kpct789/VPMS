@@ -76,7 +76,7 @@
                 top: 0;
                 left: 0;
                 margin: 0;
-                height: 100%;
+                height: 150%;
                 width: 100%;
                 /*padding-top: 30%;*/
                 display: flex;
@@ -281,7 +281,6 @@
 
             $("#btnSubmit").click(function () {
                 $("#divloading").show();
-                $("#txtCompany").focus();
                 $(document).attr('css', 'overflow: hidden');
                 var _dept = $("#selDept option:selected").val();
                 var _drivetype = $("input[name='drivetype']:checked").val();
@@ -302,7 +301,6 @@
                     data: Adddata,
                     dataType: 'json',
                     success: function (data) {
-                        $("#divloading").hide();
                         window.location.href = 'RequestEnd.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
                     },
                     statusCode: {
