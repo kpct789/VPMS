@@ -91,7 +91,7 @@
                                         </div>
                                         <div id="divvalidate" class="form-group">
                                             <label for="txtOTP" class="control-label">Verify OTP</label>
-                                            <input type="number" class="form-control" id="txtOTP" name="txtOTP" value="" required title="Verify OTP"><br />
+                                            <input type="number" class="form-control" id="txtOTP" name="txtOTP" maxlength="6" value="" required title="Verify OTP" pattern="[0-9]"><br />
                                             <button type="button" class="btn btn-success btn-block" id="btnValidate">Verify Email</button>
                                         </div>                                        
                                     </form>
@@ -215,6 +215,7 @@
                         var Validatedata = {};
                         Validatedata.Email = $("#txtEmail").val();
                         Validatedata.OTP = $("#txtOTP").val();
+                       Validatedata.RequestId =  $("#hidRequestId").val();
                         $.ajax({
                             url: apiURL + '/ValidateOTP',
                             type: 'POST',
