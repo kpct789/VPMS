@@ -60,15 +60,22 @@
             margin-right: -50%;
             transform: translate(-50%, -50%);
         }
-        
+        .headerbar
+        {
+            top: 0;
+            left: 0;
+            margin: 0;
+            position: absolute;
+        }
     </style>
 </head>
 
 <body>
+    <img class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
     <div id="divloading" class="divWaiting" style="display: none">
         <span id="imgloading">
                 <img src="img/loading.gif" alt="Loading"><br>
-                <label class="text text-success">Report is Loading</label>
+                <label class="text text-success">Loading Please Wait...</label>
             </span>
     </div>
     <div id="container" class="container-fluid">
@@ -129,14 +136,14 @@
         </div>
         <table id="tbPerson"></table>
     </div>
+    <input type="hidden" id="hidRequestId">
 </body>
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="js/additional-methods.min.js"></script>
     <script type="text/javascript">
-        var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitorDetails';
-        var IdProofTypeapiURL = 'http://61.0.225.169/VPMSAPI/api/IdProofType';//61.0.225.169
-        var SampleApi = 'http://61.0.225.169/SampleWebApi/api/Values';
+        var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitorDetails/AddVisitorDetails';
+        var IdProofTypeapiURL = 'http://61.0.225.169/VPMSAPI/api/Master/GetIdProofType';//61.0.225.169
         var qsParm = new Array();
         
         $(document).ready(function () {
@@ -271,13 +278,20 @@
                     Adddata.ProofId = $("#txtIdNo").val();
                     Adddata.MobileNo = _countrycode + '-' + $("#txtMobile").val();
                     Adddata.Email = $("#txtEmail").val();
+                    Adddata.RequestId = $("#hidRequestId").val();
                     $.ajax({
                         url: apiURL,
                         type: 'POST',
                         data: Adddata,
                         dataType: 'json',
                         success: function (data) {
-                            window.location.href = 'VisitorPhoto.html?mail=' + $("#txtEmail").val();
+                            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                                window.location.href = 'm.VisitorPhoto.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
+                            }
+                            else{
+                                window.location.href = 'VisitorPhoto.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
+                                //window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
+                            }
                         },
                         statusCode: {
                             404: function () {
@@ -301,7 +315,10 @@
                     qsParm[key] = val;
                 }
             }
-            $("#txtEmail").val(qsParm["mail"]);
+            if(parms.length > 1){
+                $("#hidRequestId").val(qsParm["reqid"]);
+                $("#txtEmail").val(qsParm["mail"]);
+            }
         }
 
         function ValidateEmail(sEmail) {
