@@ -44,7 +44,7 @@
         <img class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
         <div id="divloading" class="divWaiting" style="display: none">
             <span id="imgloading">
-                <img src="img/loading.gif" alt="Loading"><br>
+                <img src="img/loading.gif" alt="Loading" width="150" height="120"><br>
                 <label class="text text-success">Loading Please Wait...</label>
             </span>
         </div>
@@ -133,7 +133,7 @@
                     console.log("Error getting picture: " + e);
                     document.getElementById('camera_status').innerHTML = "Error getting picture.";
                 },
-                { quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI}
+                { quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI, correctOrientation: true}
             );
         };
 
