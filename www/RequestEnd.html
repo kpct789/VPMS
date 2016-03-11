@@ -45,6 +45,13 @@
                 margin: 0;
                 position: absolute;
             }
+            .navbar-center {
+                position: absolute;
+                width: 100%;
+                left: 0;
+                text-align: center;
+                margin: auto;
+            }
         </style>
     </head>
     <body onload="onLoad()">
@@ -59,6 +66,9 @@
                 </div>
                 <div class="col-lg-2"></div>
             </div>
+        </div>
+        <div class="navbar-inverse navbar-fixed-bottom" style="height: 30px; padding-top: 5px;">
+            <a class="navbar-center" href="#" onclick="exitFromApp()"><img src="img/Close24x24.PNG" height="20" width="20"></a>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript">
@@ -98,8 +108,17 @@
                     ReqId = qsParm["reqid"];
                 }
             }
+            
+            document.addEventListener('DOMContentLoaded', loaded, false);
+            function exitFromApp()
+            {
+                navigator.app.exitApp();
+            }
+            
             $(document).ready(function () {
                 qs();
+                
+                setTimeout(exitFromApp(), 5000);
             });
         </script>
     </body>
