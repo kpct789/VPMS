@@ -178,7 +178,7 @@
                 options.headers = {
                     Connection: "close"
                 }
-                
+                server = server + '/' + options.fileName;
                 document.getElementById('camera_status').innerHTML = options.fileName;
                 
                 var ft = new FileTransfer();
