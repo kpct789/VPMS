@@ -39,7 +39,7 @@
         }
     </style>
 </head>  
-<body>
+<body onload="onLoad()">
     <img class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
     <div id="divloading" class="divWaiting" style="display: none">
         <span id="imgloading">
@@ -65,6 +65,7 @@
     </div>
     <script type="text/javascript" charset="utf-8" src="bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
         var qsParm = new Array();
         function qs() {
@@ -83,6 +84,22 @@
                 $("#hidRequestId").val(qsParm["reqid"]);
                 $("#hidEmail").val(qsParm["mail"]);
             }
+        }
+        
+        function onLoad() {
+            document.addEventListener("deviceready", onDeviceReady, false);
+        }
+
+        // device APIs are available
+        //
+        function onDeviceReady() {
+            // Register the event listener
+            document.addEventListener("backbutton", onBackKeyDown, false);
+        }
+
+        // Handle the back button
+        //
+        function onBackKeyDown() {
         }
         
         $(document).ready(function (){

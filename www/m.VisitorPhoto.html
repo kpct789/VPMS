@@ -40,7 +40,7 @@
             }
         </style>
     </head>
-    <body>
+    <body onload="onLoad()">
         <img class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
         <div id="divloading" class="divWaiting" style="display: none">
             <span id="imgloading">
@@ -82,6 +82,22 @@
     <script type="text/javascript" charset="utf-8">
         var deviceReady = false;
         var qsParm = new Array();
+        
+        function onLoad() {
+            document.addEventListener("deviceready", onDeviceReady, false);
+        }
+
+        // device APIs are available
+        //
+        function onDeviceReady() {
+            // Register the event listener
+            document.addEventListener("backbutton", onBackKeyDown, false);
+        }
+
+        // Handle the back button
+        //
+        function onBackKeyDown() {
+        }
         
         function qs() {
             var query = window.location.search.substring(1);
