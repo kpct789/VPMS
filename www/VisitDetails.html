@@ -76,7 +76,7 @@
                 top: 0;
                 left: 0;
                 margin: 0;
-                height: 120%;
+                height: 100%;
                 width: 100%;
                 /*padding-top: 30%;*/
                 display: flex;
@@ -102,7 +102,7 @@
         <img class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
         <div id="divloading" class="divWaiting" style="display: none">
             <span id="imgloading">
-                <img src="img/loading.gif" alt="Loading" width="150" height="120"><br>
+                <img src="img/loading.gif" alt="Loading" width="90" height="75"><br>
                 <label class="text text-success">Loading Please Wait...</label>
             </span>
         </div>
@@ -128,7 +128,7 @@
                                                 <option value="0" selected>Select</option>
                                             </select>
                                             <label for="txtPersons" class="control-label">No.Of Persons<span class="text-danger"> *</span></label>
-                                            <input type="number" class="form-control" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" maxlength="3">
+                                            <input type="number" class="form-control" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" min="1" max="10" maxlength="3">
                                             <label for="txtPurpose" class="control-label">Visit Purpose<span class="text-danger"> *</span></label>
                                             <textarea class="form-control text-capitalize" id="txtPurpose" name="txtPurpose" title="Please Enter the Visit Purpose" required rows="3"></textarea>
                                             <label for="selVehType" class="control-label">Vehicle Type</label>
@@ -180,6 +180,11 @@
             if(parms.length > 1){
                 $("#hidRequestId").val(qsParm["reqid"]);
                 $("#hidEmail").val(qsParm["mail"]);
+                return true;
+            }
+            else{
+                window.location.href = 'VisitorRequest.html';
+                return false;
             }
         }
         function ValidateEmail(sEmail){
@@ -207,48 +212,35 @@
         }
         
         $(document).ready(function () {
-            qs();
+            var Status = qs();
             
-            $.ajax({
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                url: deptURL,
-                dataType: "json",
-                success: function (result) {
-                    $.each(result, function (key, value) {
-                        $("#selDept").append($("<option></option>").val(value.Id).html(value.Name));
-                    });
-                },
-                error: function (result) {
-                    alert(result.message);
-                }
-            });
+            if(Status){
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    url: deptURL,
+                    dataType: "json",
+                    success: function (result) {
+                        $.each(result, function (key, value) {
+                            $("#selDept").append($("<option></option>").val(value.Id).html(value.Name));
+                        });
+                    },
+                    error: function (result) {
+                        alert(result.message);
+                    }
+                });
+            }
             
             $("#txtDate").keypress(function () {
                 return false;
             });
-            
-            $("#selVehType").change(function(){
-                var str = "";
-                $("#selVehType option:selected").each(function() {
-                    str += $(this).text().trim();
-                });
-                if(str == "Select"){
-                    _vehType = "";
-                    $("#txtVehNumber").attr('disabled', 'disabled');
-                }
-                else{
-                    _vehType = $("#selVehType option:selected").val()
-                    $("#txtVehNumber").attr('disabled', false);
-                }
-            });
-            
+                        
             $("#txtPersons").keydown(function (objEvt) {
                 var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-                //alert(parseInt(charCode));
-                // Num 0-96 to 9-105 and 0-48 to 9-57
-                // Tab 9, BackSpace 8, Delete 46, Space 32
-                // Arrows keys 37 to 40
+                /*alert(parseInt(charCode));
+                 Num 0-96 to 9-105 and 0-48 to 9-57
+                 Tab 9, BackSpace 8, Delete 46, Space 32
+                 Arrows keys 37 to 40*/
                 if ((parseInt(charCode) >= 96 && parseInt(charCode) <= 105) || (parseInt(charCode) >= 48 && parseInt(charCode) <= 57))
                     return true;
                 else if (parseInt(charCode) == 9 || parseInt(charCode) == 8 || parseInt(charCode) == 46)
@@ -264,18 +256,35 @@
                 minDate: 1, maxDate: "+1M +10D"
             });
             
-            $.ajax({
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                url: vechTypeURL,
-                dataType: "json",
-                success: function (result) {
-                    $.each(result, function (key, value) {
-                        $("#selVehType").append($("<option></option>").val(value.Id).html(value.Name));
-                    });
-                },
-                error: function (result) {
-                    alert(result.message);
+            if(Status){
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    url: vechTypeURL,
+                    dataType: "json",
+                    success: function (result) {
+                        $.each(result, function (key, value) {
+                            $("#selVehType").append($("<option></option>").val(value.Id).html(value.Name));
+                        });
+                    },
+                    error: function (result) {
+                        alert(result.message);
+                    }
+                });
+            }
+            
+            $("#selVehType").change(function(){
+                var str = "";
+                $("#selVehType option:selected").each(function() {
+                    str += $(this).text().trim();
+                });
+                if(str == "Select"){
+                    _vehType = "";
+                    $("#txtVehNumber").attr('disabled', 'disabled');
+                }
+                else{
+                    _vehType = $("#selVehType option:selected").val()
+                    $("#txtVehNumber").attr('disabled', false);
                 }
             });
 
@@ -284,33 +293,84 @@
                 $(document).attr('css', 'overflow: hidden');
                 var _dept = $("#selDept option:selected").val();
                 var _drivetype = $("input[name='drivetype']:checked").val();
-                var Adddata = {};
-                Adddata.Company = $("#txtCompany").val();
-                Adddata.VisitDate = $("#txtDate").val();
-                Adddata.Department = _dept;
-                Adddata.NoofPersons = $("#txtPersons").val();
-                Adddata.VisitPurpose = $("#txtPurpose").val();
-                Adddata.VehicleNumber = $("#txtVehNumber").val();
-                Adddata.VehicleType = _vehType;
-                Adddata.SelfDriving = _drivetype;
-                Adddata.RequestId = $("#hidRequestId").val();
-                Adddata.Email = $("#hidEmail").val();
-                $.ajax({
-                    url: apiURL,
-                    type: 'POST',
-                    data: Adddata,
-                    dataType: 'json',
-                    success: function (data) {
-                        window.location.href = 'RequestEnd.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
-                    },
-                    statusCode: {
-                        404: function () {
-                            alert('Failed');
-                            $("#divloading").hide();
+                if(FormValidations()){
+                    var Adddata = {};
+                    Adddata.Company = $("#txtCompany").val();
+                    Adddata.VisitDate = $("#txtDate").val();
+                    Adddata.Department = _dept;
+                    Adddata.NoofPersons = $("#txtPersons").val();
+                    Adddata.VisitPurpose = $("#txtPurpose").val();
+                    Adddata.VehicleNumber = $("#txtVehNumber").val();
+                    Adddata.VehicleType = _vehType;
+                    Adddata.SelfDriving = _drivetype;
+                    Adddata.RequestId = $("#hidRequestId").val();
+                    Adddata.Email = $("#hidEmail").val();
+                    $.ajax({
+                        url: apiURL,
+                        type: 'POST',
+                        data: Adddata,
+                        dataType: 'json',
+                        success: function (data) {
+                            window.location.href = 'RequestEnd.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
+                        },
+                        statusCode: {
+                            404: function () {
+                                alert('Failed');
+                                $("#divloading").hide();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+                else{
+                    $("#divloading").hide();
+                }
             });
         });
+        
+        function FormValidations()
+        {
+            var _dept = $("#selDept option:selected").val();
+            var _drivetype = $("input[name='drivetype']:checked").val();
+            if($("#txtCompany").val()==""){
+                alert('Please Enter Company');
+                $("#txtCompany").focus();
+                return false;
+            }
+            else if($("#txtDate").val()==""){
+                alert('Please Select Visit Date');
+                $("#txtDate").focus();
+                return false;
+            }
+            else if(parseInt(_dept)==0){
+                alert('Plese Select Department.');
+                $("#selDept").focus();
+                return false;
+            }
+            else if($("#txtPersons").val()==""){
+                alert('Please Enter No.of Persons.');
+                $("#txtPersons").focus();
+                return false;
+            }
+            else if($("#txtPersons").val()!=""){
+                if(parseInt($("#txtPersons").val())<1 || parseInt($("#txtPersons").val())>10){
+                    alert('Please Enter No.of Persons in between 1 and 10.');
+                    $("#txtPersons").focus();
+                    return false;
+                }
+            }
+            if($("#txtPurpose").val()==""){
+                alert('Please Enter Visit Purpose.');
+                $("#txtPurpose").focus();
+                return false;
+            }
+            else if(parseInt(_vehType)==""){
+                if($("#txtVehNumber").val()==""){
+                    alert('Please Enter Vehicle Number.');
+                    $("#txtVehNumber").focus();
+                    return false;
+                }
+            }
+            return true;
+        }
     </script>
 </html>

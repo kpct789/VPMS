@@ -17,7 +17,7 @@
             top: 0;
             left: 0;
             margin: 0;
-            height: 120%;
+            height: 100%;
             width: 100%;
             /*padding-top: 30%;*/
             display: flex;
@@ -43,7 +43,7 @@
     <img class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
     <div id="divloading" class="divWaiting" style="display: none">
         <span id="imgloading">
-            <img src="img/loading.gif" alt="Loading" width="150" height="120"><br>
+            <img src="img/loading.gif" alt="Loading" width="90" height="75"><br>
             <label class="text text-success">Loading Please Wait...</label>
         </span>
     </div>
@@ -83,6 +83,9 @@
             if(parms.length > 1){
                 $("#hidRequestId").val(qsParm["reqid"]);
                 $("#hidEmail").val(qsParm["mail"]);
+            }
+            else{
+                window.location.href = 'VisitorRequest.html';
             }
         }
         

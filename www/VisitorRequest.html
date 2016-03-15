@@ -9,6 +9,7 @@
         <script type="text/ecmascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/ecmascript" src="js/jquery.min.js"></script>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
         <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
         <style type="text/css">
             ::-webkit-scrollbar-track
@@ -40,18 +41,17 @@
                 top: 0;
                 left: 0;
                 margin: auto;
-                height: 120%;
+                height: 100%;
                 width: 100%;
                 /*padding-top: 30%;*/
                 display: flex;
             }
-
             #imgloading
             {
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                margin-right: -50%;
+                margin-right: -50px;
                 transform: translate(-50%, -50%);
             }
             .headerbar
@@ -66,8 +66,8 @@
     <body onload="onLoad()">
         <img class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
         <div id="divloading" class="divWaiting" style="display: none">
-            <span id="imgloading">
-                <img src="img/loading.gif" alt="Loading" width="150" height="120"><br>
+            <span id="imgloading" class="text-center">
+                <img src="img/loading.gif" alt="Loading" width="90" height="75"><br>
                 <label class="text text-success">Loading Please Wait...</label>
             </span>
         </div>
@@ -89,9 +89,9 @@
                                             <button type="button" class="btn btn-primary btn-block" id="btnOTP">Send Verification Code</button><br>
                                             <!--<a href="#" class="text text-primary" id="lnkValidate"><small>Already having Verification Code.</small></a>-->
                                         </div>
-                                        <div id="divvalidate" class="form-group">
+                                        <div id="divvalidate" class="form-group" style="display: none;">
                                             <label for="txtOTP" class="control-label">Verify OTP</label>
-                                            <input type="number" class="form-control" id="txtOTP" name="txtOTP" maxlength="6" value="" required title="Verify OTP"><br />
+                                            <input type="number" class="form-control" id="txtOTP" name="txtOTP" value="" required title="Verify OTP" maxlength="6" pattern="([0-9]*)"><br />
                                             <button type="button" class="btn btn-success btn-block" id="btnValidate">Verify Email</button>
                                         </div>                                        
                                     </form>
@@ -121,8 +121,8 @@
                 document.addEventListener("deviceready", onDeviceReady, false);
             }
 
-            // device APIs are available
-            //
+            /* device APIs are available
+            */
             function onDeviceReady() {
                 // Register the event listener
                 document.addEventListener("backbutton", onBackKeyDown, false);
@@ -137,7 +137,6 @@
                 $("#divloading").hide();
                 $("#divvalidate").hide();
                 //Send Verification Code
-                
                 $("#btnOTP").click(function () {
                     var sEmail = $("#txtEmail").val();
                     if ($.trim(sEmail).length == 0) {
@@ -159,18 +158,24 @@
                             data: Adddata,
                             dataType: 'json',
                             success: function (data) {
-                                //debugger;
                                 $("#hidRequestId").val(data)
                                 $("#txtEmail").attr('disabled', 'disabled');
                                 $("#btnOTP").hide();
+                                $("#txtOTP").val("");
                                 $("#divvalidate").show();
                                 $("#divloading").hide();
                             },
-                            statusCode: {
+                            /*statusCode: {
                                 404: function () {
                                     alert('Failed');
                                     $("#divloading").hide();
                                 }
+                            }*/
+                            error: function(xhr, status, error){
+                                alert('Request Failed. Please try again.');
+                                $("#txtOTP").val("");
+                                $("#divvalidate").hide();
+                                $("#divloading").hide();
                             }
                         });
                     }
@@ -195,7 +200,6 @@
 
                 //Verify Email
                 $("#btnValidate").click(function () {
-                    $("#divloading").show();
                     var sEmail = $("#txtEmail").val();
                     if ($.trim(sEmail).length == 0) {
                         alert('Please enter valid email address');
@@ -211,7 +215,13 @@
                         $("#txtOTP").focus();
                         e.preventDefault();
                     }
+                    else if(parseInt($("#txtOTP").val()) < 111111 || parseInt($("#txtOTP").val()) > 999999){
+                        alert('Invalid Verification Code. Please Check');
+                        $("#txtOTP").focus();
+                        e.preventDefault();
+                    }                        
                     else {
+                        $("#divloading").show();
                         var Validatedata = {};
                         Validatedata.Email = $("#txtEmail").val();
                         Validatedata.OTP = $("#txtOTP").val();
@@ -221,17 +231,13 @@
                             type: 'POST',
                             data: Validatedata,
                             dataType: 'json',
-                            success: function (data) {
-                                //debugger;
-                                //$("#txtEmail").val(data);
+                            success: function (data, status, xhr) {
                                 window.location.href = 'VisitorInfo.html?reqid=' + ($("#hidRequestId").val()) + '&mail=' + ($("#txtEmail").val());
-                                //$("#divloading").hide();
                             },
-                            statusCode: {
-                                404: function () {
-                                    alert('Failed');
-                                    $("#divloading").hide();
-                                }
+                            error: function(xhr, status, error){
+                                $("#txtOTP").val("");
+                                alert('Verfication Failed. Please enter valid OTP or try again.');
+                                $("#divloading").hide();
                             }
                         });
                     }
