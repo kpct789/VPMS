@@ -16,7 +16,7 @@
                 <label class="text text-success">Loading Please Wait...</label>
             </span>
         </div>
-        <div class="container text-center">
+        <div id="container" class="container text-center">
             <img class="logo" src="img/headerlogobar.png" height="40" width="350">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -127,6 +127,7 @@
         
         function uploadPicture() {
             $("#divloading").show();
+            $("#container").hide();
             var img = document.getElementById('camera_image');
             var imageURI = img.src;
             if (!imageURI || (img.style.display == "none")) {
@@ -154,10 +155,12 @@
                 var ft = new FileTransfer();
                 ft.upload(imageURI, encodeURI(server), function(r) {
                     $("#divloading").hide();
+                    $("#container").show();
                     document.getElementById('camera_status').innerHTML = "Upload successful: " + (parseFloat(parseFloat(r.bytesSent)/1024)/1024) + " MB uploaded.";
                     window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();;
                 }, function(error) {
                     $("#divloading").hide();
+                    $("#container").show();
                     document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
                 }, options);
             }
@@ -167,7 +170,7 @@
             document.addEventListener("deviceready", function() {deviceReady = true;}, false);
             window.setTimeout(function() {
                 if (!deviceReady) {
-                    alert("Error: PhoneGap did not initialize.  Demo will not run correctly.");
+                    alert("Error: Camera not initialised.");
                 }
             },2000);
         }

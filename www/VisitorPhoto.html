@@ -109,6 +109,7 @@
             
             $('#btnUploadFile').on('click', function () {
                 $("#divloading").show();
+                $("#container").hide();
                 var data = new FormData();
                 var files = $("#fileUpload").get(0).files;
 
@@ -128,9 +129,11 @@
 
                 ajaxRequest.done(function (xhr, textStatus) {
                     $("#divloading").hide();
+                    $("#container").show();
                     window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();                    
                 });
                 $("#divloading").hide();
+                $("#container").show();
             });
         });
     </script>
