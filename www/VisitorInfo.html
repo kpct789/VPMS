@@ -7,64 +7,15 @@
     <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"
     />
     <title>Visitor Details</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
     <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
     <style type="text/css">
-        ::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            background-color: #F5F5F5;
-        }
-        
-        ::-webkit-scrollbar {
-            height: 7px;
-            width: 7px;
-            background-color: #F5F5F5;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-            background-color: #555;
-        }
-        
-        .input-group-btn select {
-            border-color: #ccc;
-            margin-top: 0px;
-            margin-bottom: 0px;
-            padding-top: 7px;
-            padding-bottom: 7px;
-        }
-        
-        .divWaiting {
-            position: absolute;
-            background-color: white;
-            z-index: 10000;
-            filter: alpha(opacity=80);
-            overflow: hidden;
-            text-align: center;
-            top: 0;
-            left: 0;
-            margin: auto;
-            height: 100%;
-            width: 100%;
-            /*padding-top: 30%;*/
-            display: flex;
-        }
-        
-        #imgloading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-right: -50%;
-            transform: translate(-50%, -50%);
-        }
-        .headerbar
-        {
-            top: 0;
-            left: 0;
-            margin: 0;
-            position: absolute;
+        #selCountryCode{
+            border-bottom: 1px solid #66AFE9;
+            border-right: 1px solid #E8E9EA;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0);
         }
     </style>
 </head>
@@ -76,8 +27,9 @@
             <label class="text text-success">Loading Please Wait...</label>
         </span>
     </div>
-    <div id="container" class="container-fluid">
-        <div class="modal-dialog">
+    <div id="container" class="container-fluid text-center">
+        <img class="logo" src="img/headerlogobar.png" height="40" width="350">
+        <div class="modal-dialog text-left">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabel">Visitor Details</h3>
@@ -86,13 +38,13 @@
                     <div class="row">
                         <div class="col-lg-1"></div>
                         <div class="col-lg-10">
-                            <div class="well" style="padding: 15px">
+                            <div  style="padding: 15px"><!-- class="well" -->
                             <form id="form1">
                                 <div class="form-group">
                                     <label for="txtFrstName" class="control-label">First Name<span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control text-capitalize" id="txtFrstName" name="txtFrstName" value="" required title="Please enter First Name">
+                                    <input type="text" class="form-control text-capitalize" id="txtFrstName" name="txtFrstName" value="" required title="Please enter First Name"><br>
                                     <label for="txtLstName" class="control-label">Last Name<span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control text-capitalize" id="txtLstName" name="txtLstName" value="" required title="Please enter Last Name">
+                                    <input type="text" class="form-control text-capitalize" id="txtLstName" name="txtLstName" value="" required title="Please enter Last Name"><br>
                                     <label for="selGender" class="control-label">Gender<span class="text-danger"> *</span></label>&nbsp;
                                     <div class="radio-inline">
                                         <label>
@@ -106,18 +58,18 @@
                                     <label for="selIdProof" class="control-label">ID Proof<span class="text-danger"> *</span></label>
                                     <select id="selIdProof" class="form-control">
                                         <option value="0" selected>Select</option>
-                                    </select>
+                                    </select><br>
                                     <label id="lblID" for="txtIdNo" class="control-label"></label>
-                                    <input type="text" class="form-control text-uppercase" id="txtIdNo" name="txtIdNo" value="" disabled required title="Please enter id proof no.">
+                                    <input type="text" class="form-control text-uppercase" id="txtIdNo" name="txtIdNo" value="" disabled required title="Please enter id proof no."><br>
                                     <label for="txtMobile" class="control-label">Mobile No<span class="text-danger"> *</span></label>
                                     <div class="input-group">
                                         <span class="input-group-btn">
-                                            <select id="selCountryCode" class="btn">
-                                                <option>+91</option>
+                                            <select id="selCountryCode" class="btn" disabled>
+                                                <option value="0" selected>+91</option>
                                             </select>
                                         </span>
                                         <input type="number" class="form-control" id="txtMobile" name="txtMobile" value="" required title="Please enter Mobile No" maxlength="10">
-                                    </div>
+                                    </div><br>
                                     <label for="txtEmail" class="control-label">Email<span class="text-danger"> *</span></label>
                                     <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter Email">
                                     <br>
@@ -138,6 +90,7 @@
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="js/additional-methods.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript">
         var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitorDetails/AddVisitorDetails';
@@ -148,20 +101,18 @@
             document.addEventListener("deviceready", onDeviceReady, false);
         }
 
-        // device APIs are available
-        //
+        /* device APIs are available */
         function onDeviceReady() {
-            // Register the event listener
+            /* Register the event listener */
             document.addEventListener("backbutton", onBackKeyDown, false);
         }
 
-        // Handle the back button
-        //
+        /* Handle the back button */
         function onBackKeyDown() {
         }
         
         $(document).ready(function () {
-            var Status = qs();
+            var Status = qs($("#hidRequestId").val(), $("#txtEmail").val());
             if ($("#txtEmail").val() != "")
                 $("#txtEmail").attr('disabled', 'disabled');
             else
@@ -184,6 +135,7 @@
                     }
                 });
             }
+            
             $("#selIdProof").change(function () {
                 var str = "";
                 $("#selIdProof option:selected").each(function () {
@@ -200,86 +152,21 @@
                     $("#txtIdNo").attr('placeholder', 'Enter ' + str + ' No');
                 }
             });
-            $('#txtFrstName').keypress(function (e) {
-                var regex = new RegExp("^[a-zA-Z]+$");
-                var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-                if (regex.test(str)) {
-                    return true;
-                }
-
-                e.preventDefault();
-                return false;
-            });
             
-            /*
-            $("#txtMobile").keydown(function (objEvt) {
-                var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-                //alert(charCode);
-                // Num 0-96 to 9-105 and 0-48 to 9-57
-                // Tab 9, BackSpace 8, Delete 46, Space 32
-                // Arrows keys 37 to 40
-                if ((parseInt(charCode) >= 96 && parseInt(charCode) <= 105) || (parseInt(charCode) >= 48 && parseInt(charCode) <= 57))
-                    return true;
-                else if (parseInt(charCode) == 9 || parseInt(charCode) == 8 || parseInt(charCode) == 46)
-                    return true;
-                else if (parseInt(charCode) >= 37 && parseInt(charCode) <= 40)
-                    return true;
-                else
-                    return false;
-            });
-
-            $("#txtFrstName").keydown(function (objEvt) {
-                var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-                // a-65 to z-90 and 0-48 to 9-57
-                // Tab 9, BackSpace 8, Delete 46, Space 32
-                // Arrows keys 37 to 40
-                if ((parseInt(charCode) >= 65 && parseInt(charCode) <= 90))
-                    return true;
-                else if (parseInt(charCode) == 8 || parseInt(charCode) == 9 || parseInt(charCode) == 32 || parseInt(charCode) == 46)
-                    return true;
-                else if (parseInt(charCode) >= 37 && parseInt(charCode) <= 40)
-                    return true;
-                else
-                    return false;
-            });
-
-            $("#txtLstName").keydown(function (objEvt) {
-                var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-                // a-65 to z-90 and 0-48 to 9-57
-                // Tab 9, BackSpace 8, Delete 46, Space 32
-                // Arrows keys 37 to 40
-                if ((parseInt(charCode) >= 65 && parseInt(charCode) <= 90))
-                    return true;
-                else if (parseInt(charCode) == 8 || parseInt(charCode) == 9 || parseInt(charCode) == 32 || parseInt(charCode) == 46)
-                    return true;
-                else if (parseInt(charCode) >= 37 && parseInt(charCode) <= 40)
-                    return true;
-                else
-                    return false;
-            });
-
-            $("#txtIdNo").keydown(function (objEvt) {
-                var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-                // a-65 to z-90 and 0-48 to 9-57
-                // Num 0-96 to 9-105 and 0-48 to 9-57
-                // Tab 9, BackSpace 8, Delete 46, Space 32
-                // Arrows keys 37 to 40
-                if ((parseInt(charCode) >= 96 && parseInt(charCode) <= 105) || (parseInt(charCode) >= 48 && parseInt(charCode) <= 57))
-                    return true;
-                else if ((parseInt(charCode) >= 65 && parseInt(charCode) <= 90) || parseInt(charCode) == 9)
-                    return true;
-                else if (parseInt(charCode) == 8 || parseInt(charCode) == 9 || parseInt(charCode) == 46)
-                    return true;
-                else if (parseInt(charCode) >= 37 && parseInt(charCode) <= 40)
-                    return true;
-                else
-                    return false;
-            });
-            */
             $("#btnSubmit").click(function () {
                 var sEmail = $("#txtEmail").val();
                 if (!formValidations()) {
 
+                }
+                else if(!ValidateText($("#txtFrstName").val())){
+                    alert('Number not allowed here. Please enter valid First Name');
+                    $("#txtFrstName").focus();
+                    e.preventDefault();
+                }
+                else if(!ValidateText($("#txtLstName").val())){
+                    alert('Number not allowed here. Please enter valid Last Name');
+                    $("#txtLstName").focus();
+                    e.preventDefault();
                 }
                 else if ($.trim(sEmail).length == 0) {
                     alert('Please enter valid email address');
@@ -292,6 +179,7 @@
                 }
                 else {
                     $("#divloading").show();
+                    $("#container").hide();
                     var _gender = $("input[name='gender']:checked").val();
                     var _idprooftype = $("#selIdProof option:selected").val();
                     var _countrycode = $("#selCountryCode option:selected").val();
@@ -323,6 +211,7 @@
                             404: function () {
                                 alert('Failed');
                                 $("#divloading").hide();
+                                $("#container").show();
                             }
                         }
                     });
@@ -350,14 +239,6 @@
                 window.location.href = 'VisitorRequest.html';
                 return false;
             }
-        }
-
-        function ValidateEmail(sEmail) {
-            var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-            if (filter.test(sEmail))
-                return true;
-            else
-                return false;
         }
 
         function formValidations() {

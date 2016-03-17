@@ -97,6 +97,11 @@
                 if(parms.length > 1){
                     $("#mail").text(qsParm["mail"]);
                     ReqId = qsParm["reqid"];
+                    return true;
+                }
+                else{
+                    window.location.href = 'VisitorRequest.html';
+                    return false;
                 }
             }
             

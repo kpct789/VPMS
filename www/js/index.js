@@ -29,3 +29,87 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+/* Validating Text */
+function ValidateText(text){
+    var regex = new RegExp("^[a-zA-Z ]+$");
+    if (regex.test(text))
+        return true;
+    else
+        return false;
+}
+
+/* Validating Email */
+function ValidateEmail(sEmail) {
+    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    if (filter.test(sEmail))
+        return true;
+    else
+        return false;
+}
+      
+/*
+$("#txtMobile").keydown(function (objEvt) {
+    var charCode = (objEvt.which) ? objEvt.which : event.keyCode
+    //alert(charCode);
+    // Num 0-96 to 9-105 and 0-48 to 9-57
+    // Tab 9, BackSpace 8, Delete 46, Space 32
+    // Arrows keys 37 to 40
+    if ((parseInt(charCode) >= 96 && parseInt(charCode) <= 105) || (parseInt(charCode) >= 48 && parseInt(charCode) <= 57))
+        return true;
+    else if (parseInt(charCode) == 9 || parseInt(charCode) == 8 || parseInt(charCode) == 46)
+        return true;
+    else if (parseInt(charCode) >= 37 && parseInt(charCode) <= 40)
+        return true;
+    else
+        return false;
+});
+
+$("#txtFrstName").keydown(function (objEvt) {
+    var charCode = (objEvt.which) ? objEvt.which : event.keyCode
+    // a-65 to z-90 and 0-48 to 9-57
+    // Tab 9, BackSpace 8, Delete 46, Space 32
+    // Arrows keys 37 to 40
+    if ((parseInt(charCode) >= 65 && parseInt(charCode) <= 90))
+        return true;
+    else if (parseInt(charCode) == 8 || parseInt(charCode) == 9 || parseInt(charCode) == 32 || parseInt(charCode) == 46)
+        return true;
+    else if (parseInt(charCode) >= 37 && parseInt(charCode) <= 40)
+        return true;
+    else
+        return false;
+});
+
+$("#txtLstName").keydown(function (objEvt) {
+    var charCode = (objEvt.which) ? objEvt.which : event.keyCode
+    // a-65 to z-90 and 0-48 to 9-57
+    // Tab 9, BackSpace 8, Delete 46, Space 32
+    // Arrows keys 37 to 40
+    if ((parseInt(charCode) >= 65 && parseInt(charCode) <= 90))
+        return true;
+    else if (parseInt(charCode) == 8 || parseInt(charCode) == 9 || parseInt(charCode) == 32 || parseInt(charCode) == 46)
+        return true;
+    else if (parseInt(charCode) >= 37 && parseInt(charCode) <= 40)
+        return true;
+    else
+        return false;
+});
+
+$("#txtIdNo").keydown(function (objEvt) {
+    var charCode = (objEvt.which) ? objEvt.which : event.keyCode
+    // a-65 to z-90 and 0-48 to 9-57
+    // Num 0-96 to 9-105 and 0-48 to 9-57
+    // Tab 9, BackSpace 8, Delete 46, Space 32
+    // Arrows keys 37 to 40
+    if ((parseInt(charCode) >= 96 && parseInt(charCode) <= 105) || (parseInt(charCode) >= 48 && parseInt(charCode) <= 57))
+        return true;
+    else if ((parseInt(charCode) >= 65 && parseInt(charCode) <= 90) || parseInt(charCode) == 9)
+        return true;
+    else if (parseInt(charCode) == 8 || parseInt(charCode) == 9 || parseInt(charCode) == 46)
+        return true;
+    else if (parseInt(charCode) >= 37 && parseInt(charCode) <= 40)
+        return true;
+    else
+        return false;
+});
+*/

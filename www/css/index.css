@@ -7,26 +7,25 @@ html
     position: relative;
     min-height: 100%;
 }
-body
-{
-    background: #E4E4E4; /* Old browsers */
-    background: -moz-linear-gradient(top,  #A7A7A7 0%, #E4E4E4 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  #A7A7A7 0%,#E4E4E4 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom,  #A7A7A7 0%,#E4E4E4 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#A7A7A7', endColorstr='#E4E4E4',GradientType=0 ); /* IE6-9 */
-    background-attachment: fixed;
-    min-height: 100%;
-}
-footer 
-{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    /*height: 30px;*/
-    background-color: aliceblue;
-    text-align: center;
-    vertical-align: middle;
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#EAF5FD;
+    background-image:linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
+    background-image:-webkit-linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
+    background-image:-ms-linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #D7EAFA),
+        color-stop(0.51, #EAF5FD)
+    );
+    background-attachment:fixed;
+    margin:0px;
+    padding:0px;
+    width:100%;
 }
 ::-webkit-scrollbar-track
 {
@@ -62,21 +61,35 @@ footer
     /*padding-top: 30%;*/
     display: flex;
 }
-.app {
-    background:url(../img/logo.png) no-repeat center top;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    height:50px;
-    width: 150px;
-}
 #imgloading
 {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-right: -50%;
+    margin-right: -50px;
     transform: translate(-50%, -50%);
+}
+.headerbar
+{
+    top: 0;
+    left: 0;
+    margin: 0;
+    position: absolute;
+}
+.btn{
+    border-radius: 0;
+}
+.form-control{
+    border: 0;
+    border-bottom: 1px solid #66AFE9;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.modal-content{
+    border-radius: 0;
+}
+.logo{
+    max-width: 100%;
+    max-height: 40;
 }

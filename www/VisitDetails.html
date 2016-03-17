@@ -8,29 +8,10 @@
         <title>Visit Details</title>
         <link rel="stylesheet" href="css/jquery-ui.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/index.css">
         <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
-        <!--<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>-->
-        <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
         <style type="text/css">
-            ::-webkit-scrollbar-track
-            {
-                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-                border-radius: 10px;
-                background-color: #F5F5F5;
-            }
-            ::-webkit-scrollbar
-            {
-                height: 7px;
-                width: 7px;
-                background-color: #F5F5F5;
-            }
-            ::-webkit-scrollbar-thumb
-            {
-                border-radius: 10px;
-                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-                background-color: #555;
-            }
             .input-group-btn select
             {
                 border-color: #ccc;
@@ -42,60 +23,6 @@
             .ui-datepicker{
                 font-size: 12px;
             }
-            /*.ui-widget-content .ui-icon {
-                background-image: url("img/ui-icons_222222_256x240.png");
-            }
-            .ui-widget-header .ui-icon {
-                background-image: url("img/ui-icons_222222_256x240.png");
-            }
-            .ui-state-default .ui-icon {
-                background-image: url("img/ui-icons_888888_256x240.png");
-            }
-            .ui-state-hover .ui-icon,
-            .ui-state-focus .ui-icon {
-                background-image: url("img/ui-icons_454545_256x240.png");
-            }
-            .ui-state-active .ui-icon {
-                background-image: url("img/ui-icons_454545_256x240.png");
-            }
-            .ui-state-highlight .ui-icon {
-                background-image: url("img/ui-icons_2e83ff_256x240.png");
-            }
-            .ui-state-error .ui-icon,
-            .ui-state-error-text .ui-icon {
-                background-image: url("img/ui-icons_cd0a0a_256x240.png");
-            }*/
-            .divWaiting
-            {
-                position: absolute;
-                background-color: white;
-                z-index: 10000;
-                filter: alpha(opacity=80);
-                overflow: hidden;
-                text-align: center;
-                top: 0;
-                left: 0;
-                margin: 0;
-                height: 100%;
-                width: 100%;
-                /*padding-top: 30%;*/
-                display: flex;
-            }
-            #imgloading
-            {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                margin-right: -50%;
-                transform: translate(-50%, -50%);
-            }
-            .headerbar
-            {
-                top: 0;
-                left: 0;
-                margin: 0;
-                position: absolute;
-            }
         </style>
     </head>
     <body onload="onLoad()">
@@ -106,8 +33,9 @@
                 <label class="text text-success">Loading Please Wait...</label>
             </span>
         </div>
-        <div id="container" class="container">
-            <div class="modal-dialog">
+        <div id="container" class="container text-center">
+            <img class="logo" src="img/headerlogobar.png" height="40" width="350">
+            <div class="modal-dialog text-left">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel">Visit Details</h3>
@@ -120,23 +48,23 @@
                                     <form id="form1">
                                         <div class="form-group">
                                             <label for="txtCompany" class="control-label">Company<span class="text-danger"> *</span></label>
-                                            <input type="text" class="form-control text-capitalize" id="txtCompany" name="txtCompany" value="" required title="Please enter Company">
+                                            <input type="text" class="form-control text-capitalize" id="txtCompany" name="txtCompany" value="" required title="Please enter Company"><br>
                                             <label for="txtDate" class="control-label">Visit Date<span class="text-danger"> *</span></label>
-                                            <input type="text" class="form-control" id="txtDate" name="txtDate" value="" required title="Please enter Visit Date">
+                                            <input type="text" class="form-control" id="txtDate" name="txtDate" value="" required title="Please enter Visit Date" readonly><br>
                                             <label for="selDept" class="control-label">Department<span class="text-danger"> *</span></label>
                                             <select id="selDept" class="form-control">
                                                 <option value="0" selected>Select</option>
-                                            </select>
+                                            </select><br>
                                             <label for="txtPersons" class="control-label">No.Of Persons<span class="text-danger"> *</span></label>
-                                            <input type="number" class="form-control" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" min="1" max="10" maxlength="3">
+                                            <input type="number" class="form-control" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" min="1" max="10" maxlength="3"><br>
                                             <label for="txtPurpose" class="control-label">Visit Purpose<span class="text-danger"> *</span></label>
-                                            <textarea class="form-control text-capitalize" id="txtPurpose" name="txtPurpose" title="Please Enter the Visit Purpose" required rows="3"></textarea>
+                                            <textarea class="form-control text-capitalize" id="txtPurpose" name="txtPurpose" title="Please Enter the Visit Purpose" required rows="3"></textarea><br>
                                             <label for="selVehType" class="control-label">Vehicle Type</label>
                                             <select id="selVehType" class="form-control">
                                                 <option value="0" selected>Select</option>
-                                            </select>
+                                            </select><br>
                                             <label for="txtVehNumber" class="control-label">Vehicle Number</label>
-                                            <input type="text" class="form-control text-uppercase" id="txtVehNumber" name="txtVehNumber" value="" disabled required title="Please enter Vehicle Number">
+                                            <input type="text" class="form-control text-uppercase" id="txtVehNumber" name="txtVehNumber" value="" disabled required title="Please enter Vehicle Number"><br>
                                             <label for="drivetype" class="control-label">Self Driving</label>&nbsp;
                                             <div class="radio-inline">
                                               <label><input type="radio" name="drivetype" value="N" checked>No</label>
@@ -158,6 +86,7 @@
         <input type="hidden" id="hidRequestId">
         <input type="hidden" id="hidEmail">
     </body>
+    <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript">
         var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitDetails/AddVisitDetails';
@@ -187,27 +116,18 @@
                 return false;
             }
         }
-        function ValidateEmail(sEmail){
-            var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-            if (filter.test(sEmail))
-                return true;
-            else
-                return false;
-        }
         
         function onLoad() {
             document.addEventListener("deviceready", onDeviceReady, false);
         }
 
-        // device APIs are available
-        //
+        /* device APIs are available */
         function onDeviceReady() {
-            // Register the event listener
+            /* Register the event listener */
             document.addEventListener("backbutton", onBackKeyDown, false);
         }
 
-        // Handle the back button
-        //
+        /* Handle the back button */
         function onBackKeyDown() {
         }
         
@@ -233,22 +153,6 @@
             
             $("#txtDate").keypress(function () {
                 return false;
-            });
-                        
-            $("#txtPersons").keydown(function (objEvt) {
-                var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-                /*alert(parseInt(charCode));
-                 Num 0-96 to 9-105 and 0-48 to 9-57
-                 Tab 9, BackSpace 8, Delete 46, Space 32
-                 Arrows keys 37 to 40*/
-                if ((parseInt(charCode) >= 96 && parseInt(charCode) <= 105) || (parseInt(charCode) >= 48 && parseInt(charCode) <= 57))
-                    return true;
-                else if (parseInt(charCode) == 9 || parseInt(charCode) == 8 || parseInt(charCode) == 46)
-                    return true;
-                else if (parseInt(charCode) >= 37 && parseInt(charCode) <= 40)
-                    return true;
-                else
-                    return false;
             });
 
             $("#txtDate").datepicker({
@@ -289,40 +193,56 @@
             });
 
             $("#btnSubmit").click(function () {
-                $("#divloading").show();
-                $(document).attr('css', 'overflow: hidden');
                 var _dept = $("#selDept option:selected").val();
                 var _drivetype = $("input[name='drivetype']:checked").val();
                 if(FormValidations()){
-                    var Adddata = {};
-                    Adddata.Company = $("#txtCompany").val();
-                    Adddata.VisitDate = $("#txtDate").val();
-                    Adddata.Department = _dept;
-                    Adddata.NoofPersons = $("#txtPersons").val();
-                    Adddata.VisitPurpose = $("#txtPurpose").val();
-                    Adddata.VehicleNumber = $("#txtVehNumber").val();
-                    Adddata.VehicleType = _vehType;
-                    Adddata.SelfDriving = _drivetype;
-                    Adddata.RequestId = $("#hidRequestId").val();
-                    Adddata.Email = $("#hidEmail").val();
-                    $.ajax({
-                        url: apiURL,
-                        type: 'POST',
-                        data: Adddata,
-                        dataType: 'json',
-                        success: function (data) {
-                            window.location.href = 'RequestEnd.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
-                        },
-                        statusCode: {
-                            404: function () {
-                                alert('Failed');
-                                $("#divloading").hide();
+                    if(!ValidateText($("#txtCompany").val())){
+                        alert('Numbers not allowed. Please enter valid Company Name');
+                        $("#txtCompany").focus();
+                        /* e.preventDefault(); */
+                        return false;
+                    }
+                    else if(!ValidateText($("#txtCompany").val())){
+                        alert('Numbers not allowed. Please enter valid Company Name');
+                        $("#txtCompany").focus();
+                        /* e.preventDefault(); */
+                        return false;
+                    }
+                    else{
+                        $("#divloading").show();
+                        $("#container").hide();
+                        var Adddata = {};
+                        Adddata.Company = $("#txtCompany").val();
+                        Adddata.VisitDate = $("#txtDate").val();
+                        Adddata.Department = _dept;
+                        Adddata.NoofPersons = $("#txtPersons").val();
+                        Adddata.VisitPurpose = $("#txtPurpose").val();
+                        Adddata.VehicleNumber = $("#txtVehNumber").val();
+                        Adddata.VehicleType = _vehType;
+                        Adddata.SelfDriving = _drivetype;
+                        Adddata.RequestId = $("#hidRequestId").val();
+                        Adddata.Email = $("#hidEmail").val();
+                        $.ajax({
+                            url: apiURL,
+                            type: 'POST',
+                            data: Adddata,
+                            dataType: 'json',
+                            success: function (data) {
+                                window.location.href = 'RequestEnd.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
+                            },
+                            statusCode: {
+                                404: function () {
+                                    alert('Failed');
+                                    $("#divloading").hide();
+                                    $("#container").show()
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
                 else{
                     $("#divloading").hide();
+                    $("#container").show()
                 }
             });
         });
