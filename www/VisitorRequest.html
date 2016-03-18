@@ -89,21 +89,9 @@
             function onBackKeyDown() {
             }
             
-            function isPhoneGap() {
-                return (window.cordova || window.PhoneGap || window.phonegap) 
-                && /^file:\/{3}[^\/]/i.test(window.location.href) 
-                && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent);
-            }            
-
             $(document).ready(function () {
                 $("#divloading").hide();
                 $("#divvalidate").hide();
-                
-                if ( isPhoneGap() ) {
-                    alert("Running on PhoneGap!");
-                } else {
-                    alert("Not running on PhoneGap!");
-                }
                 
                 //Send Verification Code
                 $("#btnOTP").click(function () {

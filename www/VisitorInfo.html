@@ -132,6 +132,12 @@
         function onBackKeyDown() {
         }
         
+        function isPhoneGap() {
+            return (window.cordova || window.PhoneGap || window.phonegap) 
+            && /^file:\/{3}[^\/]/i.test(window.location.href) 
+            && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent);
+        }
+        
         $(document).ready(function () {
             var Status = qs($("#hidRequestId").val(), $("#txtEmail").val());
             if ($("#txtEmail").val() != "")
@@ -218,13 +224,18 @@
                         data: Adddata,
                         dataType: 'json',
                         success: function (data) {
-                            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                            if ( isPhoneGap() ) {
+                                window.location.href = 'm.VisitorPhoto.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
+                            } else {
+                                 window.location.href = 'VisitorPhoto.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
+                            }
+                            /*if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
                                 window.location.href = 'm.VisitorPhoto.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
                             }
                             else{
                                 window.location.href = 'VisitorPhoto.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
                                 //window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
-                            }
+                            }*/
                         },
                         statusCode: {
                             404: function () {
