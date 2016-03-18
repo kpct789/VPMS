@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"
+    />
+    <title>Visitor Details</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
+    <style type="text/css">
+        #selCountryCode{
+            border: 0;
+            background-color: transparent;
+        }
+        .imp{
+            color: red;
+        }
+    </style>
+</head>
+<body onload="onLoad()">
+    <img class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
+    <div id="divloading" class="divWaiting" style="display: none">
+        <span id="imgloading">
+            <img src="img/loading.gif" alt="Loading" width="90" height="75"><br>
+            <label class="text text-success">Loading Please Wait...</label>
+        </span>
+    </div>
+    <div id="container" class="container-fluid text-center">
+        <img class="logo" src="img/headerlogobar.png" height="40" width="350">
+        <div class="modal-dialog text-left">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Visitor Details</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10">
+                            <div style="padding: 8px"><!-- class="well" -->
+                                <form id="form1" class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label for="txtFrstName" class="control-label col-md-3"><small>First Name</small></label>
+                                            <div class="col-md-8 text-left"><input type="text" class="form-control text-capitalize" id="txtFrstName" name="txtFrstName" value="" required title="Please enter First Name"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtLstName" class="control-label col-md-3"><small>Last Name</small></label>
+                                            <div class="col-md-8 text-left"><input type="text" class="form-control text-capitalize" id="txtLstName" name="txtLstName" value="" required title="Please enter Last Name"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="selGender" class="control-label col-md-3"><small>Gender</small></label>
+                                            <div class="col-md-8 text-left">
+                                                <div class="radio-inline">
+                                                    <label>
+                                                        <input type="radio" name="gender" value="Male" checked>Male</label>
+                                                </div>
+                                                <div class="radio-inline">
+                                                    <label>
+                                                        <input type="radio" name="gender" value="Female">Female</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="selIdProof" class="control-label col-md-3"><small>ID Proof</small></label>
+                                            <div class="col-md-8 text-left">
+                                                <select id="selIdProof" class="form-control">
+                                                    <option value="0" selected>Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <small><label id="lblID" for="txtIdNo" class="control-label col-md-3"></label></small>
+                                            <div class="col-md-8 text-left"><input type="text" class="form-control text-uppercase" id="txtIdNo" name="txtIdNo" value="" disabled required title="Please enter id proof no."></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtMobile" class="control-label col-md-3"><small>Mobile No</small></label>
+                                            <div class="col-md-8 text-left">
+                                                <!--<span class="input-group-btn input-group-inline">
+                                                    <select id="selCountryCode" class="btn" disabled>
+                                                        <option value="0" selected>+91</option>
+                                                    </select>
+                                                </span>-->
+                                                <div class="input-group">
+                                                <span class="input-group-addon"><select id="selCountryCode" disabled>
+                                                        <option value="0" selected>+91</option>
+                                                    </select></span>
+                                                <input type="number" class="form-control" id="txtMobile" name="txtMobile" value="" required title="Please enter Mobile No" maxlength="10"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtEmail" class="control-label col-md-3"><small>Email</small></label>
+                                            <div class="col-md-8 text-left"><input type="email" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter Email"></div>
+                                        </div>
+                                        <code class="text-center">* All Fields are mandatory.</code><br><br>
+                                        <button type="button" class="btn btn-success btn-block" id="btnSubmit">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="hidRequestId">
+    <footer>
+        <div class="container text-center">
+            <small><span class="text-primary">© <script>document.write(new Date().getFullYear())</script> - KRISHNAPATNAM PORT COMPANY LTD.</span></small>
+        </div>
+    </footer>
+</body>
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/additional-methods.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+    var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitorDetails/AddVisitorDetails';
+    var IdProofTypeapiURL = 'http://61.0.225.169/VPMSAPI/api/Master/GetIdProofType';//61.0.225.169
+    var qsParm = new Array();
+
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    /* device APIs are available */
+    function onDeviceReady() {
+        /* Register the event listener */
+        document.addEventListener("backbutton", onBackKeyDown, false);
+    }
+
+    /* Handle the back button */
+    function onBackKeyDown() {
+    }
+
+    $(document).ready(function () {
+        var Status = qs();
+        if ($("#txtEmail").val() != "")
+            $("#txtEmail").attr('disabled', 'disabled');
+        else
+            $("#txtEmail").attr('disabled', false);
+        
+        //if(Status){
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: IdProofTypeapiURL,
+                dataType: "json",
+                crossDomain: true,
+                success: function (result) {
+                    $.each(result, function (key, value) {
+                        $("#selIdProof").append($("<option></option>").val(value.Id).html(value.Name));
+                    });
+                },
+                error: function (result) {
+                    alert(result.message);
+                }
+            });
+        //}
+
+        $("#selIdProof").change(function () {
+            var str = "";
+            $("#selIdProof option:selected").each(function () {
+                str += $(this).text().trim();
+            });
+            if (str == "Select") {
+                $("#lblID").text('');
+                $("#txtIdNo").attr('disabled', 'disabled');
+                $("#txtIdNo").attr('placeholder', '');
+            }
+            else {
+                $("#lblID").text(str + ' No');
+                $("#txtIdNo").attr('disabled', false);
+                $("#txtIdNo").focus();
+                //$("#txtIdNo").attr('placeholder', 'Enter ' + str + ' No');
+            }
+        });
+    });
+    function qs() {
+        var query = window.location.search.substring(1);
+        var parms = query.split('&');
+        for (var i=0; i < parms.length; i++) {
+            var pos = parms[i].indexOf('=');
+            if (pos > 0) {
+                var key = parms[i].substring(0, pos);
+                var val = parms[i].substring(pos + 1);
+                qsParm[key] = val;
+            }
+        }
+        if(parms.length > 1){
+            $("#hidRequestId").val(qsParm["reqid"]);
+            $("#txtEmail").val(qsParm["mail"]);
+            return true;
+        }
+        else{
+            //window.location.href = 'VisitorRequest.html';
+            //return false;
+        }
+    }
+
+    function formValidations() {
+        var _idprooftype = $("#selIdProof option:selected").val();
+        if($("#txtFrstName").val() == "")
+        {
+            alert('Enter First Name');
+            $("#txtFrstName").focus();
+            return false;
+        }
+        else if($("#txtLstName").val() == "")
+        {
+            alert('Enter Last Name');
+            $("#txtLstName").focus();
+            return false;
+        }
+        else if(_idprooftype=="0")
+        {
+            alert('Select ID Proof Type');
+            $("#selIdProof").focus();
+            return false;
+        }
+        else if(parseInt(_idprooftype) > 0)
+        {
+            if($("#txtIdNo").val() == "")
+            {
+                alert('Enter ID Proof No');
+                $("#txtIdNo").focus();
+                return false;
+            }                
+        }
+        if($("#txtMobile").val() == "")
+        {
+            alert('Enter Mobile No');
+            $("#txtMobile").focus();
+            return false;
+        }
+        else if($("#txtMobile").val() != "")
+        {
+            if(parseInt($("#txtMobile").val().length) > 10 || parseInt($("#txtMobile").val().length) < 10)
+            {
+                alert('Invalid Mobile No');
+                $("#txtMobile").focus();
+                return false;
+            }
+        }
+        if($("#txtEmail").val() == "")
+        {
+            alert('Enter Email');
+            $("#txtEmail").focus();
+            return false;
+        }
+        return true;
+    }        
+</script>
+</html>

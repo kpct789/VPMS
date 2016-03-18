@@ -21,9 +21,9 @@
                 <label class="text text-success">Loading Please Wait...</label>
             </span>
         </div>
-        <div id="container" class="container">
+        <div id="container" class="container text-center">
             <img class="logo" src="img/headerlogobar.png" height="40" width="350">
-            <div id="login-overlay" class="modal-dialog">
+            <div id="login-overlay" class="modal-dialog text-left">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel">Visit Request</h3>
@@ -54,8 +54,12 @@
                 </div>
             </div>
         </div>
-        
         <input type="hidden" id="hidRequestId">
+        <footer>
+            <div class="container text-center">
+                <small><span class="text-primary">© <script>document.write(new Date().getFullYear())</script> - KRISHNAPATNAM PORT COMPANY LTD.</span></small>
+            </div>
+        </footer>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript">
             var clntHeight = parseFloat(document.documentElement.clientHeight) - 140;
@@ -84,10 +88,23 @@
             //
             function onBackKeyDown() {
             }
+            
+            function isPhoneGap() {
+                return (window.cordova || window.PhoneGap || window.phonegap) 
+                && /^file:\/{3}[^\/]/i.test(window.location.href) 
+                && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent);
+            }            
 
             $(document).ready(function () {
                 $("#divloading").hide();
                 $("#divvalidate").hide();
+                
+                if ( isPhoneGap() ) {
+                    alert("Running on PhoneGap!");
+                } else {
+                    alert("Not running on PhoneGap!");
+                }
+                
                 //Send Verification Code
                 $("#btnOTP").click(function () {
                     var sEmail = $("#txtEmail").val();

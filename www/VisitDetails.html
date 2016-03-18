@@ -23,6 +23,9 @@
             .ui-datepicker{
                 font-size: 12px;
             }
+            #txtDate{
+                background-color: transparent;
+            }
         </style>
     </head>
     <body onload="onLoad()">
@@ -44,47 +47,71 @@
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-10">
-                                <!--<div class="well" style="padding: 15px">-->
-                                    <form id="form1">
-                                        <div class="form-group">
-                                            <label for="txtCompany" class="control-label">Company<span class="text-danger"> *</span></label>
-                                            <input type="text" class="form-control text-capitalize" id="txtCompany" name="txtCompany" value="" required title="Please enter Company"><br>
-                                            <label for="txtDate" class="control-label">Visit Date<span class="text-danger"> *</span></label>
-                                            <input type="text" class="form-control" id="txtDate" name="txtDate" value="" required title="Please enter Visit Date" readonly><br>
-                                            <label for="selDept" class="control-label">Department<span class="text-danger"> *</span></label>
-                                            <select id="selDept" class="form-control">
-                                                <option value="0" selected>Select</option>
-                                            </select><br>
-                                            <label for="txtPersons" class="control-label">No.Of Persons<span class="text-danger"> *</span></label>
-                                            <input type="number" class="form-control" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" min="1" max="10" maxlength="3"><br>
-                                            <label for="txtPurpose" class="control-label">Visit Purpose<span class="text-danger"> *</span></label>
-                                            <textarea class="form-control text-capitalize" id="txtPurpose" name="txtPurpose" title="Please Enter the Visit Purpose" required rows="3"></textarea><br>
-                                            <label for="selVehType" class="control-label">Vehicle Type</label>
-                                            <select id="selVehType" class="form-control">
-                                                <option value="0" selected>Select</option>
-                                            </select><br>
-                                            <label for="txtVehNumber" class="control-label">Vehicle Number</label>
-                                            <input type="text" class="form-control text-uppercase" id="txtVehNumber" name="txtVehNumber" value="" disabled required title="Please enter Vehicle Number"><br>
-                                            <label for="drivetype" class="control-label">Self Driving</label>&nbsp;
-                                            <div class="radio-inline">
-                                              <label><input type="radio" name="drivetype" value="N" checked>No</label>
+                                <div style="padding: 8px"><!-- class="well" -->
+                                    <small>
+                                        <form id="form1" class="form-horizontal">
+                                            <div class="form-group text-left">
+                                                <div class="form-group">
+                                                    <label for="txtCompany" class="control-label col-md-3">Company</label>
+                                                    <div class="col-md-8"><input type="text" class="form-control text-capitalize" id="txtCompany" name="txtCompany" value="" required title="Please enter Company"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="txtDate" class="control-label col-md-3">Visit Date</label>
+                                                    <div class="col-md-8"><input type="text" class="form-control" id="txtDate" name="txtDate" value="" required title="Please enter Visit Date" readonly></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="selDept" class="control-label col-md-3">Department</label>
+                                                    <div class="col-md-8"><select id="selDept" class="form-control">
+                                                        <option value="0" selected>Select</option>
+                                                    </select></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="txtPersons" class="control-label col-md-3">No.Of Persons</label>
+                                                    <div class="col-md-8"><input type="number" class="form-control" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" min="1" max="10" maxlength="3"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="txtPurpose" class="control-label col-md-3">Visit Purpose</label>
+                                                    <div class="col-md-8"><textarea class="form-control text-capitalize" id="txtPurpose" name="txtPurpose" title="Please Enter the Visit Purpose" required rows="3"></textarea></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="selVehType" class="control-label col-md-3">Vehicle Type</label>
+                                                    <div class="col-md-8"><select id="selVehType" class="form-control">
+                                                        <option value="0" selected>Select</option>
+                                                    </select></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="txtVehNumber" class="control-label col-md-3">Vehicle No</label>
+                                                    <div class="col-md-8"><input type="text" class="form-control text-uppercase" id="txtVehNumber" name="txtVehNumber" value="" disabled required title="Please enter Vehicle Number"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="drivetype" class="control-label col-md-3">Self Driving</label>&nbsp;
+                                                    <div class="col-md-8"><div class="radio-inline">
+                                                      <label><input type="radio" name="drivetype" value="N" checked>No</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                      <label><input type="radio" name="drivetype" value="Y">Yes</label>
+                                                        </div></div>
+                                                </div>
+                                                <code class="text-center">* All Fields are mandatory.</code><br><br>
+                                                <button type="button" class="btn btn-success btn-block" id="btnSubmit">Submit</button>
                                             </div>
-                                            <div class="radio-inline">
-                                              <label><input type="radio" name="drivetype" value="Y">Yes</label>
-                                            </div><br />
-                                            <button type="button" class="btn btn-success btn-block" id="btnSubmit">Submit</button>
-                                        </div>
-                                    </form>
-                                <!--</div>-->
+                                        </form>
+                                    </small>
+                                </div>
                             </div>
                             <div class="col-md-1"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div><br><br>
         <input type="hidden" id="hidRequestId">
         <input type="hidden" id="hidEmail">
+        <footer>
+            <div class="container text-center">
+                <small><span class="text-primary">© <script>document.write(new Date().getFullYear())</script> - KRISHNAPATNAM PORT COMPANY LTD.</span></small>
+            </div>
+        </footer>
     </body>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
@@ -189,6 +216,7 @@
                 else{
                     _vehType = $("#selVehType option:selected").val()
                     $("#txtVehNumber").attr('disabled', false);
+                    $("#txtVehNumber").focus();
                 }
             });
 
