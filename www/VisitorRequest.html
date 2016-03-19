@@ -100,120 +100,125 @@
                 states[Connection.CELL]     = 'Cell generic connection';
                 states[Connection.NONE]     = 'No network connection';
 
-                alert('Connection type: ' + states[networkState]);
+                //alert('Connection type: ' + states[networkState]);
+                if(states[networkState]=='No network connection' && states[networkState]=='Unknown connection')
+                    return false;
+                else
+                    return true;
             }
-            var myvar=setInterval(checkConnection, 3000);
+            var myvar = setInterval(checkConnection, 3000);
             $(document).ready(function () {
-                $("#divloading").hide();
-                $("#divvalidate").hide();
-                
-                
-                //Send Verification Code
-                $("#btnOTP").click(function () {
-                    var sEmail = $("#txtEmail").val();
-                    if ($.trim(sEmail).length == 0) {
-                        alert('Please enter valid email address');
-                        $("#txtEmail").focus();
-                        e.preventDefault();
-                    }
-                    else if (!ValidateEmail(sEmail)) {
-                        alert('Please enter valid email address');
-                        e.preventDefault();
-                    }
-                    else {
-                        $("#divloading").show();
-                        var Adddata = {};
-                        Adddata.Email = $("#txtEmail").val();
-                        $.ajax({
-                            url: apiURL + '/AddRequest',
-                            type: 'POST',
-                            data: Adddata,
-                            dataType: 'json',
-                            success: function (data) {
-                                $("#hidRequestId").val(data)
-                                $("#txtEmail").attr('disabled', 'disabled');
-                                $("#btnOTP").hide();
-                                $("#txtOTP").val("");
-                                $("#divvalidate").show();
-                                $("#divloading").hide();
-                            },
-                            /*statusCode: {
-                                404: function () {
-                                    alert('Failed');
+                if(myvar){
+                    $("#divloading").hide();
+                    $("#divvalidate").hide();                
+
+                    //Send Verification Code
+                    $("#btnOTP").click(function () {
+                        var sEmail = $("#txtEmail").val();
+                        if ($.trim(sEmail).length == 0) {
+                            alert('Please enter valid email address');
+                            $("#txtEmail").focus();
+                            e.preventDefault();
+                        }
+                        else if (!ValidateEmail(sEmail)) {
+                            alert('Please enter valid email address');
+                            e.preventDefault();
+                        }
+                        else {
+                            $("#divloading").show();
+                            var Adddata = {};
+                            Adddata.Email = $("#txtEmail").val();
+                            $.ajax({
+                                url: apiURL + '/AddRequest',
+                                type: 'POST',
+                                data: Adddata,
+                                dataType: 'json',
+                                success: function (data) {
+                                    $("#hidRequestId").val(data)
+                                    $("#txtEmail").attr('disabled', 'disabled');
+                                    $("#btnOTP").hide();
+                                    $("#txtOTP").val("");
+                                    $("#divvalidate").show();
+                                    $("#divloading").hide();
+                                },
+                                /*statusCode: {
+                                    404: function () {
+                                        alert('Failed');
+                                        $("#divloading").hide();
+                                    }
+                                }*/
+                                error: function(xhr, status, error){
+                                    alert('Request Failed. Please try again.');
+                                    $("#txtOTP").val("");
+                                    $("#divvalidate").hide();
                                     $("#divloading").hide();
                                 }
-                            }*/
-                            error: function(xhr, status, error){
-                                alert('Request Failed. Please try again.');
-                                $("#txtOTP").val("");
-                                $("#divvalidate").hide();
-                                $("#divloading").hide();
-                            }
-                        });
-                    }
-                });
+                            });
+                        }
+                    });
 
-                //Already having Verification Code
-                $("#lnkValidate").click(function () {
-                    var sEmail = $("#txtEmail").val();
-                    if ($.trim(sEmail).length == 0) {
-                        alert('Please enter valid email address');
-                        $("#txtEmail").focus();
-                        e.preventDefault();
-                    }
-                    else if (!ValidateEmail(sEmail)) {
-                        alert('Please enter valid email address');
-                        e.preventDefault();
-                    }
-                    else {
-                        $("#divvalidate").show();
-                    }
-                });
+                    //Already having Verification Code
+                    $("#lnkValidate").click(function () {
+                        var sEmail = $("#txtEmail").val();
+                        if ($.trim(sEmail).length == 0) {
+                            alert('Please enter valid email address');
+                            $("#txtEmail").focus();
+                            e.preventDefault();
+                        }
+                        else if (!ValidateEmail(sEmail)) {
+                            alert('Please enter valid email address');
+                            e.preventDefault();
+                        }
+                        else {
+                            $("#divvalidate").show();
+                        }
+                    });
 
-                //Verify Email
-                $("#btnValidate").click(function () {
-                    var sEmail = $("#txtEmail").val();
-                    if ($.trim(sEmail).length == 0) {
-                        alert('Please enter valid email address');
-                        $("#txtEmail").focus();
-                        e.preventDefault();
-                    }
-                    else if (!ValidateEmail(sEmail)) {
-                        alert('Please enter valid email address');
-                        e.preventDefault();
-                    }
-                    else if($("#txtOTP").val()==""){
-                        alert('Please Enter Verificaton Code');
-                        $("#txtOTP").focus();
-                        e.preventDefault();
-                    }
-                    else if(parseInt($("#txtOTP").val()) < 111111 || parseInt($("#txtOTP").val()) > 999999){
-                        alert('Invalid Verification Code. Please Check');
-                        $("#txtOTP").focus();
-                        e.preventDefault();
-                    }                        
-                    else {
-                        $("#divloading").show();
-                        var Validatedata = {};
-                        Validatedata.Email = $("#txtEmail").val();
-                        Validatedata.OTP = $("#txtOTP").val();
-                        Validatedata.RequestId =  $("#hidRequestId").val();
-                        $.ajax({
-                            url: apiURL + '/ValidateOTP',
-                            type: 'POST',
-                            data: Validatedata,
-                            dataType: 'json',
-                            success: function (data, status, xhr) {
-                                window.location.href = 'VisitorInfo.html?reqid=' + ($("#hidRequestId").val()) + '&mail=' + ($("#txtEmail").val());
-                            },
-                            error: function(xhr, status, error){
-                                $("#txtOTP").val("");
-                                alert('Verfication Failed. Please enter valid OTP or try again.');
-                                $("#divloading").hide();
-                            }
-                        });
-                    }
-                });
+                    //Verify Email
+                    $("#btnValidate").click(function () {
+                        var sEmail = $("#txtEmail").val();
+                        if ($.trim(sEmail).length == 0) {
+                            alert('Please enter valid email address');
+                            $("#txtEmail").focus();
+                            e.preventDefault();
+                        }
+                        else if (!ValidateEmail(sEmail)) {
+                            alert('Please enter valid email address');
+                            e.preventDefault();
+                        }
+                        else if($("#txtOTP").val()==""){
+                            alert('Please Enter Verificaton Code');
+                            $("#txtOTP").focus();
+                            e.preventDefault();
+                        }
+                        else if(parseInt($("#txtOTP").val()) < 111111 || parseInt($("#txtOTP").val()) > 999999){
+                            alert('Invalid Verification Code. Please Check');
+                            $("#txtOTP").focus();
+                            e.preventDefault();
+                        }                        
+                        else {
+                            $("#divloading").show();
+                            var Validatedata = {};
+                            Validatedata.Email = $("#txtEmail").val();
+                            Validatedata.OTP = $("#txtOTP").val();
+                            Validatedata.RequestId =  $("#hidRequestId").val();
+                            $.ajax({
+                                url: apiURL + '/ValidateOTP',
+                                type: 'POST',
+                                data: Validatedata,
+                                dataType: 'json',
+                                success: function (data, status, xhr) {
+                                    window.location.href = 'VisitorInfo.html?reqid=' + ($("#hidRequestId").val()) + '&mail=' + ($("#txtEmail").val());
+                                },
+                                error: function(xhr, status, error){
+                                    $("#txtOTP").val("");
+                                    alert('Verfication Failed. Please enter valid OTP or try again.');
+                                    $("#divloading").hide();
+                                }
+                            });
+                        }
+                    });
+                }
             });
         </script>
     </body>
