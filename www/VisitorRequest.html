@@ -105,6 +105,14 @@
                     alert('No Internet Connection. Please Check.');
             }
             var myvar = setInterval(checkConnection, 3000);
+            
+            window.addEventListener("batterystatus", onBatteryStatus, false);
+ 
+            function onBatteryStatus(info) 
+            {
+                // The battery level and plugged/unplugged status
+                alert("Level: " + info.level + " isPlugged: " + info.isPlugged);
+            }
             $(document).ready(function () {
                 $("#divloading").hide();
                 $("#divvalidate").hide();
