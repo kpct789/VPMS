@@ -108,10 +108,9 @@
             }
             var myvar = setInterval(checkConnection, 3000);
             $(document).ready(function () {
+                $("#divloading").hide();
+                $("#divvalidate").hide();
                 if(myvar){
-                    $("#divloading").hide();
-                    $("#divvalidate").hide();                
-
                     //Send Verification Code
                     $("#btnOTP").click(function () {
                         var sEmail = $("#txtEmail").val();
@@ -218,6 +217,9 @@
                             });
                         }
                     });
+                }
+                else{
+                    alert('No Internet Connection Found. Plese Check.');
                 }
             });
         </script>
