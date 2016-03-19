@@ -40,7 +40,7 @@
             <blockquote><b><span class="text-success">Success: </span></b> Your Visit Request has been sent to your mail <strong><code><span id="mail">raghava.u@gmail.com</span></code></strong>. Please check.</blockquote>
             <!--<table border='0' cellpadding='1' cellspacing='0' style='font-family: Lucida Console; font-size; 12px'><tr><td style='padding: 3px; border: 1px solid Gray;'>Name</td><td style='padding: 3px; border: 1px solid Gray;'>RAGHAVENDRA UR</td><td style='padding: 3px; border: 1px solid Gray;'>Gender</td><td style='padding: 3px; border: 1px solid Gray;'>MALE</td></tr><tr><td style='padding: 3px; border: 1px solid Gray;'>ID Proof</td><td style='padding: 3px; border: 1px solid Gray;'>PAN Card</td><td style='padding: 3px; border: 1px solid Gray;'>Proof No</td><td style='padding: 3px; border: 1px solid Gray;'>ABEPU0686M</td></tr><tr><td style='padding: 3px; border: 1px solid Gray;'>VisitDate</td><td style='padding: 3px; border: 1px solid Gray;'>25-02-2016 12:00:00 AM</td><td style='padding: 3px; border: 1px solid Gray;'>Company</td><td style='padding: 3px; border: 1px solid Gray;'>KPCL</td></tr><tr><td style='padding: 3px; border: 1px solid Gray;'>Department</td><td style='padding: 3px; border: 1px solid Gray;'>IT</td><td style='padding: 3px; border: 1px solid Gray;'>No.of Persons</td><td style='padding: 3px; border: 1px solid Gray;'>10</td></tr><tr><td style='padding: 3px; border: 1px solid Gray;'>Vehicle Type</td><td style='padding: 3px; border: 1px solid Gray;'>SUV</td><td style='padding: 3px; border: 1px solid Gray;'>Vehicle No</td><td style='padding: 3px; border: 1px solid Gray;'>AP06TU3123</td></tr><tr><td style='padding: 3px; border: 1px solid Gray;'>Purpose</td><td colspan='3' style='padding: 3px; border: 1px solid Gray;'>Interview</td></tr></table>-->
         </div>
-        <div class="navbar-inverse navbar-fixed-bottom" style="height: 30px; padding-top: 5px;">
+        <div id="divclose" class="navbar-inverse navbar-fixed-bottom" style="height: 30px; padding-top: 5px;">
             <a class="navbar-center" href="#" onclick="exitFromApp()"><img src="img/Close24x24.PNG" height="20" width="20"></a>
         </div>
         <footer>
@@ -68,6 +68,12 @@
             // Handle the back button
             //
             function onBackKeyDown() {
+            }
+            
+            function isPhoneGap() {
+                return (window.cordova || window.PhoneGap || window.phonegap) 
+                && /^file:\/{3}[^\/]/i.test(window.location.href) 
+                && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent);
             }
             
             function qs() {
@@ -120,7 +126,12 @@
             $(document).ready(function () {
                 qs();
                 
-                setTimeout(exitFromApp(), 5000);
+                /*setTimeout(exitFromApp(), 5000);*/
+                if ( isPhoneGap() ) {
+                    $("#divclose").show();
+                } else {
+                     $("#divclose").hide();
+                }
             });
         </script>
     </body>
