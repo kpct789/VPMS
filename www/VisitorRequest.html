@@ -81,7 +81,7 @@
             function onDeviceReady() {
                 /* Register the event listener */
                 document.addEventListener("backbutton", onBackKeyDown, false);
-                checkConnection();
+                setInterval(checkConnection(), 3000);
             }
 
             /* Handle the back button */
