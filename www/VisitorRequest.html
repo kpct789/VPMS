@@ -101,7 +101,7 @@
                 states[Connection.NONE]     = 'No network connection';
 
                 //alert('Connection type: ' + states[networkState]);
-                if(states[networkState] == 'No network connection' && states[networkState] == 'Unknown connection')
+                if(states[networkState] == 'No network connection' || states[networkState] == 'Unknown connection')
                     alert('No Internet Connection. Please Check.');
                 else alert('Connected');
             }
