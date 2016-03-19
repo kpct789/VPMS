@@ -103,8 +103,6 @@
                 //alert('Connection type: ' + states[networkState]);
                 if(states[networkState] == 'No network connection' && states[networkState] == 'Unknown connection')
                     alert('No Internet Connection. Please Check.');
-                else
-                    alert('Conncted to Internet.');
             }
             var myvar = setInterval(checkConnection, 3000);
             $(document).ready(function () {
