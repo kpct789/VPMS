@@ -102,11 +102,11 @@
 
                 alert('Connection type: ' + states[networkState]);
             }
-            
+            var myvar=setInterval(checkConnection, 3000);
             $(document).ready(function () {
                 $("#divloading").hide();
                 $("#divvalidate").hide();
-                setInterval(checkConnection(), 3000);
+                
                 
                 //Send Verification Code
                 $("#btnOTP").click(function () {
