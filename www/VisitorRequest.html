@@ -101,17 +101,16 @@
                 states[Connection.NONE]     = 'No network connection';
 
                 //alert('Connection type: ' + states[networkState]);
-                if(states[networkState]=='No network connection' && states[networkState]=='Unknown connection')
-                    return false;
+                if(states[networkState] == 'No network connection' && states[networkState] == 'Unknown connection')
+                    return 'Fail';
                 else
-                    return true;
+                    return 'Success';
             }
             var myvar = setInterval(checkConnection, 3000);
             $(document).ready(function () {
                 $("#divloading").hide();
                 $("#divvalidate").hide();
-                alert(myvar);
-                if(myvar){
+                if(myvar == 'Success'){
                     //Send Verification Code
                     $("#btnOTP").click(function () {
                         var sEmail = $("#txtEmail").val();
