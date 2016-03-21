@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Minimal AppLaud App</title>
+
+      <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
+      <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+      <script type="text/javascript" charset="utf-8">
+        var app = {
+            sendSms: function() {
+                var number = document.getElementById('numberTxt').value;
+                var message = document.getElementById('messageTxt').value;
+                alert(number);
+                alert(message);
+
+                //CONFIGURATION
+                var options = {
+                    replaceLineBreaks: false, // true to replace \n by a new line, false by default
+                    android: {
+                        intent: 'INTENT'  // send SMS with the native android SMS messaging
+                        //intent: '' // send SMS without open any other app
+                    }
+                };
+
+                var success = function () { alert('Message sent successfully'); };
+                var error = function (e) { alert('Message Failed:' + e); };
+                sms.send(number, message, options, success, error);
+            }
+        };
+
+      </script>  
+  </head>
+
+
+  <body onload="init();">
+
+      <h2>Battery Tester</h2>
+
+      <input id="numberTxt" placeholder="Enter mobile number" value="" type="tel" />
+      <textarea id="messageTxt" placeholder="Enter message"></textarea>
+      <input type="button" onclick="app.sendSms()" value="Send SMS" />
+
+
+  </body>
+</html>
