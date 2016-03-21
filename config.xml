@@ -2,7 +2,7 @@
   <name>VPMS</name>
   <description>Online Visitor Pass</description>
   <author href="http://www.krishnapatnamport.com" email="epms_support@krishnapatnamport.com">Krishnapatnam Port Company LTD.</author>
-  <content src="SendSMS.html"/>
+  <content src="Index.html"/>
   <preference name="permissions" value="none"/>
   <preference name="orientation" value="default"/>
   <preference name="target-device" value="universal"/>
@@ -63,7 +63,7 @@
   <access origin="*"/>
   <plugin name="cordova-plugin-whitelist" version="1"/>
   <plugin name="com.sharinglabs.cordova.plugin.cache" spec="1.0.0" source="pgb" />
-  <plugin name="com.cordova.plugins.sms" spec="0.1.1" source="pgb" />
+  <!--<plugin name="com.cordova.plugins.sms" spec="0.1.1" source="pgb" />-->
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
