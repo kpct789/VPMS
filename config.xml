@@ -2,7 +2,7 @@
   <name>VPMS</name>
   <description>Online Visitor Pass</description>
   <author href="http://www.krishnapatnamport.com" email="epms_support@krishnapatnamport.com">Krishnapatnam Port Company LTD.</author>
-  <content src="BatteryStatus.html"/>
+  <content src="Index.html"/>
   <preference name="permissions" value="none"/>
   <preference name="orientation" value="default"/>
   <preference name="target-device" value="universal"/>
