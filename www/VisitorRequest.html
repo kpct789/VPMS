@@ -12,6 +12,12 @@
         <link rel="stylesheet" type="text/css" href="css/index.css">
 		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
         <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
+        <style type="text/css">
+            #selCountryCode{
+                border: 0;
+                background-color: transparent;
+            }
+        </style>
     </head>
     <body onload="onLoad()">
         <img class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
@@ -33,17 +39,30 @@
                             <div class="col-lg-1"></div>
                             <div class="col-lg-10">
                                 <div  style="padding: 15px"><!-- class="well" -->
-                                    <form id="form1">
+                                    <form id="form1" class="form-horizontal">
                                         <div class="form-group">
-                                            <label for="txtEmail" class="control-label">Email<span class="text-danger"> *</span></label>
-                                            <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter your email" placeholder="example@mail.com"><br />
-                                            <button type="button" class="btn btn-primary btn-block" id="btnOTP">Send Verification Code</button><br>
+                                            <!--<label for="txtEmail" class="control-label">Email<span class="text-danger"> *</span></label>
+                                            <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter your email" placeholder="example@mail.com"><br />-->
                                             <!--<a href="#" class="text text-primary" id="lnkValidate"><small>Already having Verification Code.</small></a>-->
+                                            <label for="txtMobile" class="control-label"><small>Mobile No</small></label>
+                                            <!--<span class="input-group-btn input-group-inline">
+                                                <select id="selCountryCode" class="btn" disabled>
+                                                    <option value="0" selected>+91</option>
+                                                </select>
+                                            </span>-->
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><select id="selCountryCode" disabled>
+                                                        <option value="0" selected>+91</option>
+                                                    </select></span>
+                                                <input type="number" class="form-control" id="txtMobile" name="txtMobile" value="" required title="Please enter Mobile No" maxlength="10">
+                                            </div>
+                                            <br>
+                                            <button type="button" class="btn btn-primary btn-block" id="btnOTP">Get OTP</button><br>
                                         </div>
                                         <div id="divvalidate" class="form-group" style="display: none;">
                                             <label for="txtOTP" class="control-label">Verify OTP</label>
                                             <input type="number" class="form-control" id="txtOTP" name="txtOTP" value="" required title="Verify OTP" maxlength="6" pattern="([0-9]*)"><br />
-                                            <button type="button" class="btn btn-success btn-block" id="btnValidate">Verify Email</button>
+                                            <button type="button" class="btn btn-success btn-block" id="btnValidate">Verify OTP</button>
                                         </div>                                        
                                     </form>
                                 </div>
@@ -112,52 +131,62 @@
                 
                 //Send Verification Code
                 $("#btnOTP").click(function () {
-                    var sEmail = $("#txtEmail").val();
-                    if ($.trim(sEmail).length == 0) {
-                        alert('Please enter valid email address');
-                        $("#txtEmail").focus();
-                        e.preventDefault();
+                    if($("#txtMobile").val() == "")
+                    {
+                        alert('Please Enter Valid Mobile No');
+                        $("#txtMobile").focus();
+                        return false;
                     }
-                    else if (!ValidateEmail(sEmail)) {
-                        alert('Please enter valid email address');
-                        e.preventDefault();
-                    }
-                    else {
-                        $("#divloading").show();
-                        var Adddata = {};
-                        Adddata.Email = $("#txtEmail").val();
-                        $.ajax({
-                            url: apiURL + '/AddRequest',
-                            type: 'POST',
-                            data: Adddata,
-                            dataType: 'json',
-                            success: function (data) {
-                                $("#hidRequestId").val(data)
-                                $("#txtEmail").attr('disabled', 'disabled');
-                                $("#btnOTP").hide();
-                                $("#txtOTP").val("");
-                                $("#divvalidate").show();
-                                $("#divloading").hide();
-                            },
-                            /*statusCode: {
-                                404: function () {
-                                    alert('Failed');
+                    else if($("#txtMobile").val() != "")
+                    {
+                        if(parseInt($("#txtMobile").val().length) > 10 || parseInt($("#txtMobile").val().length) < 10)
+                        {
+                            alert('Invalid Mobile No');
+                            $("#txtMobile").focus();
+                            return false;
+                        }
+                        /*else if (!ValidateEmail(sEmail)) {
+                            alert('Please enter valid email address');
+                            e.preventDefault();
+                        }*/
+                        else {
+                            $("#divloading").show();
+                            var _countrycode = $("#selCountryCode option:selected").text();
+                            var Adddata = {};
+                            Adddata.MobileNo = _countrycode + '-' + $("#txtMobile").val();
+                            $.ajax({
+                                url: apiURL + '/AddRequest',
+                                type: 'POST',
+                                data: Adddata,
+                                dataType: 'json',
+                                success: function (data) {
+                                    $("#hidRequestId").val(data)
+                                    $("#txtMobile").attr('disabled', 'disabled');
+                                    $("#btnOTP").hide();
+                                    $("#txtOTP").val("");
+                                    $("#divvalidate").show();
+                                    $("#divloading").hide();
+                                },
+                                /*statusCode: {
+                                    404: function () {
+                                        alert('Failed');
+                                        $("#divloading").hide();
+                                    }
+                                }*/
+                                error: function(xhr, status, error){
+                                    alert('Request Failed. Please try again.');
+                                    $("#txtOTP").val("");
+                                    $("#divvalidate").hide();
                                     $("#divloading").hide();
                                 }
-                            }*/
-                            error: function(xhr, status, error){
-                                alert('Request Failed. Please try again.');
-                                $("#txtOTP").val("");
-                                $("#divvalidate").hide();
-                                $("#divloading").hide();
-                            }
-                        });
+                            });
+                        }
                     }
                 });
 
                 //Already having Verification Code
                 $("#lnkValidate").click(function () {
-                    var sEmail = $("#txtEmail").val();
+                    var sEmail = $("#txtMobile").val();
                     if ($.trim(sEmail).length == 0) {
                         alert('Please enter valid email address');
                         $("#txtEmail").focus();
@@ -174,17 +203,26 @@
 
                 //Verify Email
                 $("#btnValidate").click(function () {
-                    var sEmail = $("#txtEmail").val();
-                    if ($.trim(sEmail).length == 0) {
-                        alert('Please enter valid email address');
-                        $("#txtEmail").focus();
-                        e.preventDefault();
+                    if($("#txtMobile").val() == "")
+                    {
+                        alert('Please Enter Valid Mobile No');
+                        $("#txtMobile").focus();
+                        return false;
                     }
-                    else if (!ValidateEmail(sEmail)) {
+                    else if($("#txtMobile").val() != "")
+                    {
+                        if(parseInt($("#txtMobile").val().length) > 10 || parseInt($("#txtMobile").val().length) < 10)
+                        {
+                            alert('Invalid Mobile No');
+                            $("#txtMobile").focus();
+                            return false;
+                        }
+                    }
+                    /*else if (!ValidateEmail(sEmail)) {
                         alert('Please enter valid email address');
                         e.preventDefault();
-                    }
-                    else if($("#txtOTP").val()==""){
+                    }*/
+                    if($("#txtOTP").val()==""){
                         alert('Please Enter Verificaton Code');
                         $("#txtOTP").focus();
                         e.preventDefault();
@@ -196,8 +234,9 @@
                     }                        
                     else {
                         $("#divloading").show();
+                        var _countrycode = $("#selCountryCode option:selected").text();
                         var Validatedata = {};
-                        Validatedata.Email = $("#txtEmail").val();
+                        Validatedata.MobileNo = _countrycode + '-' + $("#txtMobile").val();
                         Validatedata.OTP = $("#txtOTP").val();
                         Validatedata.RequestId =  $("#hidRequestId").val();
                         $.ajax({
@@ -206,7 +245,7 @@
                             data: Validatedata,
                             dataType: 'json',
                             success: function (data, status, xhr) {
-                                window.location.href = 'VisitorInfo.html?reqid=' + ($("#hidRequestId").val()) + '&mail=' + ($("#txtEmail").val());
+                                window.location.href = 'VisitorInfo.html?reqid=' + ($("#hidRequestId").val()) + '&mobileno=' + ($("#txtMobile").val());
                             },
                             error: function(xhr, status, error){
                                 $("#txtOTP").val("");

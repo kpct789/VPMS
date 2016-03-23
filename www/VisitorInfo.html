@@ -157,11 +157,11 @@
         var myvar = setInterval(checkConnection, 3000);
         
         $(document).ready(function () {
-            var Status = qs($("#hidRequestId").val(), $("#txtEmail").val());
-            if ($("#txtEmail").val() != "")
-                $("#txtEmail").attr('disabled', 'disabled');
+            var Status = qs();
+            if ($("#txtMobile").val() != "")
+                $("#txtMobile").attr('disabled', 'disabled');
             else
-                $("#txtEmail").attr('disabled', false);
+                $("#txtMobile").attr('disabled', false);
             
             if(Status){
                 $.ajax({
@@ -226,7 +226,7 @@
                     $("#container").hide();
                     var _gender = $("input[name='gender']:checked").val();
                     var _idprooftype = $("#selIdProof option:selected").val();
-                    var _countrycode = $("#selCountryCode option:selected").val();
+                    var _countrycode = $("#selCountryCode option:selected").text();
                     var Adddata = {};
                     Adddata.FirstName = $("#txtFrstName").val();
                     Adddata.LastName = $("#txtLstName").val();
@@ -280,7 +280,7 @@
             }
             if(parms.length > 1){
                 $("#hidRequestId").val(qsParm["reqid"]);
-                $("#txtEmail").val(qsParm["mail"]);
+                $("#txtMobile").val(qsParm["mobileno"]);
                 return true;
             }
             else{
