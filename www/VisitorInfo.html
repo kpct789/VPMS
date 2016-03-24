@@ -219,6 +219,7 @@
                 }
                 else if (!ValidateEmail(sEmail)) {
                     alert('Please enter valid email address');
+                    $("#txtEmail").focus();
                     e.preventDefault();
                 }
                 else {
