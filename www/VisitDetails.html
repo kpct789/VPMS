@@ -324,12 +324,13 @@
                     return false;
                 }
             }
+            
             if($("#txtPurpose").val()==""){
                 alert('Please Enter Visit Purpose.');
                 $("#txtPurpose").focus();
                 return false;
             }
-            else if(parseInt(_vehType)==""){
+            else if(parseInt(_vehType)>0){
                 if($("#txtVehNumber").val()==""){
                     alert('Please Enter Vehicle Number.');
                     $("#txtVehNumber").focus();
