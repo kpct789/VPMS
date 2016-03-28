@@ -50,9 +50,9 @@
         </footer>
     </body>
     <script type="text/javascript" charset="utf-8" src="bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/jquery.min.js"></script>    
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/jquery.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/phonegap-1.1.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
         var deviceReady = false;
         var qsParm = new Array();
@@ -149,7 +149,6 @@
         
         function uploadPicture() {
             $("#divloading").show();
-            $("#container").hide();
             var img = document.getElementById('camera_image');
             var imageURI = img.src;
             if (!imageURI || (img.style.display == "none")) {
@@ -177,12 +176,10 @@
                 var ft = new FileTransfer();
                 ft.upload(imageURI, encodeURI(server), function(r) {
                     $("#divloading").hide();
-                    $("#container").show();
                     document.getElementById('camera_status').innerHTML = "Upload successful: " + (parseFloat(parseFloat(r.bytesSent)/1024)/1024) + " MB uploaded.";
                     window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();;
                 }, function(error) {
                     $("#divloading").hide();
-                    $("#container").show();
                     document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
                 }, options);
             }
