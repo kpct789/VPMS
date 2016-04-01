@@ -261,7 +261,6 @@
                     }
                     else{
                         $("#loading").show();
-                        $("#container").hide();
                         var Adddata = {};
                         Adddata.Company = $("#txtCompany").val();
                         Adddata.VisitDate = $("#txtDate").val();
@@ -285,7 +284,6 @@
                                 404: function () {
                                     alert('Failed');
                                     $("#loading").hide();
-                                    $("#container").show()
                                 }
                             }
                         });
