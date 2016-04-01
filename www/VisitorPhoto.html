@@ -6,6 +6,7 @@
     <title>Photo Capture and Upload</title>
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/loading.css">
     <!--<style type="text/css">
         .divWaiting
         {
@@ -42,12 +43,13 @@
 </head>  
 <body onload="onLoad()">
     <img class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
-    <div id="divloading" class="divWaiting" style="display: none">
+    <div id="loading" class="loading">Loading&#8230;</div>
+    <!--<div id="divloading" class="divWaiting" style="display: none">
         <span id="imgloading">
             <img src="img/loading.gif" alt="Loading" width="90" height="75"><br>
             <label class="text text-success">Loading Please Wait...</label>
         </span>
-    </div>
+    </div>-->
     <div id="container" class="container text-center">
         <img class="logo" src="img/headerlogobar.png" height="40" width="350"><br>
         <div class="modal-dialog text-left">
@@ -111,9 +113,9 @@
         
         $(document).ready(function (){
             qs();
-            
+            $("#loading").hide();
             $('#btnUploadFile').on('click', function () {
-                $("#divloading").show();
+                $("#loading").show();
                 $("#container").hide();
                 var data = new FormData();
                 var files = $("#fileUpload").get(0).files;
@@ -133,11 +135,11 @@
                 });
 
                 ajaxRequest.done(function (xhr, textStatus) {
-                    $("#divloading").hide();
+                    $("#loading").hide();
                     $("#container").show();
                     window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();                    
                 });
-                $("#divloading").hide();
+                $("#loading").hide();
                 $("#container").show();
             });
         });

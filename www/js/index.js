@@ -112,4 +112,32 @@ $("#txtIdNo").keydown(function (objEvt) {
     else
         return false;
 });
+//This section of script is used to center the html element
+function centerLoadingPanel() {
+    //debugger;
+    centerElementOnScreen($("#divloading"));
+}
+function centerElementOnScreen(element) {
+    //debugger;
+    var scrollTop = document.body.scrollTop;
+    var scrollLeft = document.body.scrollLeft;
+    var viewPortHeight = document.body.clientHeight;
+    var viewPortWidth = document.body.clientWidth;
+    if (document.compatMode == "CSS1Compat") {
+        viewPortHeight = document.documentElement.clientHeight;
+        viewPortWidth = document.documentElement.clientWidth;
+        //if (!$telerik.isSafari) {
+            scrollTop = document.documentElement.scrollTop;
+            scrollLeft = document.documentElement.scrollLeft;
+        //}
+    }
+
+    var topOffset = Math.ceil(viewPortHeight / 2 - document.getElementById("divloading").offsetHeight / 2);
+    var leftOffset = Math.ceil(viewPortWidth / 2 - document.getElementById("divloading").offsetWidth / 2);
+    var top = scrollTop + topOffset - 40;
+    var left = scrollLeft + leftOffset;
+    document.getElementById("divloading").style.position = "absolute";
+    document.getElementById("divloading").style.top = top + "px";
+    document.getElementById("divloading").style.left = left + "px";
+}
 */

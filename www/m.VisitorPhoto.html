@@ -4,18 +4,20 @@
         <title>Photo Capture and Upload</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/loading.css">
     </head>
     <body onload="onLoad()">
         <img class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
-        <div id="divloading" class="divWaiting" style="display: none">
+        <div id="loading" class="loading">Loading&#8230;</div>
+        <!--<div id="divloading" class="divWaiting" style="display: none">
             <span id="imgloading">
                 <img src="img/loading.gif" alt="Loading" width="90" height="75"><br>
                 <label class="text text-success">Loading Please Wait...</label>
             </span>
-        </div>
+        </div>-->
         <div id="container" class="container text-center">
             <img class="logo" src="img/headerlogobar.png" height="40" width="350">
             <div class="modal-dialog">
@@ -110,6 +112,7 @@
         
         $(document).ready(function(){
             qs();
+            $("#loading").hide();
         });
         
         function takePicture() {
@@ -154,10 +157,7 @@
                 document.getElementById('camera_status').innerHTML = "Take picture or select picture from library first.";
                 return;
             }
-            /*$("#btnCapture").css('class', 'btn btn-info btn-block btn-md disabled');
-            $("#btnSelect").css('class', 'btn btn-info btn-block btn-md disabled');
-            $("#btnUpload").css('class', 'btn btn-info btn-block btn-md disabled');
-            var server = 'http://61.0.225.169:81/ContainerSearch/upload.php';*/
+            /*var server = 'http://61.0.225.169:81/ContainerSearch/upload.php';*/
             var server = 'http://61.0.225.169/VPMSAPI/api/FileUpload/UploadFile';
             if (server) {
                 var options = new FileUploadOptions();
@@ -174,11 +174,11 @@
                 
                 var ft = new FileTransfer();
                 ft.upload(imageURI, encodeURI(server), function(r) {
-                    $("#divloading").show();
+                    $("#loading").show();
                     document.getElementById('camera_status').innerHTML = "Upload successful: " + (parseFloat(parseFloat(r.bytesSent)/1024)/1024) + " MB uploaded.";
                     window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();;
                 }, function(error) {
-                    $("#divloading").hide();
+                    $("#loading").hide();
                     document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
                 }, options);
             }

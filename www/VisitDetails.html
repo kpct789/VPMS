@@ -6,9 +6,10 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
         <title>Visit Details</title>
-        <link rel="stylesheet" href="css/jquery-ui.css">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/loading.css">
         <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <style type="text/css">
@@ -23,6 +24,9 @@
             .ui-datepicker{
                 font-size: 12px;
             }
+            .ui-widget-header .ui-icon { 
+                 background-image: url(images/ui-icons_228ef1_256x240.png);
+             }
             #txtDate{
                 background-color: transparent;
             }
@@ -30,12 +34,13 @@
     </head>
     <body onload="onLoad()">
         <img class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
-        <div id="divloading" class="divWaiting" style="display: none">
+        <div id="loading" class="loading">Loading&#8230;</div>
+        <!--<div id="divloading" class="divWaiting" style="display: none">
             <span id="imgloading">
                 <img src="img/loading.gif" alt="Loading" width="90" height="75"><br>
                 <label class="text text-success">Loading Please Wait...</label>
             </span>
-        </div>
+        </div>-->
         <div id="container" class="container text-center">
             <img class="logo" src="img/headerlogobar.png" height="40" width="350">
             <div class="modal-dialog text-left">
@@ -66,7 +71,7 @@
                                                     </select></div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="txtPersons" class="control-label col-md-3">No.Of Persons</label>
+                                                    <label for="txtPersons" class="control-label col-md-3">Accompained Persons</label>
                                                     <div class="col-md-8"><input type="number" class="form-control" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" min="1" max="10" maxlength="3"></div>
                                                 </div>
                                                 <div class="form-group">
@@ -178,7 +183,7 @@
         
         $(document).ready(function () {
             var Status = qs();
-            
+            $("#loading").hide();
             if(Status){
                 $.ajax({
                     type: "GET",
@@ -201,7 +206,7 @@
             });
 
             $("#txtDate").datepicker({
-                numberOfMonths: 2,
+                /*numberOfMonths: 2,*/
                 minDate: 1, maxDate: "+1M +10D"
             });
             
@@ -255,7 +260,7 @@
                         return false;
                     }
                     else{
-                        $("#divloading").show();
+                        $("#loading").show();
                         $("#container").hide();
                         var Adddata = {};
                         Adddata.Company = $("#txtCompany").val();
@@ -279,7 +284,7 @@
                             statusCode: {
                                 404: function () {
                                     alert('Failed');
-                                    $("#divloading").hide();
+                                    $("#loading").hide();
                                     $("#container").show()
                                 }
                             }
@@ -287,7 +292,7 @@
                     }
                 }
                 else{
-                    $("#divloading").hide();
+                    $("#loading").hide();
                     $("#container").show()
                 }
             });
@@ -310,11 +315,6 @@
             else if(parseInt(_dept)==0){
                 alert('Plese Select Department.');
                 $("#selDept").focus();
-                return false;
-            }
-            else if($("#txtPersons").val()==""){
-                alert('Please Enter No.of Persons.');
-                $("#txtPersons").focus();
                 return false;
             }
             else if($("#txtPersons").val()!=""){
