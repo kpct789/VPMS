@@ -118,224 +118,224 @@
             </div>
         </footer>
     </body>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript">
-        var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitDetails/AddVisitDetails';
-        var deptURL = 'http://61.0.225.169/vpmsapi/api/Master/GetDepartments';
-        var vechTypeURL = 'http://61.0.225.169/vpmsapi/api/Master/GetVehicleType';
-        var qsParm = new Array();
-        var Email = null;
-        var _vehType = null;
-        function qs() {
-            var query = window.location.search.substring(1);
-            var parms = query.split('&');
-            for (var i=0; i < parms.length; i++) {
-                var pos = parms[i].indexOf('=');
-                if (pos > 0) {
-                    var key = parms[i].substring(0, pos);
-                    var val = parms[i].substring(pos + 1);
-                    qsParm[key] = val;
-                }
-            }
-            if(parms.length > 1){
-                $("#hidRequestId").val(qsParm["reqid"]);
-                $("#hidEmail").val(qsParm["mail"]);
-                return true;
-            }
-            else{
-                window.location.href = 'VisitorRequest.html';
-                return false;
+</html>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+    var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitDetails/AddVisitDetails';
+    var deptURL = 'http://61.0.225.169/vpmsapi/api/Master/GetDepartments';
+    var vechTypeURL = 'http://61.0.225.169/vpmsapi/api/Master/GetVehicleType';
+    var qsParm = new Array();
+    var Email = null;
+    var _vehType = null;
+    function qs() {
+        var query = window.location.search.substring(1);
+        var parms = query.split('&');
+        for (var i=0; i < parms.length; i++) {
+            var pos = parms[i].indexOf('=');
+            if (pos > 0) {
+                var key = parms[i].substring(0, pos);
+                var val = parms[i].substring(pos + 1);
+                qsParm[key] = val;
             }
         }
-        
-        function onLoad() {
-            document.addEventListener("deviceready", onDeviceReady, false);
-        }
-
-        /* device APIs are available */
-        function onDeviceReady() {
-            /* Register the event listener */
-            document.addEventListener("backbutton", onBackKeyDown, false);
-        }
-
-        /* Handle the back button */
-        function onBackKeyDown() {
-        }
-        
-        function checkConnection() {
-            var networkState = navigator.connection.type;
-            var states = {};
-            states[Connection.UNKNOWN]  = 'Unknown connection';
-            states[Connection.ETHERNET] = 'Ethernet connection';
-            states[Connection.WIFI]     = 'WiFi connection';
-            states[Connection.CELL_2G]  = 'Cell 2G connection';
-            states[Connection.CELL_3G]  = 'Cell 3G connection';
-            states[Connection.CELL_4G]  = 'Cell 4G connection';
-            states[Connection.CELL]     = 'Cell generic connection';
-            states[Connection.NONE]     = 'No network connection';
-
-            //alert('Connection type: ' + states[networkState]);
-            if(states[networkState] == 'No network connection' || states[networkState] == 'Unknown connection')
-                alert('No Internet Connection. Please Check.');
-        }
-        var myvar = setInterval(checkConnection, 3000);
-        
-        $(document).ready(function () {
-            var Status = qs();
-            $("#loading").hide();
-            if(Status){
-                $.ajax({
-                    type: "GET",
-                    contentType: "application/json; charset=utf-8",
-                    url: deptURL,
-                    dataType: "json",
-                    success: function (result) {
-                        $.each(result, function (key, value) {
-                            $("#selDept").append($("<option></option>").val(value.Id).html(value.Name));
-                        });
-                    },
-                    error: function (result) {
-                        alert(result.message);
-                    }
-                });
-            }
-            
-            $("#txtDate").keypress(function () {
-                return false;
-            });
-
-            $("#txtDate").datepicker({
-                /*numberOfMonths: 2,*/
-                minDate: 1, maxDate: "+1M +10D"
-            });
-            
-            if(Status){
-                $.ajax({
-                    type: "GET",
-                    contentType: "application/json; charset=utf-8",
-                    url: vechTypeURL,
-                    dataType: "json",
-                    success: function (result) {
-                        $.each(result, function (key, value) {
-                            $("#selVehType").append($("<option></option>").val(value.Id).html(value.Name));
-                        });
-                    },
-                    error: function (result) {
-                        alert(result.message);
-                    }
-                });
-            }
-            
-            $("#selVehType").change(function(){
-                var str = "";
-                $("#selVehType option:selected").each(function() {
-                    str += $(this).text().trim();
-                });
-                if(str == "Select"){
-                    _vehType = "";
-                    $("#txtVehNumber").attr('disabled', 'disabled');
-                }
-                else{
-                    _vehType = $("#selVehType option:selected").val()
-                    $("#txtVehNumber").attr('disabled', false);
-                    $("#txtVehNumber").focus();
-                }
-            });
-
-            $("#btnSubmit").click(function () {
-                var _dept = $("#selDept option:selected").val();
-                var _drivetype = $("input[name='drivetype']:checked").val();
-                if(FormValidations()){
-                    if(!ValidateText($("#txtCompany").val())){
-                        alert('Numbers not allowed. Please enter valid Company Name');
-                        $("#txtCompany").focus();
-                        /* e.preventDefault(); */
-                        return false;
-                    }
-                    else if(!ValidateText($("#txtCompany").val())){
-                        alert('Numbers not allowed. Please enter valid Company Name');
-                        $("#txtCompany").focus();
-                        /* e.preventDefault(); */
-                        return false;
-                    }
-                    else{
-                        $("#loading").show();
-                        var Adddata = {};
-                        Adddata.Company = $("#txtCompany").val();
-                        Adddata.VisitDate = $("#txtDate").val();
-                        Adddata.Department = _dept;
-                        Adddata.NoofPersons = $("#txtPersons").val();
-                        Adddata.VisitPurpose = $("#txtPurpose").val();
-                        Adddata.VehicleNumber = $("#txtVehNumber").val();
-                        Adddata.VehicleType = _vehType;
-                        Adddata.SelfDriving = _drivetype;
-                        Adddata.RequestId = $("#hidRequestId").val();
-                        Adddata.Email = $("#hidEmail").val();
-                        $.ajax({
-                            url: apiURL,
-                            type: 'POST',
-                            data: Adddata,
-                            dataType: 'json',
-                            success: function (data) {
-                                window.location.href = 'RequestEnd.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
-                            },
-                            statusCode: {
-                                404: function () {
-                                    alert('Failed');
-                                    $("#loading").hide();
-                                }
-                            }
-                        });
-                    }
-                }
-                else{
-                    $("#loading").hide();
-                    $("#container").show()
-                }
-            });
-        });
-        
-        function FormValidations()
-        {
-            var _dept = $("#selDept option:selected").val();
-            var _drivetype = $("input[name='drivetype']:checked").val();
-            if($("#txtCompany").val()==""){
-                alert('Please Enter Company');
-                $("#txtCompany").focus();
-                return false;
-            }
-            else if($("#txtDate").val()==""){
-                alert('Please Select Visit Date');
-                $("#txtDate").focus();
-                return false;
-            }
-            else if(parseInt(_dept)==0){
-                alert('Plese Select Department.');
-                $("#selDept").focus();
-                return false;
-            }
-            else if($("#txtPersons").val()!=""){
-                if(parseInt($("#txtPersons").val())<1 || parseInt($("#txtPersons").val())>10){
-                    alert('Please Enter No.of Persons in between 1 and 10.');
-                    $("#txtPersons").focus();
-                    return false;
-                }
-            }
-            
-            if($("#txtPurpose").val()==""){
-                alert('Please Enter Visit Purpose.');
-                $("#txtPurpose").focus();
-                return false;
-            }
-            else if(parseInt(_vehType)>0){
-                if($("#txtVehNumber").val()==""){
-                    alert('Please Enter Vehicle Number.');
-                    $("#txtVehNumber").focus();
-                    return false;
-                }
-            }
+        if(parms.length > 1){
+            $("#hidRequestId").val(qsParm["reqid"]);
+            $("#hidEmail").val(qsParm["mail"]);
             return true;
         }
-    </script>
-</html>
+        else{
+            window.location.href = 'VisitorRequest.html';
+            return false;
+        }
+    }
+        
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    /* device APIs are available */
+    function onDeviceReady() {
+        /* Register the event listener */
+        document.addEventListener("backbutton", onBackKeyDown, false);
+    }
+
+    /* Handle the back button */
+    function onBackKeyDown() {
+    }
+        
+    function checkConnection() {
+        var networkState = navigator.connection.type;
+        var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.CELL]     = 'Cell generic connection';
+        states[Connection.NONE]     = 'No network connection';
+
+        //alert('Connection type: ' + states[networkState]);
+        if(states[networkState] == 'No network connection' || states[networkState] == 'Unknown connection')
+            alert('No Internet Connection. Please Check.');
+    }
+    var myvar = setInterval(checkConnection, 3000);
+        
+    $(document).ready(function () {
+        var Status = qs();
+        $("#loading").hide();
+        /*if(Status){
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: deptURL,
+                dataType: "json",
+                success: function (result) {
+                    $.each(result, function (key, value) {
+                        $("#selDept").append($("<option></option>").val(value.Id).html(value.Name));
+                    });
+                },
+                error: function (result) {
+                    alert(result.message);
+                }
+            });
+        }*/
+            
+        $("#txtDate").keypress(function () {
+            return false;
+        });
+
+        $("#txtDate").datepicker({
+            /*numberOfMonths: 2,*/
+            minDate: 1, maxDate: "+1M +10D"
+        });
+            
+        if(Status){
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: vechTypeURL,
+                dataType: "json",
+                success: function (result) {
+                    $.each(result, function (key, value) {
+                        $("#selVehType").append($("<option></option>").val(value.Id).html(value.Name));
+                    });
+                },
+                error: function (result) {
+                    alert(result.message);
+                }
+            });
+        }
+            
+        $("#selVehType").change(function(){
+            var str = "";
+            $("#selVehType option:selected").each(function() {
+                str += $(this).text().trim();
+            });
+            if(str == "Select"){
+                _vehType = "";
+                $("#txtVehNumber").attr('disabled', 'disabled');
+            }
+            else{
+                _vehType = $("#selVehType option:selected").val()
+                $("#txtVehNumber").attr('disabled', false);
+                $("#txtVehNumber").focus();
+            }
+        });
+
+        $("#btnSubmit").click(function () {
+            var _dept = $("#selDept option:selected").val();
+            var _drivetype = $("input[name='drivetype']:checked").val();
+            if(FormValidations()){
+                if(!ValidateText($("#txtCompany").val())){
+                    alert('Numbers not allowed. Please enter valid Company Name');
+                    $("#txtCompany").focus();
+                    /* e.preventDefault(); */
+                    return false;
+                }
+                else if(!ValidateText($("#txtCompany").val())){
+                    alert('Numbers not allowed. Please enter valid Company Name');
+                    $("#txtCompany").focus();
+                    /* e.preventDefault(); */
+                    return false;
+                }
+                else{
+                    $("#loading").show();
+                    var Adddata = {};
+                    Adddata.Company = $("#txtCompany").val();
+                    Adddata.VisitDate = $("#txtDate").val();
+                    Adddata.Department = _dept;
+                    Adddata.NoofPersons = $("#txtPersons").val();
+                    Adddata.VisitPurpose = $("#txtPurpose").val();
+                    Adddata.VehicleNumber = $("#txtVehNumber").val();
+                    Adddata.VehicleType = _vehType;
+                    Adddata.SelfDriving = _drivetype;
+                    Adddata.RequestId = $("#hidRequestId").val();
+                    Adddata.Email = $("#hidEmail").val();
+                    $.ajax({
+                        url: apiURL,
+                        type: 'POST',
+                        data: Adddata,
+                        dataType: 'json',
+                        success: function (data) {
+                            window.location.href = 'RequestEnd.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
+                        },
+                        statusCode: {
+                            404: function () {
+                                alert('Failed');
+                                $("#loading").hide();
+                            }
+                        }
+                    });
+                }
+            }
+            else{
+                $("#loading").hide();
+                $("#container").show()
+            }
+        });
+    });
+        
+    function FormValidations()
+    {
+        var _dept = $("#selDept option:selected").val();
+        var _drivetype = $("input[name='drivetype']:checked").val();
+        if($("#txtCompany").val()==""){
+            alert('Please Enter Company');
+            $("#txtCompany").focus();
+            return false;
+        }
+        else if($("#txtDate").val()==""){
+            alert('Please Select Visit Date');
+            $("#txtDate").focus();
+            return false;
+        }
+        else if(parseInt(_dept)==0){
+            alert('Plese Select Department.');
+            $("#selDept").focus();
+            return false;
+        }
+        else if($("#txtPersons").val()!=""){
+            if(parseInt($("#txtPersons").val())<1 || parseInt($("#txtPersons").val())>10){
+                alert('Please Enter No.of Persons in between 1 and 10.');
+                $("#txtPersons").focus();
+                return false;
+            }
+        }
+            
+        if($("#txtPurpose").val()==""){
+            alert('Please Enter Visit Purpose.');
+            $("#txtPurpose").focus();
+            return false;
+        }
+        else if(parseInt(_vehType)>0){
+            if($("#txtVehNumber").val()==""){
+                alert('Please Enter Vehicle Number.');
+                $("#txtVehNumber").focus();
+                return false;
+            }
+        }
+        return true;
+    }
+</script>
