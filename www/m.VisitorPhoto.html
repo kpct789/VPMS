@@ -151,6 +151,7 @@
         };
         
         function uploadPicture() {
+            $("#loading").show();
             var img = document.getElementById('camera_image');
             var imageURI = img.src;
             if (!imageURI || (img.style.display == "none")) {
@@ -174,7 +175,6 @@
                 
                 var ft = new FileTransfer();
                 ft.upload(imageURI, encodeURI(server), function(r) {
-                    $("#loading").show();
                     document.getElementById('camera_status').innerHTML = "Upload successful: " + (parseFloat(parseFloat(r.bytesSent)/1024)/1024) + " MB uploaded.";
                     window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();;
                 }, function(error) {
