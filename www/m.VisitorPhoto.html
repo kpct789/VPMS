@@ -176,8 +176,8 @@
                 var ft = new FileTransfer();
                 ft.upload(imageURI, encodeURI(server), function(r) {
                     document.getElementById('camera_status').innerHTML = "Upload successful: " + (parseFloat(parseFloat(r.bytesSent)/1024)/1024) + " MB uploaded.";
-                    //window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
-                    $("#loading").hide();
+                    window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
+                    //$("#loading").hide();
                 }, function(error) {
                     $("#loading").hide();
                     document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
