@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -191,13 +191,14 @@
                 contentType: "application/json; charset=utf-8",
                 url: deptURL,
                 dataType: "json",
-                success: function (result) {
-                    $.each(result, function (key, value) {
-                        $("#selDept").append($("<option></option>").val(value.Id).html(value.Name));
+                success: function (deptresult) {
+                    $.each(deptresult, function (key, deptvalue) {
+                        $("#selDept").append($("<option></option>").val(deptvalue.Id).html(deptvalue.Name));
                     });
                 },
                 error: function (result) {
-                    alert(result.message);
+                    //alert(result.message);
+                    window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
                 }
             });
         }
@@ -217,13 +218,14 @@
                 contentType: "application/json; charset=utf-8",
                 url: vechTypeURL,
                 dataType: "json",
-                success: function (result) {
-                    $.each(result, function (key, value) {
-                        $("#selVehType").append($("<option></option>").val(value.Id).html(value.Name));
+                success: function (vehresult) {
+                    $.each(vehresult, function (key, vehvalue) {
+                        $("#selVehType").append($("<option></option>").val(vehvalue.Id).html(vehvalue.Name));
                     });
                 },
                 error: function (result) {
-                    alert(result.message);
+                    //alert(result.message);
+                    window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
                 }
             });
         }

@@ -246,7 +246,7 @@
                         data: Adddata,
                         dataType: 'json',
                         success: function (data) {
-                            window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
+                            //window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
                             if (isPhoneGap()) {
                                 window.location.href = 'm.VisitorPhoto.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
                             } else {
