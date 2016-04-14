@@ -83,7 +83,6 @@
             </div>
         </footer>
         <script type="text/javascript" src="cordova.js"></script>
-        <!--<script type="text/javascript" src="telephonenumber.js"></script>-->
         <script type="text/javascript">
             var clntHeight = parseFloat(document.documentElement.clientHeight) - 140;
             var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitorRequest';
@@ -133,13 +132,6 @@
                     alert('No Internet Connection. Please Check.');
             }
             var myvar = setInterval(checkConnection, 3000);
-
-            /*var telephoneNumber = cordova.require("cordova/plugin/telephonenumber");
-            telephoneNumber.get(function(result) {
-            $("#txtMobile").val(result);
-            }, function() {
-            alert("error");
-            });*/
 
             $(document).ready(function ()
             {
