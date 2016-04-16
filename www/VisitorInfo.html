@@ -129,27 +129,30 @@
     /* device APIs are available */
     function onDeviceReady() {
         /* Register the event listener */
-        document.addEventListener("backbutton", onBackKeyDown, false);
+        //document.addEventListener("backbutton", onBackKeyDown, false);
+        document.addEventListener('deviceready', function () {
+            var exitApp = false, intval = setInterval(function () { exitApp = false; }, 1000);
+            document.addEventListener("backbutton", function (e) {
+                e.preventDefault();
+                if (exitApp) {
+                    clearInterval(intval)
+                (navigator.app && navigator.app.exitApp()) || (device && device.exitApp())
+                }
+                else {
+                    exitApp = true
+                    history.back(1);
+                }
+            }, false);
+        }, false);
     }
     /* Handle the back button */
     function onBackKeyDown() {
-        navigator.notification.confirm(
-                'Press back again to exit'
-            , function (button) {
-                if (button == 2 || button == 0) {
-                    navigator.app.exitApp();
-                }
-            }
-            , 'Exit App?'
-            , ['No way', 'Exit']
-        );
-        return false;
     }
 
     function isPhoneGap() {
         return (window.cordova || window.PhoneGap || window.phonegap)
-        && /^file:\/{3}[^\/]/i.test(window.location.href)
-        && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent);
+            && /^file:\/{3}[^\/]/i.test(window.location.href)
+            && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent);
     }
 
     function checkConnection() {
