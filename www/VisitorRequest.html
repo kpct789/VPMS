@@ -6,8 +6,6 @@
         <!--<meta name="msapplication-tap-highlight" content="no" />-->
         <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
         <title>Visit Request</title>
-        <script type="text/ecmascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/ecmascript" src="js/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/loading.css">
@@ -29,7 +27,7 @@
             </span>
         </div>-->
         <div id="container" class="container text-center">
-            <img alt="header logo" class="logo" src="img/headerlogobar.png" height="40" width="350">
+            <img alt="header logo" class="logo" src="img/headerlogobar.png" height="40" width="300">
             <div id="login-overlay" class="modal-dialog text-left">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -58,7 +56,9 @@
                                                 <input type="number" class="form-control" id="txtMobile" name="txtMobile" value="" required title="Please enter Mobile No" maxlength="10">
                                             </div>
                                             <br>
-                                            <button type="button" class="btn btn-primary btn-block" id="btnOTP">Get OTP</button>
+                                            <!--<div style="border-color: #86c9f9; border-width: 1px; border-style: solid; padding: 3px;">-->
+                                                <button type="button" class="btn btn-primary btn-block" id="btnOTP">Get OTP</button>
+                                            <!--</div>-->
                                         </div>
                                         <div id="divvalidate" class="form-group" style="display: none;">
                                             <label for="txtOTP" class="control-label">Verify OTP</label>
@@ -82,214 +82,216 @@
                 <small><span class="text-primary">© <script>document.write(new Date().getFullYear())</script> - KRISHNAPATNAM PORT COMPANY LTD.</span></small>
             </div>
         </footer>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript">
-            var clntHeight = parseFloat(document.documentElement.clientHeight) - 140;
-            var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitorRequest';
+    </body>
+</html>
+<script type="text/ecmascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/ecmascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+    var clntHeight = parseFloat(document.documentElement.clientHeight) - 140;
+    var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitorRequest';
 
-            function ValidateEmail(sEmail) {
-                var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-                if (filter.test(sEmail))
-                    return true;
-                else
+    function ValidateEmail(sEmail) {
+        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if (filter.test(sEmail))
+            return true;
+        else
+            return false;
+    }
+
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    /* device APIs are available */
+    function onDeviceReady() {
+        /* Register the event listener */
+        document.addEventListener("backbutton", onBackKeyDown, false);
+        checkConnection();
+    }
+
+    /* Handle the back button */
+    function onBackKeyDown() {
+    }
+
+    function isPhoneGap() {
+        return (window.cordova || window.PhoneGap || window.phonegap)
+            && /^file:\/{3}[^\/]/i.test(window.location.href)
+            && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent);
+    }
+
+    function checkConnection() {
+        if (isPhoneGap()) {
+            var networkState = navigator.connection.type;
+            var states = {};
+            states[Connection.UNKNOWN] = 'Unknown connection';
+            states[Connection.ETHERNET] = 'Ethernet connection';
+            states[Connection.WIFI] = 'WiFi connection';
+            states[Connection.CELL_2G] = 'Cell 2G connection';
+            states[Connection.CELL_3G] = 'Cell 3G connection';
+            states[Connection.CELL_4G] = 'Cell 4G connection';
+            states[Connection.CELL] = 'Cell generic connection';
+            states[Connection.NONE] = 'No network connection';
+
+            //alert('Connection type: ' + states[networkState]);
+            if (states[networkState] == 'No network connection' || states[networkState] == 'Unknown connection')
+                alert('No Internet Connection. Please Check.');
+        }
+    }
+    var myvar = setInterval(checkConnection, 3000);
+
+    $(document).ready(function () {
+        $("#loading").hide();
+        $("#divvalidate").hide();
+
+        //Send Verification Code
+        $("#btnOTP").click(function () {
+            if ($("#txtMobile").val() == "") {
+                alert('Please Enter Valid Mobile No');
+                $("#txtMobile").focus();
+                return false;
+            }
+            else if ($("#txtMobile").val() != "") {
+                if (parseInt($("#txtMobile").val().length) > 10 || parseInt($("#txtMobile").val().length) < 10) {
+                    alert('Invalid Mobile No');
+                    $("#txtMobile").focus();
                     return false;
-            }
-
-            function onLoad() {
-                document.addEventListener("deviceready", onDeviceReady, false);
-            }
-
-            /* device APIs are available */
-            function onDeviceReady() {
-                /* Register the event listener */
-                document.addEventListener("backbutton", onBackKeyDown, false);
-                checkConnection();
-            }
-
-            /* Handle the back button */
-            function onBackKeyDown() {
-            }
-
-            function isPhoneGap() {
-                return (window.cordova || window.PhoneGap || window.phonegap)
-                    && /^file:\/{3}[^\/]/i.test(window.location.href)
-                    && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent);
-            }
-
-            function checkConnection() {
-                if (isPhoneGap()) {
-                    var networkState = navigator.connection.type;
-                    var states = {};
-                    states[Connection.UNKNOWN] = 'Unknown connection';
-                    states[Connection.ETHERNET] = 'Ethernet connection';
-                    states[Connection.WIFI] = 'WiFi connection';
-                    states[Connection.CELL_2G] = 'Cell 2G connection';
-                    states[Connection.CELL_3G] = 'Cell 3G connection';
-                    states[Connection.CELL_4G] = 'Cell 4G connection';
-                    states[Connection.CELL] = 'Cell generic connection';
-                    states[Connection.NONE] = 'No network connection';
-
-                    //alert('Connection type: ' + states[networkState]);
-                    if (states[networkState] == 'No network connection' || states[networkState] == 'Unknown connection')
-                        alert('No Internet Connection. Please Check.');
                 }
-            }
-            var myvar = setInterval(checkConnection, 3000);
-
-            $(document).ready(function () {
-                $("#loading").hide();
-                $("#divvalidate").hide();
-
-                //Send Verification Code
-                $("#btnOTP").click(function () {
-                    if ($("#txtMobile").val() == "") {
-                        alert('Please Enter Valid Mobile No');
-                        $("#txtMobile").focus();
-                        return false;
-                    }
-                    else if ($("#txtMobile").val() != "") {
-                        if (parseInt($("#txtMobile").val().length) > 10 || parseInt($("#txtMobile").val().length) < 10) {
-                            alert('Invalid Mobile No');
-                            $("#txtMobile").focus();
-                            return false;
-                        }
-                        /*else if (!ValidateEmail(sEmail)) {
-                        alert('Please enter valid email address');
-                        e.preventDefault();
-                        }*/
-                        else {
-                            $("#loading").show();
-                            var _countrycode = $("#selCountryCode option:selected").text();
-                            var Adddata = {};
-                            Adddata.MobileNo = _countrycode + '-' + $("#txtMobile").val();
-                            $.ajax({
-                                url: apiURL + '/AddRequest',
-                                type: 'POST',
-                                data: Adddata,
-                                dataType: 'json',
-                                success: function (data) {
-                                    $("#hidRequestId").val(data)
-                                    $("#txtMobile").attr('disabled', 'disabled');
-                                    $("#btnOTP").hide();
-                                    $("#txtOTP").val("");
-                                    $("#divvalidate").show();
-                                    $("#loading").hide();
-                                },
-                                /*statusCode: {
-                                404: function () {
-                                alert('Failed');
-                                $("#divloading").hide();
-                                }
-                                }*/
-                                error: function (xhr, status, error) {
-                                    alert('Request Failed. Please try again.');
-                                    $("#txtOTP").val("");
-                                    $("#divvalidate").hide();
-                                    $("#loading").hide();
-                                }
-                            });
-                        }
-                    }
-                });
-
-                //Already having Verification Code
-                $("#lnkValidate").click(function () {
-                    var sEmail = $("#txtMobile").val();
-                    if ($.trim(sEmail).length == 0) {
-                        alert('Please enter valid email address');
-                        $("#txtEmail").focus();
-                        e.preventDefault();
-                    }
-                    else if (!ValidateEmail(sEmail)) {
-                        alert('Please enter valid email address');
-                        e.preventDefault();
-                    }
-                    else {
-                        $("#divvalidate").show();
-                    }
-                });
-
-                //Verify OTP
-                $("#btnValidate").click(function () {
-                    if ($("#txtMobile").val() == "") {
-                        alert('Please Enter Valid Mobile No');
-                        $("#txtMobile").focus();
-                        return false;
-                    }
-                    else if ($("#txtMobile").val() != "") {
-                        if (parseInt($("#txtMobile").val().length) > 10 || parseInt($("#txtMobile").val().length) < 10) {
-                            alert('Invalid Mobile No');
-                            $("#txtMobile").focus();
-                            return false;
-                        }
-                    }
-                    /*else if (!ValidateEmail(sEmail)) {
-                    alert('Please enter valid email address');
-                    e.preventDefault();
-                    }*/
-                    if ($("#txtOTP").val() == "") {
-                        alert('Please Enter Verificaton Code');
-                        $("#txtOTP").focus();
-                        e.preventDefault();
-                    }
-                    else if (parseInt($("#txtOTP").val()) < 111111 || parseInt($("#txtOTP").val()) > 999999) {
-                        alert('Invalid Verification Code. Please Check');
-                        $("#txtOTP").focus();
-                        e.preventDefault();
-                    }
-                    else {
-                        $("#loading").show();
-                        //$("#btnValidate").attr('disabled', 'disabled');
-                        var _countrycode = $("#selCountryCode option:selected").text();
-                        var Validatedata = {};
-                        Validatedata.MobileNo = _countrycode + '-' + $("#txtMobile").val();
-                        Validatedata.OTP = $("#txtOTP").val();
-                        Validatedata.RequestId = $("#hidRequestId").val();
-                        $.ajax({
-                            url: apiURL + '/ValidateOTP',
-                            type: 'POST',
-                            data: Validatedata,
-                            dataType: 'json',
-                            success: function (data, status, xhr) {
-                                window.location.href = 'VisitorInfo.html?reqid=' + ($("#hidRequestId").val()) + '&mobileno=' + ($("#txtMobile").val());
-                            },
-                            error: function (xhr, status, error) {
-                                $("#txtOTP").val("");
-                                $("#btnValidate").attr('disabled', 'false');
-                                alert('Verfication Failed. Please enter valid OTP or try again.');
-                                $("#loading").hide();
-                            }
-                        });
-                    }
-                });
-
-                //Resend OTP
-                $("#lnkResendOTP").click(function () {
+                /*else if (!ValidateEmail(sEmail)) {
+                alert('Please enter valid email address');
+                e.preventDefault();
+                }*/
+                else {
                     $("#loading").show();
-                    //$("#btnValidate").attr('disabled', 'disabled');
                     var _countrycode = $("#selCountryCode option:selected").text();
-                    var Resenddata = {};
-                    Resenddata.MobileNo = _countrycode + '-' + $("#txtMobile").val();
-                    Resenddata.RequestId = $("#hidRequestId").val();
+                    var Adddata = {};
+                    Adddata.MobileNo = _countrycode + '-' + $("#txtMobile").val();
                     $.ajax({
-                        url: apiURL + '/ResendOTP',
+                        url: apiURL + '/AddRequest',
                         type: 'POST',
-                        data: Resenddata,
+                        data: Adddata,
                         dataType: 'json',
-                        success: function (data, status, xhr) {
-                            $("#spnResend").hide();
+                        success: function (data) {
+                            $("#hidRequestId").val(data)
+                            $("#txtMobile").attr('disabled', 'disabled');
+                            $("#btnOTP").hide();
+                            $("#txtOTP").val("");
+                            $("#divvalidate").show();
                             $("#loading").hide();
                         },
+                        /*statusCode: {
+                        404: function () {
+                        alert('Failed');
+                        $("#divloading").hide();
+                        }
+                        }*/
                         error: function (xhr, status, error) {
+                            alert('Request Failed. Please try again.');
                             $("#txtOTP").val("");
-                            $("#spnResend").show();
-                            $("#lnkResendOTP").attr('disabled', 'false');
-                            alert('Verfication Failed. Please enter valid OTP or try again.');
+                            $("#divvalidate").hide();
                             $("#loading").hide();
                         }
                     });
+                }
+            }
+        });
+
+        //Already having Verification Code
+        $("#lnkValidate").click(function () {
+            var sEmail = $("#txtMobile").val();
+            if ($.trim(sEmail).length == 0) {
+                alert('Please enter valid email address');
+                $("#txtEmail").focus();
+                e.preventDefault();
+            }
+            else if (!ValidateEmail(sEmail)) {
+                alert('Please enter valid email address');
+                e.preventDefault();
+            }
+            else {
+                $("#divvalidate").show();
+            }
+        });
+
+        //Verify OTP
+        $("#btnValidate").click(function () {
+            if ($("#txtMobile").val() == "") {
+                alert('Please Enter Valid Mobile No');
+                $("#txtMobile").focus();
+                return false;
+            }
+            else if ($("#txtMobile").val() != "") {
+                if (parseInt($("#txtMobile").val().length) > 10 || parseInt($("#txtMobile").val().length) < 10) {
+                    alert('Invalid Mobile No');
+                    $("#txtMobile").focus();
+                    return false;
+                }
+            }
+            /*else if (!ValidateEmail(sEmail)) {
+            alert('Please enter valid email address');
+            e.preventDefault();
+            }*/
+            if ($("#txtOTP").val() == "") {
+                alert('Please Enter Verificaton Code');
+                $("#txtOTP").focus();
+                e.preventDefault();
+            }
+            else if (parseInt($("#txtOTP").val()) < 111111 || parseInt($("#txtOTP").val()) > 999999) {
+                alert('Invalid Verification Code. Please Check');
+                $("#txtOTP").focus();
+                e.preventDefault();
+            }
+            else {
+                $("#loading").show();
+                //$("#btnValidate").attr('disabled', 'disabled');
+                var _countrycode = $("#selCountryCode option:selected").text();
+                var Validatedata = {};
+                Validatedata.MobileNo = _countrycode + '-' + $("#txtMobile").val();
+                Validatedata.OTP = $("#txtOTP").val();
+                Validatedata.RequestId = $("#hidRequestId").val();
+                $.ajax({
+                    url: apiURL + '/ValidateOTP',
+                    type: 'POST',
+                    data: Validatedata,
+                    dataType: 'json',
+                    success: function (data, status, xhr) {
+                        window.location.href = 'VisitorInfo.html?reqid=' + ($("#hidRequestId").val()) + '&mobileno=' + ($("#txtMobile").val());
+                    },
+                    error: function (xhr, status, error) {
+                        $("#txtOTP").val("");
+                        $("#btnValidate").attr('disabled', 'false');
+                        alert('Verfication Failed. Please enter valid OTP or try again.');
+                        $("#loading").hide();
+                    }
                 });
+            }
+        });
+
+        //Resend OTP
+        $("#lnkResendOTP").click(function () {
+            $("#loading").show();
+            //$("#btnValidate").attr('disabled', 'disabled');
+            var _countrycode = $("#selCountryCode option:selected").text();
+            var Resenddata = {};
+            Resenddata.MobileNo = _countrycode + '-' + $("#txtMobile").val();
+            Resenddata.RequestId = $("#hidRequestId").val();
+            $.ajax({
+                url: apiURL + '/ResendOTP',
+                type: 'POST',
+                data: Resenddata,
+                dataType: 'json',
+                success: function (data, status, xhr) {
+                    $("#spnResend").hide();
+                    $("#loading").hide();
+                },
+                error: function (xhr, status, error) {
+                    $("#txtOTP").val("");
+                    $("#spnResend").show();
+                    $("#lnkResendOTP").attr('disabled', 'false');
+                    alert('Verfication Failed. Please enter valid OTP or try again.');
+                    $("#loading").hide();
+                }
             });
-        </script>
-    </body>
-</html>
+        });
+    });
+</script>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
+    <!--<meta name="msapplication-tap-highlight" content="no" />-->
     <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"
     />
     <title>Visitor Details</title>
@@ -130,20 +130,6 @@
     function onDeviceReady() {
         /* Register the event listener */
         document.addEventListener("backbutton", onBackKeyDown, false);
-        /*document.addEventListener('deviceready', function () {
-            var exitApp = false, intval = setInterval(function () { exitApp = false; }, 1000);
-            document.addEventListener("backbutton", function (e) {
-                e.preventDefault();
-                if (exitApp) {
-                    clearInterval(intval)
-                (navigator.app && navigator.app.exitApp()) || (device && device.exitApp())
-                }
-                else {
-                    exitApp = true
-                    history.back(1);
-                }
-            }, false);
-        }, false);*/
     }
     /* Handle the back button */
     function onBackKeyDown() {
@@ -156,20 +142,22 @@
     }
 
     function checkConnection() {
-        var networkState = navigator.connection.type;
-        var states = {};
-        states[Connection.UNKNOWN] = 'Unknown connection';
-        states[Connection.ETHERNET] = 'Ethernet connection';
-        states[Connection.WIFI] = 'WiFi connection';
-        states[Connection.CELL_2G] = 'Cell 2G connection';
-        states[Connection.CELL_3G] = 'Cell 3G connection';
-        states[Connection.CELL_4G] = 'Cell 4G connection';
-        states[Connection.CELL] = 'Cell generic connection';
-        states[Connection.NONE] = 'No network connection';
+        if (isPhoneGap()) {
+            var networkState = navigator.connection.type;
+            var states = {};
+            states[Connection.UNKNOWN] = 'Unknown connection';
+            states[Connection.ETHERNET] = 'Ethernet connection';
+            states[Connection.WIFI] = 'WiFi connection';
+            states[Connection.CELL_2G] = 'Cell 2G connection';
+            states[Connection.CELL_3G] = 'Cell 3G connection';
+            states[Connection.CELL_4G] = 'Cell 4G connection';
+            states[Connection.CELL] = 'Cell generic connection';
+            states[Connection.NONE] = 'No network connection';
 
-        //alert('Connection type: ' + states[networkState]);
-        if (states[networkState] == 'No network connection' || states[networkState] == 'Unknown connection')
-            alert('No Internet Connection. Please Check.');
+            //alert('Connection type: ' + states[networkState]);
+            if (states[networkState] == 'No network connection' || states[networkState] == 'Unknown connection')
+                alert('No Internet Connection. Please Check.');
+        }
     }
     var myvar = setInterval(checkConnection, 3000);
 
