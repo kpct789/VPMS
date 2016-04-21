@@ -52,7 +52,7 @@
             var qsParm = new Array();
             var Email = null;
             var ReqId = null;
-            
+
             function onLoad() {
                 document.addEventListener("deviceready", onDeviceReady, false);
             }
@@ -68,17 +68,17 @@
             //
             function onBackKeyDown() {
             }
-            
+
             function isPhoneGap() {
-                return (window.cordova || window.PhoneGap || window.phonegap) 
-                && /^file:\/{3}[^\/]/i.test(window.location.href) 
+                return (window.cordova || window.PhoneGap || window.phonegap)
+                && /^file:\/{3}[^\/]/i.test(window.location.href)
                 && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent);
             }
-            
+
             function qs() {
                 var query = window.location.search.substring(1);
                 var parms = query.split('&');
-                for (var i=0; i < parms.length; i++) {
+                for (var i = 0; i < parms.length; i++) {
                     var pos = parms[i].indexOf('=');
                     if (pos > 0) {
                         var key = parms[i].substring(0, pos);
@@ -86,24 +86,23 @@
                         qsParm[key] = val;
                     }
                 }
-                if(parms.length > 1){
+                if (parms.length > 1) {
                     $("#mail").text(qsParm["mail"]);
                     ReqId = qsParm["reqid"];
                     return true;
                 }
-                else{
+                else {
                     window.location.href = 'VisitorRequest.html';
                     return false;
                 }
             }
-            
+
             /*document.addEventListener('DOMContentLoaded', loaded, false);*/
-            function exitFromApp()
-            {
-                var success = function(status) {
+            function exitFromApp() {
+                var success = function (status) {
                     alert('Message: ' + status);
                 }
-                var error = function(status) {
+                var error = function (status) {
                     alert('Error: ' + status);
                 }
                 window.cache.clear(success, error);
@@ -113,23 +112,26 @@
             document.addEventListener('deviceready', onDeviceReady);
             function onDeviceReady()
             {
-                var success = function(status) {
-                    alert('Message: ' + status);
-                }
-                var error = function(status) {
-                    alert('Error: ' + status);
-                }
-                window.cache.clear( success, error );
+            var success = function(status) {
+            alert('Message: ' + status);
+            }
+            var error = function(status) {
+            alert('Error: ' + status);
+            }
+            window.cache.clear( success, error );
             }
             */
             $(document).ready(function () {
                 qs();
-                
+
                 /*setTimeout(exitFromApp(), 5000);*/
-                if ( isPhoneGap() ) {
+                if (isPhoneGap()) {
                     $("#btnClose").show();
                 } else {
-                     $("#btnClose").hide();
+                    $("#btnClose").hide();
+                }
+                if (/Android|webOS/i.test(navigator.userAgent)) {
+                    $("#btnClose").hide();
                 }
             });
         </script>
