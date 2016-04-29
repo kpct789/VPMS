@@ -186,6 +186,7 @@
                         }
                         }*/
                         error: function (xhr, status, error) {
+                            alert(status);
                             alert('Request Failed. Please try again.');
                             $("#txtOTP").val("");
                             $("#divvalidate").hide();
