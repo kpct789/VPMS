@@ -1,115 +1,186 @@
-*
-{
-    font-family: Tahoma, Geneva, sans-serif;
-}
-html
-{
-    position: relative;
-    min-height: 100%;
-}
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#EAF5FD;
-    background-image:linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
-    background-image:-webkit-linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
-    background-image:-ms-linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
-    background-image:-webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #D7EAFA),
-        color-stop(0.51, #EAF5FD)
-    );
-    background-attachment:fixed;
-    margin:0px;
-    padding:0px;
-    width:100%;
+    /*background-color: #ebebeb;*/
+    margin: 60px 10px;
+    font-family: 'Raleway', sans-serif;
 }
-::-webkit-scrollbar-track
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 10px;
-    background-color: #F5F5F5;
+
+label {
+    color: black;
+    font-size: 13px;
 }
-::-webkit-scrollbar
-{
-    height: 7px;
-    width: 7px;
-    background-color: #F5F5F5;
+
+input[type="button"]:focus{
+    outline: none;
 }
-::-webkit-scrollbar-thumb
-{
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #555;
-}
-.divWaiting
-{
-    position: absolute;
-    background-color: white;
-    z-index: 10000;
-    filter: alpha(opacity=80);
-    overflow: hidden;
+
+.headertext{
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
     text-align: center;
-    top: 0;
-    left: 0;
-    margin: auto;
-    height: 100%;
-    width: 100%;
-    /*padding-top: 30%;*/
-    display: flex;
+    text-shadow: 2px 1px 2px #b4b4b4;
 }
-#imgloading
-{
+
+.stylebutton{
+    width: 20px;
+    height: 20px;
+    border: none;
+    outline: none;
+}
+
+.navbar {
+    height: 100px;
+    padding: 10px;
+    border: 0px;
+    border-top: 3px solid #e74c3c;
+    /* IE10+ */
+    background-image: -ms-linear-gradient(bottom, #FCFCFC 20%, #F7F7F7 100%);
+    /* Mozilla Firefox */
+    background-image: -moz-linear-gradient(bottom, #FCFCFC 20%, #F7F7F7 100%);
+    /* Opera */
+    background-image: -o-linear-gradient(bottom, #FCFCFC 20%, #F7F7F7 100%);
+    /* Webkit (Safari/Chrome 10) */
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(20, #FCFCFC), color-stop(100, #F7F7F7));
+    /* Webkit (Chrome 11+) */
+    background-image: -webkit-linear-gradient(bottom, #FCFCFC 20%, #F7F7F7 100%);
+    /* W3C Markup */
+    background-image: linear-gradient(to top, #FCFCFC 20%, #F7F7F7 100%);
+    background-attachment: fixed;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+.navbar-center{
+    text-align: center;
+}
+
+.headerbar{
+    height: 65px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50px;
-    transform: translate(-50%, -50%);
-}
-.headerbar
-{
     top: 0;
     left: 0;
     margin: 0;
-    position: absolute;
-}
-.btn{
-    border-radius: 0;
-}
-.form-control{
-    border: 0;
-    border-bottom: 1px solid #66AFE9;
-    border-radius: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-.modal-content{
-    border-radius: 0;
-}
-.logo{
-    max-width: 100%;
-    max-height: 40;
-}
-.input-group-addon{
-    border: 0;
-    border-bottom: 1px solid #66AFE9;
-    border-radius: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    /* Remove #eee with White when you want to display content background color as enabled */
-    background-color: #eee;
-}
-footer 
-{
-    position: absolute;
-    bottom: 0;
+    padding: 3px 0px;
     width: 100%;
-    /* Set the fixed height of the footer here */
-    /*height: 30px;*/
-    background-color: aliceblue;
-    text-align: center;
     vertical-align: middle;
+    text-align: center;
+    border-top: 3px solid #e74c3c;
+    border-bottom: 1px solid #e1e1e1;    
+    /* IE10+ */
+    background-image: -ms-linear-gradient(bottom, #f0f0f0 10%, #f5f5f5 70%);
+    /* Mozilla Firefox */
+    background-image: -moz-linear-gradient(bottom, #f0f0f0 10%, #f5f5f5 70%);
+    /* Opera */
+    background-image: -o-linear-gradient(bottom, #f0f0f0 10%, #f5f5f5 70%);
+    /* Webkit (Safari/Chrome 10) */
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(10, #f0f0f0), color-stop(70, #f5f5f5));
+    /* Webkit (Chrome 11+) */
+    background-image: -webkit-linear-gradient(bottom, #f0f0f0 10%, #f5f5f5 70%);
+    /* W3C Markup */
+    background-image: linear-gradient(to top, #f0f0f0 10%, #f5f5f5 70%);
+    background-attachment: fixed;
+    text-align: center;
+}
+
+.imglogo{
+    border-radius: 10%;
+    height: 35px;
+    width: 35px;
+    box-shadow: 1px 1px 2px #b4b4b4;
+}
+
+.page-header {
+    padding: 0;
+    border-bottom: 1px solid #bdbdbd;
+    font-family: Ubuntu;
+    font-size: 18px;
+    color: #e74c3c;
+    text-shadow: 1px 1px 2px #b4b4b4;
+    /* IE10+ */
+    background-image: -ms-linear-gradient(bottom, #f0f0f0 10%, #f5f5f5 70%);
+    /* Mozilla Firefox */
+    background-image: -moz-linear-gradient(bottom, #f0f0f0 10%, #f5f5f5 70%);
+    /* Opera */
+    background-image: -o-linear-gradient(bottom, #f0f0f0 10%, #f5f5f5 70%);
+    /* Webkit (Safari/Chrome 10) */
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(10, #f0f0f0), color-stop(70, #f5f5f5));
+    /* Webkit (Chrome 11+) */
+    background-image: -webkit-linear-gradient(bottom, #f0f0f0 10%, #f5f5f5 70%);
+    /* W3C Markup */
+    background-image: linear-gradient(to top, #f0f0f0 10%, #f5f5f5 70%);
+    background-attachment: fixed;
+}
+
+.inputtext {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #e1e1e1;
+    font-size: 15px;
+    font-family: 'Raleway', sans-serif;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    /* For Safari 3.0+ */
+    -webkit-transition-property: border, background;
+    -webkit-transition-duration: .7s, .9s;
+    -webkit-animation: ease-in-out;
+    /* Standard syntax */
+    transition-property: border, background;
+    transition-duration: .7s, .9s;
+    animation: ease-in-out;
+    resize: none;
+}
+.inputtext:focus {
+    border-bottom: 2px solid #e74c3c; /* f8646e, 56caca */
+    background-color: #f3f3f3;
+}
+
+.btn-custom {
+    border-radius: 5px;
+    border: none;
+    background-color: #e74c3c;
+    color: white;
+    vertical-align: middle;
+    width: 100%;
+    outline: none;
+    padding: 8px;
+    /*box-shadow: 1px 1px 5px #f0030f;*/
+    border-bottom: 2px solid #a7020a;
+    font-weight: bold;
+}
+.btn-custom:hover{
+    color: white;
+}
+
+::-webkit-input-placeholder {
+   color: #bdbdbd;
+   font-size: 12px;
+}
+:-moz-placeholder { /* Firefox 18- */
+   color: #bdbdbd;
+   font-size: 12px;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #bdbdbd;
+   font-size: 12px;
+}
+:-ms-input-placeholder {  
+   color: #bdbdbd;
+   font-size: 12px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background-color: #eaeaea;
+    border-left: 0px solid #ccc;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
 }

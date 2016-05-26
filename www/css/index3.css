@@ -1,0 +1,115 @@
+*
+{
+    font-family: Tahoma, Geneva, sans-serif;
+}
+html
+{
+    position: relative;
+    min-height: 100%;
+}
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#EAF5FD;
+    background-image:linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
+    background-image:-webkit-linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
+    background-image:-ms-linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #D7EAFA),
+        color-stop(0.51, #EAF5FD)
+    );
+    background-attachment:fixed;
+    margin:0px;
+    padding:0px;
+    width:100%;
+}
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+::-webkit-scrollbar
+{
+    height: 7px;
+    width: 7px;
+    background-color: #66AFE9;
+}
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+.divWaiting
+{
+    position: absolute;
+    background-color: white;
+    z-index: 10000;
+    filter: alpha(opacity=80);
+    overflow: hidden;
+    text-align: center;
+    top: 0;
+    left: 0;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    /*padding-top: 30%;*/
+    display: flex;
+}
+#imgloading
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50px;
+    transform: translate(-50%, -50%);
+}
+.headerbar
+{
+    top: 0;
+    left: 0;
+    margin: 0;
+    position: absolute;
+}
+.btn{
+    border-radius: 0;
+}
+.form-control{
+    border: 0;
+    border-bottom: 1px solid #66AFE9;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.modal-content{
+    border-radius: 0;
+}
+.logo{
+    max-width: 100%;
+    max-height: 40;
+}
+.input-group-addon{
+    border: 0;
+    border-bottom: 1px solid #66AFE9;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    /* Remove #eee with White when you want to display content background color as enabled */
+    background-color: #eee;
+}
+footer 
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    /*height: 30px;*/
+    background-color: aliceblue;
+    text-align: center;
+    vertical-align: middle;
+}
