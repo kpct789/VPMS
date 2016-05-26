@@ -20,21 +20,22 @@
             <div class="page-header text-left">
                 <span id="myModalLabel">Take Picture</span>
             </div>
-                        <div class="text-left">
-                            <b>Status:</b> <span id="camera_status"></span><br>
-                            <b>Image:</b> <img style="width:150px;visibility:hidden;display:none;" id="camera_image" src="" />
-                        </div>
-                        <!-- Actions -->
-                        <div class="text-center">
-                            <button id="btnCapture" class="btn btn-primary btn-block btn-md" onclick="takePicture();"><span class="glyphicon glyphicon-camera"></span>  Take Picture</button><br/>
-                            <input type="button" id="btnSelect" class="btn btn-primary btn-block btn-md" onclick="selectPicture();" value="Select Picture from Library" /><br/>
-                            <input type="button" id="btnUpload" class="btn btn-custom btn-block btn-md" onclick="uploadPicture();" value="Upload Picture" />
-                        </div>
-                        <br/>
-                        <img alt="image" style="display:none;width: 100%;height:200px;" id="smallImage" src="" />
-                        <img alt="image" style="display:none;" id="largeImage" src="" />
-                        <input type="hidden" id="hidRequestId">
-                        <input type="hidden" id="hidEmail">
+            <div class="text-left">
+                <b>Status:</b> <span id="camera_status"></span><br>
+                <b>Image:</b> <img alt="image" style="width:150px;visibility:hidden;display:none;" id="camera_image" src="" />
+            </div>
+            <div class="text-center">
+                <img alt="Take Picture" src="img/flat_image_camera.png" onclick="takePicture();">
+                <img alt="Take Picture" src="img/flat_image_picture.png" onclick="takePicture();">
+                <button id="btnCapture" class="btn btn-primary btn-block btn-md" onclick="takePicture();"><span class="glyphicon glyphicon-camera"></span>  Take Picture</button><br/>
+                <button id="btnSelect" class="btn btn-primary btn-block btn-md" onclick="selectPicture();" value="Select Picture from Library" /><br/>
+                <input type="button" id="btnUpload" class="btn btn-custom btn-block btn-md" onclick="uploadPicture();" value="Upload Picture" />
+            </div>
+            <br/>
+            <img alt="image" style="display:none;width: 100%;height:200px;" id="smallImage" src="" />
+            <img alt="image" style="display:none;" id="largeImage" src="" />
+            <input type="hidden" id="hidRequestId">
+            <input type="hidden" id="hidEmail">
             
         </div>
         <!--<div class="navbar-fixed-bottom footer">
