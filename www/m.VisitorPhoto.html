@@ -5,51 +5,43 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/loading.css">
+	    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway'>
+        <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Ubuntu'>
     </head>
     <body onload="onLoad()">
-        <img alt="header bar" class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
         <div id="loading" class="loading">Loading&#8230;</div>
-        <!--<div id="divloading" class="divWaiting" style="display: none">
-            <span id="imgloading">
-                <img src="img/loading.gif" alt="Loading" width="90" height="75"><br>
-                <label class="text text-success">Loading Please Wait...</label>
-            </span>
-        </div>-->
+        <div id="header1" class="headerbar">
+            <img alt="logo" class="imglogo" src="img/logo.png"><br>
+            <strong><span class="headertext">KRISHNAPATNAM PORT</span></strong>
+        </div>
         <div id="container" class="container text-center">
-            <img alt="header logo" class="logo" src="img/headerlogobar.png" height="40" width="350">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel">Visit Details</h3>
-                    </div>
-                    <div class="modal-body">
+            <div class="page-header text-left">
+                <span id="myModalLabel">Take Picture</span>
+            </div>
                         <div class="text-left">
                             <b>Status:</b> <span id="camera_status"></span><br>
                             <b>Image:</b> <img style="width:150px;visibility:hidden;display:none;" id="camera_image" src="" />
                         </div>
                         <!-- Actions -->
                         <div class="text-center">
-                            <input type="button" id="btnCapture" class="btn btn-primary btn-block btn-md" onclick="takePicture();" value="Take Picture" /><br/>
+                            <button id="btnCapture" class="btn btn-primary btn-block btn-md" onclick="takePicture();"><span class="glyphicon glyphicon-camera"></span>  Take Picture</button><br/>
                             <input type="button" id="btnSelect" class="btn btn-primary btn-block btn-md" onclick="selectPicture();" value="Select Picture from Library" /><br/>
-                            <input type="button" id="btnUpload" class="btn btn-success btn-block btn-md" onclick="uploadPicture();" value="Upload Picture" />
+                            <input type="button" id="btnUpload" class="btn btn-custom btn-block btn-md" onclick="uploadPicture();" value="Upload Picture" />
                         </div>
                         <br/>
-                        <img style="display:none;width: 100%;height:200px;" id="smallImage" src="" />
-                        <img style="display:none;" id="largeImage" src="" />
+                        <img alt="image" style="display:none;width: 100%;height:200px;" id="smallImage" src="" />
+                        <img alt="image" style="display:none;" id="largeImage" src="" />
                         <input type="hidden" id="hidRequestId">
                         <input type="hidden" id="hidEmail">
-                    </div>
-                </div>
-            </div>
+            
         </div>
-        <footer>
-            <div class="container text-center">
+        <!--<div class="navbar-fixed-bottom footer">
+            <div class="text-center">
                 <small><span class="text-primary">© <script>document.write(new Date().getFullYear())</script> - KRISHNAPATNAM PORT COMPANY LTD.</span></small>
             </div>
-        </footer>
+        </div>-->
     </body>
 </html>
 <script type="text/javascript" charset="utf-8" src="bootstrap/js/bootstrap.min.js"></script>
