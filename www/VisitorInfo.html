@@ -9,6 +9,7 @@
     <title>Visitor Details</title>
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/magic-check.css">
     <link rel="stylesheet" type="text/css" href="css/loading.css">
 	<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway'>
     <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Ubuntu'>
@@ -21,7 +22,7 @@
     </div>
     <div id="container" class="container-fluid text-center">
         <div class="page-header text-left">
-            <span id="myModalLabel">Visitor Request</span>
+            <span id="myModalLabel">Visitor Information</span>
         </div>
         <form id="form1" class="form-horizontal text-left" role="form">
             <div class="form-group">
@@ -41,7 +42,7 @@
                 <div class="col-lg-10">
                     <div class="radio-inline">
                         <label>
-                            <input type="radio" name="gender" value="Male" checked>Male</label>
+                            <input class="magic-radio" type="radio" name="gender" value="Male" checked>Male</label>
                     </div>
                     <div class="radio-inline">
                         <label>
@@ -79,17 +80,17 @@
                 <div class="col-lg-2"></div>
                 <div class="col-lg-10">
                     <code class="text-center">* All Fields are mandatory.</code><br><br>
-                    <button type="button" class="btn btn-custom" id="btnSubmit">Submit</button>
+                    <button type="button" class="btn btn-custom" id="btnSubmit">Next  <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
                 </div>
             </div>
         </form>
-    </div><br><br>
+    </div>
     <input type="hidden" id="hidRequestId">
-    <div class="navbar-fixed-bottom footer">
+    <!--<div class="navbar-fixed-bottom footer">
         <div class="text-center">
             <small><span class="text-primary">© <script>document.write(new Date().getFullYear())</script> - KRISHNAPATNAM PORT COMPANY LTD.</span></small>
         </div>
-    </div>
+    </div>-->
 </body>
 </html>
 <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
@@ -177,6 +178,7 @@
             });
             if (str == "Select") {
                 $("#lblID").text('');
+                $("#txtIdNo").val('');
                 $("#txtIdNo").attr('disabled', 'disabled');
                 $("#txtIdNo").attr('placeholder', '');
             }
