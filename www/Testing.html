@@ -1,66 +1,171 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>jQuery UI Dialog - Default functionality</title>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <link rel="stylesheet" href="css/loading.css">
-    <style type="text/css">
-        *{
-            font-family: monospace;
-        }
-    </style>
-    <script>
-        $(function() {
-            //$("#dialog").dialog();
-            $("#loading").hide();
-            /*$(this).click(function (){
-                $("#loading").toggle();
-            });*/
-            var data = [ 
-             {"Id": 10004, "PageName": "Home"}, 
-             {"Id": 10040, "PageName": "Articles"}, 
-             {"Id": 10059, "PageName": "Contact Us"}
-            ];
-
-            var li;
-            $.each(data, function(i, item) {
-                li = li + "<li>" + data[i].PageName + "</li>";
-            });
-            $("#navUL").html(li);
-
-            /*$.each(data, function(i, item) {
-                alert(item.PageName);
-            });*/
-        });
-    </script>
-</head>
-<body>
-    <div id="loading" class="loading">Loading&#8230;</div>
-    <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="#" class="navbar-brand">Brand</a>
+    <head>
+        <meta charset="utf-8" />
+        <title>Page-3</title>
+        <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"/>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.css">
+        <link id="stylesht" rel="stylesheet" type="text/css" href="css/index.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    </head>
+    <body>
+        <!--<div class="headerbar">&nbsp;</div>-->
+        <!--<div style="background-color: #fff; position: fixed; top: 75px; right: 5px; float: right;">
+            <button type="button" id="style1" class="stylebutton" style="background-color: #ee3a43;"></button>
+            <button type="button" id="style2" class="stylebutton" style="background-color: #ee3a43;"></button>
+            <button type="button" id="style2" class="stylebutton" style="background-color: #56caca;"></button>
+            <button type="button" id="style3" class="stylebutton" style="background-color: #609ddc;"></button>
+            <button type="button" id="style4" class="stylebutton" style="background-color: #f7814f;"></button>
+            <button type="button" id="style5" class="stylebutton" style="background-color: #39686e;"></button>-->
+        <!--</div>
+        <nav class="navbar navbar-fixed-top" role="navigation">-->
+            <div id="header1" class="headerbar">
+                <img alt="logo" class="imglogo" src="img/logo.png">
+                <strong><span class="headertext">KRISHNAPATNAM PORT</span></strong>
             </div>
-            <!-- Collection of nav links and other content for toggling -->
-            <div id="navbarCollapse" class="collapse navbar-collapse">
-                <ul id="navUL" class="nav navbar-nav"></ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Login</a></li>
-                </ul>
+            <div id="header2" class="headerbar">
+                <img alt="logo" class="imglogo" src="img/logo.png"><br>
+                <strong><span class="headertext">KRISHNAPATNAM PORT</span></strong>
             </div>
+        <!--</nav>-->
+        <div class="container-fluid text-center">
+            <div class="page-header text-left">
+                <span>Visitor Information</span>
+            </div>
+            <form class="form-horizontal text-left" role="form">
+                <div class="form-group">
+                    <label for="firstname" id="lblfirstname" class="col-lg-2 control-label">First Name</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="inputtext" id="firstname" placeholder="Enter First Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" id="lbllastname" class="col-lg-2 control-label">Last Name</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="inputtext" id="lastname" placeholder="Enter Last Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dob" id="lbldob" class="col-lg-2 control-label">DOB</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="inputtext" id="dob" placeholder="Enter Date of Birth">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address" id="lbladdress" class="col-lg-2 control-label">Address</label>
+                    <div class="col-lg-10">
+                        <textarea class="inputtext" id="address" placeholder="Enter Address" style="height: 100px;"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="mobileno" id="lblmobileno" class="col-lg-2 control-label">Mobile No</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="inputtext" id="mobileno" placeholder="Enter Mobile No">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" id="lblemail" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="inputtext" id="email" placeholder="Enter Email">
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <div class="col-lg-2"></div><div class="col-lg-10"><button class="btn btn-custom" id="btnSubmit" type="button">Next  <span class="glyphicon glyphicon-circle-arrow-right"></span></button></div>
+                </div>
+            </form>
         </div>
-    </nav>
-</body>
+    </body>
 </html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#header1").hide();
+        $("#style1").click(function () {
+            $('#stylesht').attr('href', 'css/style1.css');
+            $("#firstname").focus();
+            $("#header1").show();
+            $("#header2").hide();
+        });
+        $("#style2").click(function () {
+            $('#stylesht').attr('href', 'css/style1.1.css');
+            $("#firstname").focus();
+            $("#header1").hide();
+            $("#header2").show();
+        });
+        $("#style3").click(function () {
+            $('#stylesht').attr('href', 'css/style3.css');
+            $("#firstname").focus();
+            $("#header1").show();
+            $("#header2").hide();
+        });
+        $("#style4").click(function () {
+            $('#stylesht').attr('href', 'css/style4.css');
+            $("#firstname").focus();
+            $("#header1").show();
+            $("#header2").hide();
+        });
+        $("#style5").click(function () {
+            $('#stylesht').attr('href', 'css/style5.css');
+            $("#firstname").focus();
+            $("#header1").show();
+            $("#header2").hide();
+        });
+
+        $("#btnSubmit").click(function () {
+            $(this).css('outline', 'none');
+            $(this).css('color', 'white');
+        });
+        $("#btnSubmit").focusin(function () {
+            $(this).css('outline', 'none');
+            $(this).css('color', 'white');
+        });
+        $("#btnSubmit").focusout(function () {
+            $(this).css('outline', 'none');
+            $(this).css('color', 'white');
+        });
+
+        $("#firstname").focusin(function () {
+            $("#firstname").attr('placeholder', '');
+        });
+        $("#firstname").focusout(function () {
+            $("#firstname").attr('placeholder', 'Enter First Name');
+        });
+
+        $("#lastname").focusin(function () {
+            $("#lastname").attr('placeholder', '');
+        });
+        $("#lastname").focusout(function () {
+            $("#lastname").attr('placeholder', 'Enter Last Name');
+        });
+        $("#dob").focusin(function () {
+            $("#dob").attr('placeholder', '');
+        });
+        $("#dob").focusout(function () {
+            $("#dob").attr('placeholder', 'Enter Date of Birth');
+        });
+        $("#address").focusin(function () {
+            $("#address").attr('placeholder', '');
+        });
+        $("#address").focusout(function () {
+            $("#address").attr('placeholder', 'Enter Address');
+        });
+        $("#mobileno").focusin(function () {
+            $("#mobileno").attr('placeholder', '');
+        });
+        $("#mobileno").focusout(function () {
+            $("#mobileno").attr('placeholder', 'Enter Mobile No');
+        });
+        $("#email").focusin(function () {
+            $("#email").attr('placeholder', '');
+        });
+        $("#email").focusout(function () {
+            $("#email").attr('placeholder', 'Enter Email');
+        });
+    });
+</script>

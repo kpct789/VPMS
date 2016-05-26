@@ -7,81 +7,60 @@
         <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
         <title>Visit Request</title>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.css">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/loading.css">
-		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
-        <style type="text/css">
-            #selCountryCode{
-                border: 0;
-                background-color: transparent;
-            }
-        </style>
+		<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway'>
+        <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Ubuntu'>
     </head>
     <body onload="onLoad()">
-        <img alt="header bar" class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
         <div id="loading" class="loading">Loading&#8230;</div>
-        <!--<div id="divloading" class="divWaiting" style="display: none">
-            <span id="imgloading" class="text-center">
-                <img src="img/loading.gif" alt="Loading" width="90" height="75"><br>
-                <label class="text text-success">Loading Please Wait...</label>
-            </span>
-        </div>-->
-        <div id="container" class="container text-center">
-            <img alt="header logo" class="logo" src="img/headerlogobar.png" height="30" width="600">
-            <div id="login-overlay" class="modal-dialog text-left">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel">Visit Request</h3>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-1"></div>
-                            <div class="col-lg-10">
-                                <div  style="padding: 15px"><!-- class="well" -->
-                                    <form id="form1" class="form-horizontal">
-                                        <div class="form-group">
-                                            <!--<label for="txtEmail" class="control-label">Email<span class="text-danger"> *</span></label>
-                                            <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="" required title="Please enter your email" placeholder="example@mail.com"><br />-->
-                                            <!--<a href="#" class="text text-primary" id="lnkValidate"><small>Already having Verification Code.</small></a>-->
-                                            <label for="txtMobile" class="control-label"><small>Mobile No</small></label>
-                                            <!--<span class="input-group-btn input-group-inline">
-                                                <select id="selCountryCode" class="btn" disabled>
-                                                    <option value="0" selected>+91</option>
-                                                </select>
-                                            </span>-->
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><select id="selCountryCode" disabled>
-                                                    <option value="0" selected>+91</option>
-                                                </select></span>
-                                                <input type="number" class="form-control" id="txtMobile" name="txtMobile" value="" required title="Please enter Mobile No" maxlength="10">
-                                            </div>
-                                            <br>
-                                            <!--<div style="border-color: #86c9f9; border-width: 1px; border-style: solid; padding: 3px;">-->
-                                                <button type="button" class="btn btn-primary btn-block" id="btnOTP">Get OTP</button>
-                                            <!--</div>-->
-                                        </div>
-                                        <div id="divvalidate" class="form-group" style="display: none;">
-                                            <label for="txtOTP" class="control-label">Verify OTP</label>
-                                            <input type="number" class="form-control" id="txtOTP" name="txtOTP" value="" required title="Verify OTP" maxlength="6" pattern="([0-9]*)"><br />
-                                            <button type="button" class="btn btn-success btn-block" id="btnValidate">Verify OTP</button>
-                                            <span id="spnResend"><small>Click here to <a id="lnkResendOTP" href="#">resend OTP</a></small></span><br>
-                                            <code class="text-left">OTP has sent to your mobile no. It will receive shortly.</code>
-                                        </div>                                        
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-1"></div>
+        <div id="header1" class="headerbar">
+            <img alt="logo" class="imglogo" src="img/logo.png"><br>
+            <strong><span class="headertext">KRISHNAPATNAM PORT</span></strong>
+        </div>
+        <div class="container-fluid text-center">
+            <div class="page-header text-left">
+                <span id="myModalLabel">Visitor Request</span>
+            </div>
+            <form class="form-horizontal text-left" role="form">
+                <div class="form-group">
+                    <label for="txtMobile" class="col-lg-2 control-label">Mobile No</label>
+                    <div class="col-lg-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><select id="selCountryCode" disabled>
+                                <option value="0" selected>+91</option>
+                            </select></span>
+                            <input type="number" class="inputtext" id="txtMobile" name="txtMobile" value="" required title="Please enter Mobile No" maxlength="10">
                         </div>
                     </div>
+                    <br>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-10">
+                        <button type="button" class="btn btn-custom" id="btnOTP">Get OTP  <span class="glyphicon glyphicon-circle-arrow-down"></span></button>
+                    </div>
                 </div>
-            </div>
-        </div><br><br>
+                <div id="divvalidate" class="form-group" style="display: none;">
+                    <label for="txtOTP" class="col-lg-2 control-label">Verify OTP</label>
+                    <div class="col-lg-10">
+                        <input type="number"  class="inputtext" id="txtOTP" name="txtOTP" value="" required title="Verify OTP" maxlength="6" pattern="([0-9]*)">
+                    </div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-10">
+                        <br>
+                        <button type="button" class="btn btn-custom" id="btnValidate">Verify OTP  <span class="glyphicon glyphicon-ok-sign"></span></button>
+                        <span id="spnResend"><small>Click here to <a id="lnkResendOTP" href="#">resend OTP</a></small></span><br>
+                        <code class="text-left">OTP has sent to your mobile no. It will receive shortly.</code>
+                    </div>
+                </div>
+            </form>
+        </div>
         <input type="hidden" id="hidRequestId">
-        <footer>
-            <div class="container text-center">
+        <div class="navbar-fixed-bottom footer">
+            <div class="text-center">
                 <small><span class="text-primary">© <script>document.write(new Date().getFullYear())</script> - KRISHNAPATNAM PORT COMPANY LTD.</span></small>
             </div>
-        </footer>
+        </div>
     </body>
 </html>
 <script type="text/ecmascript" src="bootstrap/js/bootstrap.min.js"></script>
