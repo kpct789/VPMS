@@ -10,6 +10,26 @@
         <link rel="stylesheet" href="css/index.css">
         <!--<link rel="stylesheet" href="css/font-awesome.css">-->
         <style type="text/css">
+            body {
+                -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+                -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+                -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+                background-color:#EAF5FD;
+                background-image:linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
+                background-image:-webkit-linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
+                background-image:-ms-linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
+                background-image:-webkit-gradient(
+                    linear,
+                    left top,
+                    left bottom,
+                    color-stop(0, #D7EAFA),
+                    color-stop(0.51, #EAF5FD)
+                );
+                background-attachment:fixed;
+                margin:0px;
+                padding:0px;
+                width:100%;
+            }
             #container
             {
                 top: 30%;
@@ -35,16 +55,15 @@
     </head>
     <body onload="onLoad()">
         <a id="btnClose" href="#" onclick="exitFromApp()"><img alt="close" src="img/Close24x24.PNG" height="25" width="25"></a>
-        <img alt="header bar" class="headerbar" src="img/headerbar.png" width="100%" height="5px">
         <div id="container" class="container text-center">
             <img alt="header logo" class="logo" src="img/logo.png" height="100" width="100"><br><br>
             <span class="text-success">Success: </span> Your Visit Request submitted successfully.<br> Status information will be sent to<strong><code><span id="mail"></span></code></strong>
         </div>
-        <footer>
-            <div class="container text-center">
+        <!--<div class="navbar-fixed-bottom footer">
+            <div class="text-center">
                 <small><span class="text-primary">© <script>document.write(new Date().getFullYear())</script> - KRISHNAPATNAM PORT COMPANY LTD.</span></small>
             </div>
-        </footer>
+        </div>-->
         <script type="text/ecmascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/ecmascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
@@ -52,27 +71,24 @@
             var qsParm = new Array();
             var Email = null;
             var ReqId = null;
-
-            function onLoad() {
-                document.addEventListener("deviceready", onDeviceReady, false);
+            var click = 0;
+            function ClearClick() {
+                click = 0;
             }
-
-            // device APIs are available
-            //
-            function onDeviceReady() {
-                // Register the event listener
-                document.addEventListener("backbutton", onBackKeyDown, false);
-            }
-
-            // Handle the back button
-            //
-            function onBackKeyDown() {
-            }
+            document.addEventListener('backbutton', function (event) {
+                click = parseInt(click) + 1;
+                if (isPhoneGap() || /android/i.test(navigator.userAgent)) {
+                    window.plugins.toast.show('Press back again to exit', 'short', 'bottom');
+                }
+                setTimeout(ClearClick, 3000);
+                if (parseInt(click) == 2)
+                    navigator.app.exitApp(); // exit the app
+            });
 
             function isPhoneGap() {
                 return (window.cordova || window.PhoneGap || window.phonegap)
-                && /^file:\/{3}[^\/]/i.test(window.location.href)
-                && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent);
+                    && /^file:\/{3}[^\/]/i.test(window.location.href)
+                    && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent);
             }
 
             function qs() {
@@ -97,7 +113,6 @@
                 }
             }
 
-            /*document.addEventListener('DOMContentLoaded', loaded, false);*/
             function exitFromApp() {
                 var success = function (status) {
                     alert('Message: ' + status);
@@ -108,23 +123,9 @@
                 window.cache.clear(success, error);
                 navigator.app.exitApp();
             }
-            /*
-            document.addEventListener('deviceready', onDeviceReady);
-            function onDeviceReady()
-            {
-            var success = function(status) {
-            alert('Message: ' + status);
-            }
-            var error = function(status) {
-            alert('Error: ' + status);
-            }
-            window.cache.clear( success, error );
-            }
-            */
             $(document).ready(function () {
                 qs();
 
-                /*setTimeout(exitFromApp(), 5000);*/
                 if (isPhoneGap()) {
                     $("#btnClose").show();
                 } else {

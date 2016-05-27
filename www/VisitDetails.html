@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -6,115 +6,91 @@
         <!--<meta name="msapplication-tap-highlight" content="no" />-->
         <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
         <title>Visit Details</title>
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/loading.css">
-        <style type="text/css">
-            .input-group-btn select
-            {
-                border-color: #ccc;
-                margin-top: 0px;
-                margin-bottom: 0px;
-                padding-top: 7px;
-                padding-bottom: 7px;
-            }
-            .ui-datepicker{
-                font-size: 12px;
-            }
-            .ui-widget-header .ui-icon { 
-                 background-image: url(images/ui-icons_228ef1_256x240.png);
-             }
-            #txtDate{
-                background-color: transparent;
-            }
-        </style>
+	    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway'>
+        <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Ubuntu'>
     </head>
     <body onload="onLoad()">
-        <img alt="header bar" class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
         <div id="loading" class="loading">Loading&#8230;</div>
-        <!--<div id="divloading" class="divWaiting" style="display: none">
-            <span id="imgloading">
-                <img src="img/loading.gif" alt="Loading" width="90" height="75"><br>
-                <label class="text text-success">Loading Please Wait...</label>
-            </span>
-        </div>-->
-        <div id="container" class="container text-center">
-            <img alt="header logo" class="logo" src="img/headerlogobar.png" height="40" width="350">
-            <div class="modal-dialog text-left">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel">Visit Details</h3>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-10">
-                                <div style="padding: 8px"><!-- class="well" -->
-                                    <small>
-                                        <form id="form1" class="form-horizontal">
-                                            <div class="form-group text-left">
-                                                <div class="form-group">
-                                                    <label for="txtCompany" class="control-label col-md-3">Company</label>
-                                                    <div class="col-md-8"><input type="text" class="form-control text-capitalize" id="txtCompany" name="txtCompany" value="" required title="Please enter Company"></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="txtDate" class="control-label col-md-3">Visit Date</label>
-                                                    <div class="col-md-8"><input type="text" class="form-control" id="txtDate" name="txtDate" value="" required title="Please enter Visit Date" readonly></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="selDept" class="control-label col-md-3">Department</label>
-                                                    <div class="col-md-8"><select id="selDept" class="form-control">
-                                                        <option value="0" selected>Select</option>
-                                                    </select></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="txtPersons" class="control-label col-md-3">Accompained Persons</label>
-                                                    <div class="col-md-8"><input type="number" class="form-control" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" min="1" max="10" maxlength="3"></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="txtPurpose" class="control-label col-md-3">Visit Purpose</label>
-                                                    <div class="col-md-8"><textarea class="form-control text-capitalize" id="txtPurpose" name="txtPurpose" title="Please Enter the Visit Purpose" required rows="3"></textarea></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="selVehType" class="control-label col-md-3">Vehicle Type</label>
-                                                    <div class="col-md-8"><select id="selVehType" class="form-control">
-                                                        <option value="0" selected>Select</option>
-                                                    </select></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="txtVehNumber" class="control-label col-md-3">Vehicle No</label>
-                                                    <div class="col-md-8"><input type="text" class="form-control text-uppercase" id="txtVehNumber" name="txtVehNumber" value="" disabled required title="Please enter Vehicle Number"></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="drivetype" class="control-label col-md-3">Self Driving</label>&nbsp;
-                                                    <div class="col-md-8"><div class="radio-inline">
-                                                      <label><input type="radio" name="drivetype" value="N" checked>No</label>
-                                                    </div>
-                                                    <div class="radio-inline">
-                                                      <label><input type="radio" name="drivetype" value="Y">Yes</label>
-                                                        </div></div>
-                                                </div>
-                                                <code class="text-center">* All Fields are mandatory.</code><br><br>
-                                                <button type="button" class="btn btn-success btn-block" id="btnSubmit">Submit</button>
-                                            </div>
-                                        </form>
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="col-md-1"></div>
-                        </div>
+        <div id="header1" class="headerbar">
+            <img alt="logo" class="imglogo" src="img/logo.png"><br>
+            <strong><span class="headertext">KRISHNAPATNAM PORT</span></strong>
+        </div>
+        <div id="container" class="container-fluid text-center">
+            <div class="page-header text-left">
+                <span id="myModalLabel">Visit Details</span>
+            </div>
+            <form id="form1" class="form-horizontal text-left" role="form">
+                <div class="form-group">
+                    <label for="txtCompany" class="col-lg-2 control-label">Company</label>
+                    <div class="col-md-10">
+                        <input type="text" class="inputtext text-capitalize" id="txtCompany" name="txtCompany" value="" required title="Please enter Company">
                     </div>
                 </div>
-            </div>
-        </div><br><br>
+                <div class="form-group">
+                    <label for="txtDate" class="col-lg-2 control-label">Visit Date</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="inputtext" id="txtDate" name="txtDate" value="" required title="Please enter Visit Date" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="selDept" class="col-lg-2 control-label">Department</label>
+                    <div class="col-lg-10"><select id="selDept" class="inputtext">
+                        <option value="0" selected>Select</option>
+                    </select></div>
+                </div>
+                <div class="form-group">
+                    <label for="txtPersons" class="col-lg-2 control-label">Accompained Persons</label>
+                    <div class="col-lg-10">
+                        <input type="number" class="inputtext" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" min="1" max="10" maxlength="3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtPurpose" class="col-lg-2 control-label">Visit Purpose</label>
+                    <div class="col-lg-10">
+                        <textarea class="inputtext text-capitalize" id="txtPurpose" name="txtPurpose" title="Please Enter the Visit Purpose" required rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="selVehType" class="col-lg-2 control-label">Vehicle Type</label>
+                    <div class="col-lg-10"><select id="selVehType" class="inputtext">
+                        <option value="0" selected>Select</option>
+                    </select></div>
+                </div>
+                <div class="form-group">
+                    <label for="txtVehNumber" class="col-lg-2 control-label">Vehicle No</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="inputtext text-uppercase" id="txtVehNumber" name="txtVehNumber" value="" disabled required title="Please enter Vehicle Number">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="drivetype" class="col-lg-2 control-label">Self Driving</label>&nbsp;
+                    <div class="col-lg-10"><div class="radio-inline">
+                        <label><input type="radio" name="drivetype" value="N" checked>No</label>
+                    </div>
+                    <div class="radio-inline">
+                        <label><input type="radio" name="drivetype" value="Y">Yes</label>
+                        </div></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-10">
+                        <code class="text-center">* All Fields are mandatory.</code><br><br>
+                        <button type="button" class="btn btn-custom" id="btnSubmit">Submit <span class="glyphicon glyphicon-ok-sign"></span></button>
+                    </div>
+                </div>                
+            </form>
+        </div>
         <input type="hidden" id="hidRequestId">
         <input type="hidden" id="hidEmail">
-        <footer>
-            <div class="container text-center">
+        <!--<div class="navbar-fixed-bottom footer">
+            <div class="text-center">
                 <small><span class="text-primary">© <script>document.write(new Date().getFullYear())</script> - KRISHNAPATNAM PORT COMPANY LTD.</span></small>
             </div>
-        </footer>
+        </div>-->
     </body>
 </html>
 <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
