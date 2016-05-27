@@ -7,71 +7,62 @@
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/loading.css">
-    <!--<style type="text/css">
-        .divWaiting
-        {
-            position: absolute;
-            background-color: white;
-            z-index: 10000;
-            filter: alpha(opacity=80);
+	<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway'>
+    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Ubuntu'>
+    <style type="text/css">
+        .btn-file {
+            position: relative;
             overflow: hidden;
-            text-align: center;
-            top: 0;
-            left: 0;
-            margin: 0;
-            height: 100%;
-            width: 100%;
-            /*padding-top: 30%;*/
-            display: flex;
         }
-        #imgloading
-        {
+        .btn-file input[type=file] {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-right: -50%;
-            transform: translate(-50%, -50%);
-        }
-        .headerbar
-        {
             top: 0;
-            left: 0;
-            margin: 0;
-            position: absolute;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
         }
-    </style>-->
+    </style>
 </head>  
 <body onload="onLoad()">
-    <img alt="header bar" class="headerbar" src="img/headerbar.png" width="100%" height="5px"><br>
     <div id="loading" class="loading">Loading&#8230;</div>
-    <!--<div id="divloading" class="divWaiting" style="display: none">
-        <span id="imgloading">
-            <img src="img/loading.gif" alt="Loading" width="90" height="75"><br>
-            <label class="text text-success">Loading Please Wait...</label>
-        </span>
-    </div>-->
-    <div id="container" class="container text-center">
-        <img alt="header logo" class="logo" src="img/headerlogobar.png" height="40" width="350"><br>
-        <div class="modal-dialog text-left">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabel">Visit Details</h3>
-                </div>
-                <div class="modal-body">
-                    <label for="fileUpload">Select File to Upload:</label> 
-                    <input id="fileUpload" type="file" accept="image/*" class="form-control" /><br>
-                    <input id="btnUploadFile" type="button" value="Upload Picture" class="btn btn-success btn-block btn-md" />
+    <div id="header1" class="headerbar">
+        <img alt="logo" class="imglogo" src="img/logo.png"><br>
+        <strong><span class="headertext">KRISHNAPATNAM PORT</span></strong>
+    </div>
+    <div id="container" class="container-fluid text-center">
+        <div class="page-header text-left">
+            <span id="myModalLabel">Take Picture</span>
+        </div>
+        <form id="form1" class="form-horizontal text-left" role="form">
+            <div class="form-group">
+                <label for="fileUpload" class="col-lg-2 control-label">Select File to Upload:</label>
+                <div class="col-lg-10">
+                    <input id="fileUpload" type="file" accept="image/*" class="inputtext" /><br>
                 </div>
             </div>
-        </div>
-        <input type="hidden" id="hidRequestId">
-        <input type="hidden" id="hidEmail">
+            <div class="form-group">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-10">
+                    <button id="btnUploadFile" class="btn btn-custom">Upload Picture  <span class="glyphicon glyphicon-circle-arrow-up"></span></button>
+                </div>
+            </div>
+            <input type="hidden" id="hidRequestId">
+            <input type="hidden" id="hidEmail">
+        </form>
     </div>
-    <footer>
-        <div class="container text-center">
+    <!--<div class="navbar-fixed-bottom footer">
+        <div class="text-center">
             <small><span class="text-primary">© <script>document.write(new Date().getFullYear())</script> - KRISHNAPATNAM PORT COMPANY LTD.</span></small>
         </div>
-    </footer>
+    </div>-->
     <script type="text/javascript" charset="utf-8" src="bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
@@ -80,7 +71,7 @@
         function qs() {
             var query = window.location.search.substring(1);
             var parms = query.split('&');
-            for (var i=0; i < parms.length; i++) {
+            for (var i = 0; i < parms.length; i++) {
                 var pos = parms[i].indexOf('=');
                 if (pos > 0) {
                     var key = parms[i].substring(0, pos);
@@ -88,15 +79,15 @@
                     qsParm[key] = val;
                 }
             }
-            if(parms.length > 1){
+            if (parms.length > 1) {
                 $("#hidRequestId").val(qsParm["reqid"]);
                 $("#hidEmail").val(qsParm["mail"]);
             }
-            else{
+            else {
                 window.location.href = 'VisitorRequest.html';
             }
         }
-        
+
         function onLoad() {
             document.addEventListener("deviceready", onDeviceReady, false);
         }
@@ -110,8 +101,8 @@
         /* Handle the back button */
         function onBackKeyDown() {
         }
-        
-        $(document).ready(function (){
+
+        $(document).ready(function () {
             qs();
             $("#loading").hide();
             $('#btnUploadFile').on('click', function () {
@@ -119,7 +110,7 @@
                 $("#container").hide();
                 var data = new FormData();
                 var files = $("#fileUpload").get(0).files;
-
+                alert(files[0]);
                 /* Add the uploaded image content to the form data collection */
                 if (files.length > 0) {
                     data.append("file", files[0]);
@@ -137,7 +128,7 @@
                 ajaxRequest.done(function (xhr, textStatus) {
                     $("#loading").hide();
                     $("#container").show();
-                    window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();                    
+                    window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
                 });
                 $("#loading").hide();
                 $("#container").show();

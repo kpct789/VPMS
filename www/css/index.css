@@ -2,24 +2,6 @@ body {
     /*background-color: #ebebeb;*/
     margin-top: 60px;
     font-family: 'Raleway', sans-serif;
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-                -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-                -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-                background-color:#EAF5FD;
-                background-image:linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
-                background-image:-webkit-linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
-                background-image:-ms-linear-gradient(top, #D7EAFA 0%, #EAF5FD 51%);
-                background-image:-webkit-gradient(
-                    linear,
-                    left top,
-                    left bottom,
-                    color-stop(0, #D7EAFA),
-                    color-stop(0.51, #EAF5FD)
-                );
-                background-attachment:fixed;
-                margin:0px;
-                padding:0px;
-                width:100%;
 }
 
 label {
