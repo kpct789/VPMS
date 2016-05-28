@@ -26,16 +26,10 @@
                 text-shadow: 2px 2px 2px #838383;
             }
             .divimg{
-                background-color: #5B6275; 
                 cursor: pointer; 
                 border-radius: 10px; 
                 padding: 20px; 
                 height: 140px;
-            }
-            .divimg>img{
-                -webkit-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.25);
-                -moz-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.25);
-                box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.25);
             }
         </style>
     </head>
@@ -60,13 +54,13 @@
                 </tr>
                 <tr>
                     <td style="text-align: center;">
-                        <div class="divimg">
-                            <img alt="Take Picture" src="img/camera4.png" height="60" width="80" onclick="takePicture();"><br>
+                        <div class="divimg" style="background-color: #00AEAD;">
+                            <img alt="Take Picture" src="img/camera.png" height="60" width="80" onclick="takePicture();"><br>
                             <label>Take Picture</label>
                         </div>
                     </td>
                     <td style="text-align: center;">
-                        <div class="divimg">
+                        <div class="divimg" style="background-color: #5B6275;">
                             <img alt="Select Picture from Gallery" src="img/pictures.png" height="60" width="80" onclick="selectPicture();"><br>
                             <label>Select Picture</label>
                         </div>
@@ -74,8 +68,8 @@
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: center;">
-                        <div class="divimg">
-                            <img alt="Select Picture from Gallery" src="img/upload3.png" height="70" width="80" onclick="uploadPicture();"><br>
+                        <div class="divimg" style="background-color: #E74C3C;">
+                            <img alt="Select Picture from Gallery" src="img/upload.png" height="70" width="80" onclick="uploadPicture();"><br>
                             <label>Upload Picture</label>
                         </div>
                     </td>
