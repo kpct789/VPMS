@@ -9,6 +9,15 @@
         <link rel="stylesheet" type="text/css" href="css/loading.css">
 	    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway'>
         <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Ubuntu'>
+        <style type="text/css">
+            table {
+                width: 100%;
+            }
+            td {
+                padding: 2px;
+                width: 50%;
+            }
+        </style>
     </head>
     <body onload="onLoad()">
         <div id="loading" class="loading">Loading&#8230;</div>
@@ -20,21 +29,39 @@
             <div class="page-header text-left">
                 <span id="myModalLabel">Take Picture</span>
             </div>
-            <div class="text-left">
-                <b>Status:</b> <span id="camera_status"></span><br>
-                <b>Image:</b> <img alt="image" style="width:150px;visibility:hidden;display:none;" id="camera_image" src="" />
-            </div>
-            <div class="text-center">
-                <img alt="Take Picture" src="img/flat_image_camera.png" height="72" width="72" onclick="takePicture();">
-                <img alt="Take Picture" src="img/flat_image_picture.png" height="72" width="72" onclick="selectPicture();"><br>
-                <input type="button" id="btnUpload" class="btn btn-custom btn-block btn-md" onclick="uploadPicture();" value="Upload Picture" />
-            </div>
-            <br/>
-            <img alt="image" style="display:none;width: 100%;height:200px;" id="smallImage" src="" />
-            <img alt="image" style="display:none;" id="largeImage" src="" />
+            <table style="border: 1px solid;">
+                <tr>
+                    <td><label class="control-label">Status: </label></td>
+                    <td><span id="camera_status"></span></td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">Image:</label></td>
+                    <td><img alt="image" style="width:150px;visibility:hidden;display:none;" id="camera_image" src="" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right; background-color: #8DD8F8;"></td>
+                    <td style="text-align: left; background-color: #5B6275;"></td>
+                </tr>
+            </table>
+            <form id="form1" class="form-horizontal text-left">
+                <div class="form-group text-left">
+                     
+                </div>
+                <div class="form-group text-center">
+                    <div class="col-lg-6 text-center">
+                        <img alt="Take Picture" src="img/camera.png" height="48" width="48" onclick="takePicture();">
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <img alt="Take Picture" src="img/pictures.png" height="48" width="48" onclick="selectPicture();">
+                    </div>
+                    <input type="button" id="btnUpload" class="btn btn-custom btn-block btn-md" onclick="uploadPicture();" value="Upload Picture" />
+                </div>
+                <br/>
+                <img alt="image" style="display:none;width: 100%;height:200px;" id="smallImage" src="" />
+                <img alt="image" style="display:none;" id="largeImage" src="" />
+            </form>            
             <input type="hidden" id="hidRequestId">
-            <input type="hidden" id="hidEmail">
-            
+            <input type="hidden" id="hidEmail">            
         </div>
         <!--<div class="navbar-fixed-bottom footer">
             <div class="text-center">
@@ -43,11 +70,11 @@
         </div>-->
     </body>
 </html>
-<script type="text/javascript" charset="utf-8" src="bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/jquery.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/phonegap-1.1.0.js"></script>
-<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/phonegap-1.1.0.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
     var deviceReady = false;
     var qsParm = new Array();
 
@@ -112,7 +139,7 @@
     var myvar = setInterval(checkConnection, 3000);
 
     $(document).ready(function () {
-        qs();
+        //qs();
         $("#loading").hide();
     });
 
