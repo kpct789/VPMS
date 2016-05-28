@@ -218,7 +218,8 @@
         var img = document.getElementById('camera_image');
         var imageURI = img.src;
         if (!imageURI || (img.style.display == "none")) {
-            document.getElementById('camera_status').innerHTML = "Take picture or select picture from library first.";
+            alert('Take Picture or Select Picture from library.');
+            document.getElementById('camera_status').innerHTML = "Take picture or Select picture from library.";
             $("#loading").hide();
             return;
         }
@@ -239,7 +240,7 @@
 
             var ft = new FileTransfer();
             ft.upload(imageURI, encodeURI(server), function (r) {
-                document.getElementById('camera_status').innerHTML = "Upload successful: ";// + (parseFloat(parseFloat(r.bytesSent) / 1024) / 1024) + " MB uploaded.";
+                document.getElementById('camera_status').innerHTML = "Upload successful: "; // + (parseFloat(parseFloat(r.bytesSent) / 1024) / 1024) + " MB uploaded.";
                 window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
                 //$("#loading").hide();
             }, function (error) {
