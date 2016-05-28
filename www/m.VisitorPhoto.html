@@ -32,6 +32,11 @@
                 padding: 20px; 
                 height: 140px;
             }
+            .divimg>img{
+                -webkit-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.25);
+                -moz-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.25);
+                box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.25);
+            }
         </style>
     </head>
     <body onload="onLoad()">
@@ -55,7 +60,7 @@
                 </tr>
                 <tr>
                     <td style="text-align: center;">
-                        <div style="background-color: #00AEAD; cursor: pointer; border-radius: 10px; padding: 20px; height: 140px;">
+                        <div class="divimg">
                             <img alt="Take Picture" src="img/camera4.png" height="60" width="80" onclick="takePicture();"><br>
                             <label>Take Picture</label>
                         </div>
@@ -69,7 +74,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: center;">
-                        <div style="background-color: #E74C3C; cursor: pointer; border-radius: 10px; padding: 20px; height: 140px;">
+                        <div class="divimg">
                             <img alt="Select Picture from Gallery" src="img/upload3.png" height="70" width="80" onclick="uploadPicture();"><br>
                             <label>Upload Picture</label>
                         </div>
@@ -239,7 +244,7 @@
 
             var ft = new FileTransfer();
             ft.upload(imageURI, encodeURI(server), function (r) {
-                document.getElementById('camera_status').innerHTML = "Upload successful: " + (parseFloat(parseFloat(r.bytesSent) / 1024) / 1024) + " MB uploaded.";
+                document.getElementById('camera_status').innerHTML = "Upload successful: ";// + (parseFloat(parseFloat(r.bytesSent) / 1024) / 1024) + " MB uploaded.";
                 window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
                 //$("#loading").hide();
             }, function (error) {
