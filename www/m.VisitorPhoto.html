@@ -246,7 +246,7 @@
                 status = false;
             }, options);
 
-            if(status){
+            if (status == true) {
                 window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
             }
         }
