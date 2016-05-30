@@ -222,7 +222,7 @@
             return;
         }
         var server = 'http://61.0.225.169/VPMSAPI/api/FileUpload/UploadFile';
-        var status = false;
+        var status = "0";
         if (server) {
             var options = new FileUploadOptions();
             options.fileKey = "file";
@@ -239,14 +239,14 @@
             ft.upload(imageURI, encodeURI(server), function (r) {
                 document.getElementById('camera_status').innerHTML = "Upload successful: "; // + (parseFloat(parseFloat(r.bytesSent) / 1024) / 1024) + " MB uploaded.";
                 //window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
-                status = true;
+                status = "1";
             }, function (error) {
                 $("#loading").hide();
                 document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
-                status = false;
+                status = "0";
             }, options);
 
-            if (status == true) {
+            if (status == "1") {
                 window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
             }
         }
