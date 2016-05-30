@@ -223,12 +223,11 @@
             $("#loading").hide();
             return;
         }
-        /*var server = 'http://61.0.225.169:81/ContainerSearch/upload.php';*/
         var server = 'http://61.0.225.169/VPMSAPI/api/FileUpload/UploadFile';
+        var status = false;
         if (server) {
             var options = new FileUploadOptions();
             options.fileKey = "file";
-            /*options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);*/
             options.fileName = $("#hidRequestId").val();
             options.mimeType = "image/jpeg";
             options.chunkedMode = false;
@@ -241,12 +240,17 @@
             var ft = new FileTransfer();
             ft.upload(imageURI, encodeURI(server), function (r) {
                 document.getElementById('camera_status').innerHTML = "Upload successful: "; // + (parseFloat(parseFloat(r.bytesSent) / 1024) / 1024) + " MB uploaded.";
-                window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
-                //$("#loading").hide();
+                //window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
+                status = true;
             }, function (error) {
                 $("#loading").hide();
                 document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
+                status = false;
             }, options);
+
+            if(status){
+                window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
+            }
         }
     }
 
