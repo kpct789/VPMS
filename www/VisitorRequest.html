@@ -213,12 +213,10 @@
             if ($("#txtOTP").val() == "") {
                 alert('Please Enter Verificaton Code');
                 $("#txtOTP").focus();
-                e.preventDefault();
             }
             else if (parseInt($("#txtOTP").val()) < 111111 || parseInt($("#txtOTP").val()) > 999999) {
                 alert('Invalid Verification Code. Please Check');
                 $("#txtOTP").focus();
-                e.preventDefault();
             }
             else {
                 $("#loading").show();
