@@ -69,7 +69,7 @@
                 <tr>
                     <td colspan="2" style="text-align: center;">
                         <div class="divimg" style="background-color: #E74C3C;">
-                            <img alt="Select Picture from Gallery" src="img/upload.PNG" height="70" width="80" onclick="uploadPicture();"><br>
+                            <img alt="Select Picture from Gallery" src="img/upload.PNG" height="70" width="80" id="btnUpload" onclick="uploadPicture();"><br>
                             <label>Upload Picture</label>
                         </div>
                     </td>
@@ -114,13 +114,10 @@
         document.addEventListener("deviceready", onDeviceReady, false);
     }
 
-    /* device APIs are available */
     function onDeviceReady() {
-        /* Register the event listener */
         document.addEventListener("backbutton", onBackKeyDown, false);
     }
 
-    /* Handle the back button */
     function onBackKeyDown() {
     }
 
@@ -222,7 +219,6 @@
             return;
         }
         var server = 'http://61.0.225.169/VPMSAPI/api/FileUpload/UploadFile';
-        var status = "0";
         if (server) {
             var options = new FileUploadOptions();
             options.fileKey = "file";
@@ -238,18 +234,11 @@
             var ft = new FileTransfer();
             ft.upload(imageURI, encodeURI(server), function (r) {
                 document.getElementById('camera_status').innerHTML = "Upload successful: "; // + (parseFloat(parseFloat(r.bytesSent) / 1024) / 1024) + " MB uploaded.";
-                //window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
-                status = "1";
-                alert(status);
+                window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
             }, function (error) {
                 $("#loading").hide();
                 document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
-                status = "0";
             }, options);
-            alert("Step-1");
-            if (status == "1") {
-                window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
-            }
         }
     }
 
