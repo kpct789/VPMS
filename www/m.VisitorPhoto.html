@@ -178,7 +178,9 @@
                 var img = document.getElementById('camera_image');
                 img.style.visibility = "visible";
                 img.style.display = "block";
-                //img.src = uri;
+                img.style.height = "100px";
+                img.style.width = "100px";
+                img.src = uri;
                 document.getElementById('camera_status').innerHTML = "Success";
             },
             function (e) {
