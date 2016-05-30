@@ -240,12 +240,13 @@
                 document.getElementById('camera_status').innerHTML = "Upload successful: "; // + (parseFloat(parseFloat(r.bytesSent) / 1024) / 1024) + " MB uploaded.";
                 //window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
                 status = "1";
+                alert(status);
             }, function (error) {
                 $("#loading").hide();
                 document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
                 status = "0";
             }, options);
-
+            alert("Step-1");
             if (status == "1") {
                 window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
             }
