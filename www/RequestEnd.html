@@ -115,10 +115,8 @@
 
             function exitFromApp() {
                 var success = function (status) {
-                    alert('Message: ' + status);
                 }
                 var error = function (status) {
-                    alert('Error: ' + status);
                 }
                 window.cache.clear(success, error);
                 navigator.app.exitApp();
