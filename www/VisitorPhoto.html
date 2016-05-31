@@ -79,6 +79,7 @@
                     qsParm[key] = val;
                 }
             }
+
             if (parms.length > 1) {
                 $("#hidRequestId").val(qsParm["reqid"]);
                 $("#hidEmail").val(qsParm["mail"]);
@@ -110,7 +111,7 @@
                 $("#container").hide();
                 var data = new FormData();
                 var files = $("#fileUpload").get(0).files;
-                alert(files[0]);
+                
                 /* Add the uploaded image content to the form data collection */
                 if (files.length > 0) {
                     data.append("file", files[0]);
@@ -124,7 +125,6 @@
                     processData: false,
                     data: data
                 });
-
                 ajaxRequest.done(function (xhr, textStatus) {
                     $("#loading").hide();
                     $("#container").show();

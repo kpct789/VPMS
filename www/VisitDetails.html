@@ -304,7 +304,7 @@
             return false;
         }
         else if ($("#txtPersons").val() != "") {
-            if (parseInt($("#txtPersons").val()) <= 1 || parseInt($("#txtPersons").val()) >= 10) {
+            if (parseInt($("#txtPersons").val()) < 1 || parseInt($("#txtPersons").val()) > 10) {
                 alert('Please Enter No.of Persons in between 1 and 10.');
                 $("#txtPersons").focus();
                 return false;
