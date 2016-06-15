@@ -219,7 +219,7 @@
                 window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
             }, function (error) {
                 $("#loading").hide();
-                document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code;
+                document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code + "\n upload error source " + error.source + "\n upload error target " + error.target;
             }, options);
         }
     }
