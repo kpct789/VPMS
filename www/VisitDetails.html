@@ -25,7 +25,7 @@
             <form id="form1" class="form-horizontal text-left" role="form">
                 <div class="form-group">
                     <label for="txtCompany" class="col-lg-2 control-label">Company</label>
-                    <div class="col-md-10">
+                    <div class="col-lg-10">
                         <input type="text" class="inputtext text-capitalize" id="txtCompany" name="txtCompany" value="" required title="Please enter Company">
                     </div>
                 </div>
@@ -42,10 +42,13 @@
                     </select></div>
                 </div>
                 <div class="form-group">
-                    <label for="txtPersons" class="col-lg-2 control-label">Accompained Persons</label><br>
-                    <small>
-                    <span class="col-lg-2 text-danger">(Note: Carry respective ID-Proofs When visiting the port)</span>
-                    </small><br>
+                    <label for="txtPersons" class="col-lg-2 control-label">Accompained Persons</label>
+                    <div class="col-lg-10">
+                        <small>
+                            <span class="text-danger">(Carry respective ID-Proofs When visiting the port)</span>
+                        </small>
+                    </div>
+                
                     <div class="col-lg-10">
                         <input type="number" class="inputtext" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" min="1" max="10" maxlength="3">
                     </div>
@@ -175,15 +178,35 @@
             $.ajax({
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
-                url: deptURL,
+                url: 'http://61.0.225.169/vpmsapi/api/Master/GetDepartments',
                 dataType: "json",
+                data: '{}',
+                async: false,
                 success: function (deptresult) {
                     $.each(deptresult, function (key, deptvalue) {
                         $("#selDept").append($("<option></option>").val(deptvalue.Id).html(deptvalue.Name));
                     });
                 },
                 error: function (result) {
-                    //alert(result.message);
+                    console.log(result);
+                    window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: 'http://61.0.225.169/vpmsapi/api/Master/GetVehicleType',
+                dataType: "json",
+                data: '{}',
+                async: false,
+                success: function (vehresult) {
+                    $.each(vehresult, function (key, vehvalue) {
+                        $("#selVehType").append($("<option></option>").val(vehvalue.Id).html(vehvalue.Name));
+                    });
+                },
+                error: function (result) {
+                    console.log(result.message);
                     window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
                 }
             });
@@ -197,24 +220,6 @@
             /*numberOfMonths: 2,*/
             minDate: 1, maxDate: "+1M +10D"
         });
-
-        if (Status) {
-            $.ajax({
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                url: vechTypeURL,
-                dataType: "json",
-                success: function (vehresult) {
-                    $.each(vehresult, function (key, vehvalue) {
-                        $("#selVehType").append($("<option></option>").val(vehvalue.Id).html(vehvalue.Name));
-                    });
-                },
-                error: function (result) {
-                    //alert(result.message);
-                    window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
-                }
-            });
-        }
 
         $("#selVehType").change(function () {
             var str = "";
