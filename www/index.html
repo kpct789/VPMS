@@ -18,11 +18,9 @@
         </div>
         <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
         <script type="text/javascript">
-            var redirect = function () {
-                var rurl = 'VisitorRequest.html';
-                $(location).attr('href', rurl);
-            }
             $(document).ready(function () {
+                $("#android").hide();
+                $("#ios").hide();
                 if (/Android/i.test(navigator.userAgent)) {
                     $("#android").show();
                     $("#ios").hide();
@@ -39,9 +37,9 @@
                         window.location.replace(url, '_system');
                     });
                 }
-                else {
-                    window.location.href = 'VisitorRequest.html';
-                }
+                //else {
+                //    window.location.href = 'VisitorRequest.html';
+                //}
             });
         </script>
     </body>
