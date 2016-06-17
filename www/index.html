@@ -23,23 +23,21 @@
                 $("#ios").hide();
                 if (/Android/i.test(navigator.userAgent)) {
                     $("#android").show();
-                    $("#ios").hide();
                     $("#android").click(function () {
                         var url = "market://details?id=com.kpcl.vpms";
                         window.location.replace(url, '_system');
                     });
                 }
                 else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                    $("#android").hide();
                     $("#ios").show();
                     $("#ios").click(function () {
                         var url = "itms-apps://itunes.apple.com/app/id1107217604";
                         window.location.replace(url, '_system');
                     });
                 }
-                //else {
-                //    window.location.href = 'VisitorRequest.html';
-                //}
+                else {
+                    window.location.href = 'VisitorRequest.html';
+                }
             });
         </script>
     </body>

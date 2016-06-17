@@ -170,6 +170,24 @@ input[type="button"]:focus{
     color: white;
 }
 
+.btn-custom-sm {
+    border-radius: 5px;
+    border: none;
+    background-color: #e74c3c;
+    color: white;
+    vertical-align: middle;
+    width: auto;
+    outline: none;
+    padding: 6px 10px;
+    /*box-shadow: 1px 1px 5px #f0030f;*/
+    border-bottom: 2px solid #a7020a;
+    font-weight: bold;
+}
+
+.btn-custom-sm:hover{
+    color: white;
+}
+
 .input-group-btn select {
     border-color: #ccc;
     margin-top: 0px;
@@ -179,11 +197,11 @@ input[type="button"]:focus{
 }
 
 .ui-datepicker {
-                font-size: 12px;
-            }
-            .ui-widget-header .ui-icon {
-                background-image: url(../images/ui-icons_228ef1_256x240.png);
-            }
+    font-size: 12px;
+}
+.ui-widget-header .ui-icon {
+    background-image: url(../images/ui-icons_228ef1_256x240.png);
+}
 #txtDate {
     background-color: transparent;
 }

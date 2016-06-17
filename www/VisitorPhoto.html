@@ -41,9 +41,34 @@
         <div class="page-header text-left">
             <span id="myModalLabel">Take Picture</span>
         </div>
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"><label for="fileUpload" class="control-label">Select File & Upload:</label></div>
+            <div class="col-lg-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <div class="fileUpload btn btn-custom-sm">
+                    <span>Choose file</span>
+                    <input id="fileUpload" type="file" accept="image/*" class="upload" />
+                </div>            
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"></div>
+        </div>
         <form id="form1" class="form-horizontal text-left" role="form">
             <div class="form-group">
-                <label for="fileUpload" class="col-lg-2 control-label">Select File to Upload:</label>
+                
                 <div class="col-lg-10">
                     <input id="fileUpload" type="file" accept="image/*" class="inputtext" /><br>
                 </div>
@@ -104,7 +129,7 @@
         }
 
         $(document).ready(function () {
-            qs();
+            //qs();
             $("#loading").hide();
             $('#btnUploadFile').on('click', function () {
                 $("#loading").show();
