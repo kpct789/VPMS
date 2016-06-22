@@ -94,6 +94,7 @@
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
+    window.history.forward(-1);
     var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitorDetails/AddVisitorDetails';
     var IdProofTypeapiURL = 'http://61.0.225.169/VPMSAPI/api/Master/GetIdProofType'; //61.0.225.169
     var qsParm = new Array();
@@ -154,7 +155,7 @@
                 contentType: "application/json; charset=utf-8",
                 url: IdProofTypeapiURL,
                 dataType: "json",
-                crossDomain: true,
+                async: false,
                 success: function (result) {
                     $.each(result, function (key, value) {
                         $("#selIdProof").append($("<option></option>").val(value.Id).html(value.Name));
