@@ -50,7 +50,7 @@
                     </div>
                 
                     <div class="col-lg-10">
-                        <input type="number" class="inputtext" id="txtPersons" name="txtPersons" value="" required title="Please enter the No of Persons visiting" min="1" max="10" maxlength="3">
+                        <input type="number" class="inputtext" id="txtPersons" name="txtPersons" value="1" required title="Please enter the No of Persons visiting" min="1" max="10" maxlength="3">
                     </div>
                 </div>
                 <div class="form-group">
@@ -103,7 +103,6 @@
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
-    window.history.forward(-1);
     var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitDetails/AddVisitDetails';
     var deptURL = 'http://61.0.225.169/vpmsapi/api/Master/GetDepartments';
     var vechTypeURL = 'http://61.0.225.169/vpmsapi/api/Master/GetVehicleType';
@@ -219,7 +218,7 @@
 
         $("#txtDate").datepicker({
             /*numberOfMonths: 2,*/
-            minDate: 1, maxDate: "+1M +10D"
+            minDate: 0, maxDate: "+1M +10D"
         });
 
         $("#selVehType").change(function () {
