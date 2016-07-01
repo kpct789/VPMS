@@ -88,7 +88,6 @@
 <script type="text/javascript" src="js/phonegap-1.1.0.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
-    window.history.forward(-1);
     var deviceReady = false;
     var qsParm = new Array();
 
@@ -115,8 +114,8 @@
             }
         }
         if (parms.length > 1) {
-            $("#hidRequestId").val(qsParm["reqid"]);
-            $("#hidEmail").val(qsParm["mail"]);
+            $("#hidRequestId").val(atob(qsParm["reqid"]));
+            $("#hidEmail").val(atob(qsParm["mail"]));
         }
         else {
             window.location.href = 'VisitorRequest.html';
@@ -217,7 +216,7 @@
             var ft = new FileTransfer();
             ft.upload(imageURI, encodeURI(server), function (r) {
                 document.getElementById('camera_status').innerHTML = "Picture Uploaded successfully."; // + (parseFloat(parseFloat(r.bytesSent) / 1024) / 1024) + " MB uploaded.";
-                window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
+                window.location.href = 'VisitDetails.html?reqid=' + btoa($("#hidRequestId").val()) + '&mail=' + btoa($("#hidEmail").val());
             }, function (error) {
                 $("#loading").hide();
                 document.getElementById('camera_status').innerHTML = "Upload failed: Code = " + error.code + "\n upload error source " + error.source + "\n upload error target " + error.target;

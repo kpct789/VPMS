@@ -67,7 +67,6 @@
         <script type="text/ecmascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript">
-            window.history.forward(-1);
             var qsParm = new Array();
             var Email = null;
             var ReqId = null;
@@ -103,7 +102,7 @@
                     }
                 }
                 if (parms.length > 1) {
-                    $("#mail").text(qsParm["mail"]);
+                    $("#mail").text(atob(qsParm["mail"]));
                     ReqId = qsParm["reqid"];
                     return true;
                 }

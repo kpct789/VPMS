@@ -121,8 +121,8 @@
             }
         }
         if (parms.length > 1) {
-            $("#hidRequestId").val(qsParm["reqid"]);
-            $("#hidEmail").val(qsParm["mail"]);
+            $("#hidRequestId").val(atob(qsParm["reqid"]));
+            $("#hidEmail").val(atob(qsParm["mail"]));
             return true;
         }
         else {
@@ -272,7 +272,7 @@
                         data: Adddata,
                         dataType: 'json',
                         success: function (data) {
-                            window.location.href = 'RequestEnd.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
+                            window.location.href = 'RequestEnd.html?reqid=' + btoa($("#hidRequestId").val()) + '&mail=' + btoa($("#hidEmail").val());
                         },
                         statusCode: {
                             404: function () {

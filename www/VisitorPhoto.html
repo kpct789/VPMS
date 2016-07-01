@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -121,8 +121,8 @@
             }
 
             if (parms.length > 1) {
-                $("#hidRequestId").val(qsParm["reqid"]);
-                $("#hidEmail").val(qsParm["mail"]);
+                $("#hidRequestId").val(atob(qsParm["reqid"]));
+                $("#hidEmail").val(atob(qsParm["mail"]));
             }
             else {
                 window.location.href = 'VisitorRequest.html';
@@ -176,7 +176,7 @@
             $('#btnUploadFile').on('click', function () {
                 $("#loading").show();
                 if (uploadStatus == 1) {
-                    window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
+                    window.location.href = 'VisitDetails.html?reqid=' + btoa($("#hidRequestId").val()) + '&mail=' + btoa($("#hidEmail").val());
                 }
                 else {
                     alert("Failed to Upload File. Please Try Again.");
@@ -206,7 +206,7 @@
             ajaxRequest.done(function (xhr, textStatus) {
                 $("#loading").hide();
                 $("#container").show();
-                window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#hidEmail").val();
+                window.location.href = 'VisitDetails.html?reqid=' + btoa($("#hidRequestId").val()) + '&mail=' + btoa($("#hidEmail").val());
             });
             $("#loading").hide();
             $("#container").show();

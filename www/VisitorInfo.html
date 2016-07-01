@@ -94,7 +94,6 @@
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
-    window.history.forward(-1);
     var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitorDetails/AddVisitorDetails';
     var IdProofTypeapiURL = 'http://61.0.225.169/VPMSAPI/api/Master/GetIdProofType'; //61.0.225.169
     var qsParm = new Array();
@@ -155,7 +154,7 @@
                 contentType: "application/json; charset=utf-8",
                 url: IdProofTypeapiURL,
                 dataType: "json",
-                async: false,
+                crossDomain: true,
                 success: function (result) {
                     $.each(result, function (key, value) {
                         $("#selIdProof").append($("<option></option>").val(value.Id).html(value.Name));
@@ -233,9 +232,9 @@
                     success: function (data) {
                         //window.location.href = 'VisitDetails.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
                         if (isPhoneGap()) {
-                            window.location.href = 'm.VisitorPhoto.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
+                            window.location.href = 'm.VisitorPhoto.html?reqid=' + btoa($("#hidRequestId").val()) + '&mail=' + btoa($("#txtEmail").val());
                         } else {
-                            window.location.href = 'VisitorPhoto.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
+                            window.location.href = 'VisitorPhoto.html?reqid=' + btoa($("#hidRequestId").val()) + '&mail=' + btoa($("#txtEmail").val());
                         }
                         /*if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
                         window.location.href = 'm.VisitorPhoto.html?reqid=' + $("#hidRequestId").val() + '&mail=' + $("#txtEmail").val();
@@ -269,8 +268,8 @@
             }
         }
         if (parms.length > 1) {
-            $("#hidRequestId").val(qsParm["reqid"]);
-            $("#txtMobile").val(qsParm["mobileno"]);
+            $("#hidRequestId").val(atob(qsParm["reqid"]));
+            $("#txtMobile").val(atob(qsParm["mobileno"]));
             return true;
         }
         else {
