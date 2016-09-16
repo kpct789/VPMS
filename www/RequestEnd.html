@@ -130,8 +130,13 @@
                 }
                 if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
                     $("#btnClose").hide();
+                    setTimeout(ClearClick, 5000);
                 }
             });
+            function iOS_Redirect_To_Home()
+            {
+                window.location.href = 'VisitorRequest.html';
+            }
         </script>
     </body>
 </html>
