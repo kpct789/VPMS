@@ -87,9 +87,10 @@
   <gap:splash src="www/res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone"/>
   <access origin="*"/>
   <plugin name="cordova-plugin-whitelist" version="1"/>
+  <plugin name="com.simonmacdonald.telephonenumber" source="pgb" />
+  <!--
   <plugin name="com.sharinglabs.cordova.plugin.cache" source="pgb" />
-  <plugin name="com.simonmacdonald.telephonenumber" spec="1.0.0" source="pgb" />
-  <!--<plugin name="com.cordova.plugins.sms" spec="0.1.1" source="pgb" />-->
+  <plugin name="com.cordova.plugins.sms" spec="0.1.1" source="pgb" />-->
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
