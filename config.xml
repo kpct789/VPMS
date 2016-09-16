@@ -38,7 +38,7 @@
   <plugin name="org.apache.cordova.network-information"/>
   <plugin name="org.apache.cordova.splashscreen"/>
   <plugin name="org.apache.cordova.vibration"/>
-  <plugin name="com.phonegap.plugin.statusbar"/>
+  <plugin name="com.phonegap.plugin.statusbar" source="npm"/>
   <icon src="icon.png"/>
 
   <icon src="icon.png" gap:platform="ios" width="57" height="57"/>
