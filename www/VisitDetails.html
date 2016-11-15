@@ -103,9 +103,9 @@
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
-    var apiURL = 'http://61.0.225.169/vpmsapi/api/VisitDetails/AddVisitDetails';
-    var deptURL = 'http://61.0.225.169/vpmsapi/api/Master/GetDepartments';
-    var vechTypeURL = 'http://61.0.225.169/vpmsapi/api/Master/GetVehicleType';
+    var apiURL = 'http://61.0.225.169/vpmsapi_demo/api/VisitDetails/AddVisitDetails';
+    var deptURL = 'http://61.0.225.169/vpmsapi_demo/api/Master/GetDepartments';
+    var vechTypeURL = 'http://61.0.225.169/vpmsapi_demo/api/Master/GetVehicleType';
     var qsParm = new Array();
     var Email = null;
     var _vehType = null;
@@ -178,7 +178,7 @@
             $.ajax({
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
-                url: 'http://61.0.225.169/vpmsapi/api/Master/GetDepartments',
+                url: 'http://61.0.225.169/vpmsapi_demo/api/Master/GetDepartments',
                 dataType: "json",
                 data: '{}',
                 async: false,
@@ -196,7 +196,7 @@
             $.ajax({
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
-                url: 'http://61.0.225.169/vpmsapi/api/Master/GetVehicleType',
+                url: 'http://61.0.225.169/vpmsapi_demo/api/Master/GetVehicleType',
                 dataType: "json",
                 data: '{}',
                 async: false,
